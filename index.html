@@ -16,10 +16,6 @@
 
   <title>Cek Data Santri</title>
 
-  <link rel="manifest" href="./manifest.json">
-  <link rel="icon" type="image/png" sizes="192x192" href="./icons/icon-192.png">
-  <link rel="apple-touch-icon" href="./icons/icon-192.png">
-
   <style>
 
     * {
@@ -4752,18 +4748,6 @@
 
   }
 
-</script>
-
-  <script>
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', function () {
-      navigator.serviceWorker
-        .register('./service-worker.js')
-        .catch(function (error) {
-          console.error('Service Worker gagal didaftarkan:', error);
-        });
-    });
-  }
 </script>
 
 </body>
