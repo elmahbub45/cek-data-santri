@@ -557,9 +557,15 @@
         #173b2a;
     }
 
-    .profile-name-wrap {
+    .profile-heading {
+      flex:
+        1;
+
       min-width:
         0;
+
+      line-height:
+        1.25;
     }
 
     .profile-status-badge {
@@ -567,7 +573,7 @@
         fit-content;
 
       margin-top:
-        7px;
+        5px;
 
       padding:
         5px 9px;
@@ -585,7 +591,7 @@
         #166534;
 
       font-size:
-        9px;
+        8px;
 
       font-weight:
         800;
@@ -1657,16 +1663,6 @@
           right;
       }
 
-      .profile-name-wrap {
-        text-align:
-          right;
-      }
-
-      .profile-status-badge {
-        margin-left:
-          auto;
-      }
-
       .stats {
         grid-template-columns:
           repeat(5, 1fr);
@@ -1702,6 +1698,975 @@
 
     }
 
+
+    /* ==================================================
+       PESANTREN PREMIUM THEME
+       ================================================== */
+
+    :root {
+      --premium-green-dark: #0b3d2e;
+      --premium-green: #166534;
+      --premium-green-mid: #2f855a;
+      --premium-green-soft: #edf7f0;
+      --premium-gold: #d4a72c;
+      --premium-gold-soft: #f3e7bd;
+      --premium-ivory: #f8f5ec;
+      --premium-ink: #183629;
+      --premium-muted: #6f7f75;
+      --premium-border: #e4eadf;
+    }
+
+    html,
+    body {
+      font-family:
+        system-ui,
+        -apple-system,
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
+      background:
+        radial-gradient(
+          circle at top right,
+          rgba(212,167,44,0.09),
+          transparent 270px
+        ),
+        linear-gradient(
+          180deg,
+          #edf5ef 0,
+          var(--premium-ivory) 420px,
+          #f5f4ee 100%
+        );
+
+      color:
+        var(--premium-ink);
+    }
+
+    .header {
+      min-height:
+        250px;
+
+      padding:
+        27px 20px 70px;
+
+      background:
+        radial-gradient(
+          circle at 50% -30%,
+          rgba(255,255,255,0.16),
+          transparent 48%
+        ),
+        linear-gradient(
+          145deg,
+          #082f23 0%,
+          var(--premium-green-dark) 42%,
+          var(--premium-green) 100%
+        );
+
+      border-bottom:
+        2px solid rgba(212,167,44,0.72);
+
+      box-shadow:
+        0 14px 34px rgba(8,47,35,0.22);
+    }
+
+    .header::before {
+      width:
+        250px;
+
+      height:
+        250px;
+
+      top:
+        -158px;
+
+      right:
+        -70px;
+
+      border:
+        1px solid rgba(212,167,44,0.24);
+
+      background:
+        rgba(255,255,255,0.025);
+    }
+
+    .header::after {
+      width:
+        190px;
+
+      height:
+        190px;
+
+      bottom:
+        -126px;
+
+      left:
+        -55px;
+
+      border:
+        1px solid rgba(212,167,44,0.18);
+
+      background:
+        rgba(255,255,255,0.025);
+    }
+
+    .header-pattern {
+      position:
+        absolute;
+
+      inset:
+        0;
+
+      opacity:
+        0.12;
+
+      background-image:
+        linear-gradient(
+          30deg,
+          rgba(255,255,255,0.18) 12%,
+          transparent 12.5%,
+          transparent 87%,
+          rgba(255,255,255,0.18) 87.5%
+        ),
+        linear-gradient(
+          150deg,
+          rgba(255,255,255,0.18) 12%,
+          transparent 12.5%,
+          transparent 87%,
+          rgba(255,255,255,0.18) 87.5%
+        );
+
+      background-size:
+        34px 59px;
+
+      mask-image:
+        linear-gradient(
+          to bottom,
+          rgba(0,0,0,0.8),
+          transparent 88%
+        );
+
+      pointer-events:
+        none;
+    }
+
+    .header-inner {
+      max-width:
+        760px;
+    }
+
+    .header-eyebrow {
+      margin-bottom:
+        12px;
+
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      justify-content:
+        center;
+
+      gap:
+        9px;
+
+      color:
+        rgba(255,255,255,0.68);
+
+      font-size:
+        9px;
+
+      font-weight:
+        800;
+
+      letter-spacing:
+        1.8px;
+    }
+
+    .header-eyebrow span {
+      width:
+        23px;
+
+      height:
+        1px;
+
+      background:
+        rgba(212,167,44,0.72);
+    }
+
+    .premium-logo {
+      width:
+        66px;
+
+      height:
+        66px;
+
+      margin:
+        0 auto 12px;
+
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      justify-content:
+        center;
+
+      border:
+        1px solid rgba(243,231,189,0.55);
+
+      border-radius:
+        21px;
+
+      background:
+        linear-gradient(
+          145deg,
+          rgba(255,255,255,0.17),
+          rgba(255,255,255,0.07)
+        );
+
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.17),
+        0 10px 26px rgba(0,0,0,0.16);
+
+      backdrop-filter:
+        blur(5px);
+    }
+
+    .premium-logo svg {
+      width:
+        43px;
+
+      height:
+        43px;
+
+      fill:
+        none;
+
+      stroke:
+        #f3df9d;
+
+      stroke-width:
+        2.2;
+
+      stroke-linecap:
+        round;
+
+      stroke-linejoin:
+        round;
+    }
+
+    .header h1 {
+      margin:
+        0;
+
+      color:
+        #ffffff;
+
+      font-size:
+        27px;
+
+      font-weight:
+        800;
+
+      letter-spacing:
+        1.1px;
+
+      text-shadow:
+        0 2px 8px rgba(0,0,0,0.16);
+    }
+
+    .header-class {
+      margin-top:
+        5px;
+
+      color:
+        rgba(255,255,255,0.84);
+
+      font-size:
+        13px;
+
+      font-weight:
+        600;
+    }
+
+    .academic-pill {
+      width:
+        fit-content;
+
+      margin:
+        13px auto 0;
+
+      padding:
+        7px 12px;
+
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      justify-content:
+        center;
+
+      gap:
+        9px;
+
+      border:
+        1px solid rgba(243,231,189,0.32);
+
+      border-radius:
+        99px;
+
+      background:
+        rgba(4,30,22,0.20);
+
+      color:
+        #f8efd2;
+
+      font-size:
+        10px;
+
+      font-weight:
+        700;
+
+      letter-spacing:
+        0.35px;
+
+      backdrop-filter:
+        blur(5px);
+    }
+
+    .academic-pill i {
+      width:
+        4px;
+
+      height:
+        4px;
+
+      border-radius:
+        50%;
+
+      background:
+        var(--premium-gold);
+    }
+
+    .header-gold-line {
+      width:
+        42px;
+
+      height:
+        2px;
+
+      margin:
+        14px auto 0;
+
+      border-radius:
+        99px;
+
+      background:
+        linear-gradient(
+          90deg,
+          transparent,
+          var(--premium-gold),
+          transparent
+        );
+    }
+
+    .content {
+      max-width:
+        760px;
+
+      margin-top:
+        -38px;
+
+      padding-bottom:
+        38px;
+    }
+
+    .card {
+      border:
+        1px solid rgba(22,101,52,0.08);
+
+      border-radius:
+        20px;
+
+      background:
+        rgba(255,255,255,0.96);
+
+      box-shadow:
+        0 10px 28px rgba(22,64,40,0.075),
+        0 2px 5px rgba(22,64,40,0.035);
+    }
+
+    .card-title {
+      min-height:
+        65px;
+
+      padding:
+        15px 18px;
+
+      border-bottom:
+        1px solid var(--premium-border);
+
+      background:
+        linear-gradient(
+          90deg,
+          #ffffff,
+          #fbfcf8
+        );
+
+      color:
+        var(--premium-ink);
+
+      letter-spacing:
+        0.15px;
+    }
+
+    .card-title::before {
+      content:
+        "";
+
+      width:
+        3px;
+
+      height:
+        25px;
+
+      border-radius:
+        99px;
+
+      background:
+        linear-gradient(
+          to bottom,
+          var(--premium-gold),
+          #e7cb70
+        );
+    }
+
+    .card-title-icon {
+      border:
+        1px solid #d7eadc;
+
+      background:
+        linear-gradient(
+          145deg,
+          #eef8f1,
+          #e5f2e9
+        );
+
+      box-shadow:
+        inset 0 1px 0 #ffffff;
+    }
+
+    .card-body {
+      padding:
+        19px;
+    }
+
+    .login-card {
+      border-top:
+        2px solid rgba(212,167,44,0.76);
+
+      box-shadow:
+        0 15px 34px rgba(11,61,46,0.13);
+    }
+
+    .login-description {
+      color:
+        var(--premium-muted);
+    }
+
+    .input {
+      border-color:
+        #d4dfd6;
+
+      background:
+        #fcfdfb;
+    }
+
+    .input:focus {
+      border-color:
+        var(--premium-green);
+
+      box-shadow:
+        0 0 0 3px rgba(22,101,52,0.10),
+        0 5px 16px rgba(22,101,52,0.06);
+    }
+
+    .btn {
+      background:
+        linear-gradient(
+          135deg,
+          var(--premium-green),
+          var(--premium-green-dark)
+        );
+
+      box-shadow:
+        0 8px 18px rgba(11,61,46,0.22);
+    }
+
+    .profile-card {
+      border-top:
+        2px solid rgba(212,167,44,0.76);
+    }
+
+    .profile-card .card-title {
+      min-height:
+        78px;
+
+      border-bottom:
+        1px solid rgba(243,231,189,0.24);
+
+      background:
+        linear-gradient(
+          135deg,
+          var(--premium-green-dark),
+          var(--premium-green)
+        );
+
+      color:
+        #ffffff;
+    }
+
+    .profile-card .card-title::before {
+      background:
+        var(--premium-gold);
+    }
+
+    .profile-card .card-title-icon {
+      border-color:
+        rgba(255,255,255,0.20);
+
+      background:
+        rgba(255,255,255,0.12);
+    }
+
+    .profile-status-badge {
+      border-color:
+        rgba(243,231,189,0.30);
+
+      background:
+        rgba(255,255,255,0.10);
+
+      color:
+        #f7efd3;
+    }
+
+    .profile-status-badge::before {
+      background:
+        #7ee2a0;
+
+      box-shadow:
+        0 0 0 3px rgba(126,226,160,0.12);
+    }
+
+    .absen-badge {
+      border-color:
+        rgba(243,231,189,0.52);
+
+      background:
+        linear-gradient(
+          145deg,
+          #fffdf7,
+          #f5edcf
+        );
+
+      box-shadow:
+        0 6px 15px rgba(0,0,0,0.12);
+    }
+
+    .absen-badge strong {
+      color:
+        var(--premium-green-dark);
+    }
+
+    .absen-badge span {
+      color:
+        #8b7125;
+    }
+
+    .profile-item,
+    .stat,
+    .progress-number,
+    .info-box {
+      border:
+        1px solid #e5e9dc;
+
+      background:
+        linear-gradient(
+          145deg,
+          #fffefa,
+          #f7f7ef
+        );
+    }
+
+    .profile-item {
+      position:
+        relative;
+
+      overflow:
+        hidden;
+    }
+
+    .profile-item::after {
+      content:
+        "";
+
+      position:
+        absolute;
+
+      left:
+        0;
+
+      top:
+        11px;
+
+      bottom:
+        11px;
+
+      width:
+        3px;
+
+      border-radius:
+        0 4px 4px 0;
+
+      background:
+        var(--premium-gold);
+    }
+
+    .stats {
+      gap:
+        9px;
+    }
+
+    .stat {
+      border-top:
+        2px solid #dce6dc;
+
+      box-shadow:
+        0 4px 12px rgba(22,64,40,0.035);
+    }
+
+    .stat.hadir {
+      border-top-color:
+        #43a763;
+    }
+
+    .stat.sakit {
+      border-top-color:
+        #8b75bb;
+    }
+
+    .stat.izin {
+      border-top-color:
+        var(--premium-gold);
+    }
+
+    .stat.alpa {
+      border-top-color:
+        #d96b6b;
+    }
+
+    .attendance-award {
+      border-width:
+        1px;
+
+      box-shadow:
+        inset 0 0 0 4px rgba(212,167,44,0.055),
+        0 7px 18px rgba(22,64,40,0.055);
+    }
+
+    .attendance-award-icon {
+      border:
+        1px solid rgba(212,167,44,0.35);
+
+      background:
+        rgba(255,255,255,0.72);
+    }
+
+    .attendance-award-label {
+      color:
+        #8a7026;
+    }
+
+    .monthly-details summary {
+      border-color:
+        #dce5d8;
+
+      background:
+        linear-gradient(
+          90deg,
+          #f3f8f3,
+          #fbf9f0
+        );
+
+      color:
+        var(--premium-green-dark);
+
+      box-shadow:
+        inset 3px 0 0 var(--premium-gold);
+    }
+
+    .monthly-item {
+      border-color:
+        #e3e8df;
+
+      box-shadow:
+        0 3px 10px rgba(22,64,40,0.035);
+    }
+
+    .monthly-head {
+      background:
+        #f7f8f2;
+    }
+
+    .progress-percent {
+      color:
+        var(--premium-green-dark);
+
+      text-shadow:
+        0 1px 0 #ffffff;
+    }
+
+    .progress-bar {
+      height:
+        11px;
+
+      border:
+        1px solid #dde4d9;
+
+      background:
+        #eef0e8;
+
+      box-shadow:
+        inset 0 2px 4px rgba(11,61,46,0.06);
+    }
+
+    .progress-fill {
+      background:
+        linear-gradient(
+          90deg,
+          var(--premium-green-dark) 0%,
+          var(--premium-green-mid) 72%,
+          var(--premium-gold) 100%
+        );
+
+      box-shadow:
+        0 0 10px rgba(47,133,90,0.18);
+    }
+
+    .predicate {
+      border-color:
+        #d9e2d5;
+
+      background:
+        linear-gradient(
+          145deg,
+          #f4faf4,
+          #fbf8ed
+        );
+
+      box-shadow:
+        inset 0 0 0 3px rgba(212,167,44,0.045);
+    }
+
+    .predicate-name {
+      color:
+        var(--premium-green-dark);
+    }
+
+    .hafalan-item {
+      border-color:
+        #e3e8dd;
+
+      background:
+        linear-gradient(
+          145deg,
+          #ffffff,
+          #f8f8f1
+        );
+
+      box-shadow:
+        0 3px 10px rgba(22,64,40,0.035);
+    }
+
+    .hafalan-number {
+      border:
+        1px solid rgba(212,167,44,0.55);
+
+      border-radius:
+        50%;
+
+      background:
+        #f4ecd0;
+
+      color:
+        var(--premium-green-dark);
+    }
+
+    .note {
+      border:
+        1px solid #e4e7dd;
+
+      background:
+        #faf9f3;
+
+      color:
+        var(--premium-muted);
+    }
+
+    .footer {
+      padding:
+        8px 15px 27px;
+
+      color:
+        #748278;
+    }
+
+    .footer-mark {
+      color:
+        var(--premium-gold);
+
+      font-size:
+        8px;
+
+      margin-bottom:
+        6px;
+    }
+
+    .footer strong,
+    .footer span {
+      display:
+        block;
+    }
+
+    .footer strong {
+      color:
+        var(--premium-green-dark);
+
+      font-size:
+        10px;
+
+      letter-spacing:
+        0.9px;
+    }
+
+    .footer span {
+      margin-top:
+        4px;
+
+      font-size:
+        9px;
+    }
+
+    #hasilSection .card {
+      animation:
+        premiumFadeUp 0.42s ease both;
+    }
+
+    #hasilSection .card:nth-child(2) {
+      animation-delay:
+        0.04s;
+    }
+
+    #hasilSection .card:nth-child(3) {
+      animation-delay:
+        0.08s;
+    }
+
+    #hasilSection .card:nth-child(4) {
+      animation-delay:
+        0.12s;
+    }
+
+    @keyframes premiumFadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 600px) {
+
+      .header {
+        min-height:
+          238px;
+
+        padding:
+          24px 14px 66px;
+      }
+
+      .header h1 {
+        font-size:
+          23px;
+
+        letter-spacing:
+          0.8px;
+      }
+
+      .premium-logo {
+        width:
+          61px;
+
+        height:
+          61px;
+
+        border-radius:
+          19px;
+      }
+
+      .premium-logo svg {
+        width:
+          39px;
+
+        height:
+          39px;
+      }
+
+      .header-eyebrow {
+        font-size:
+          8px;
+
+        letter-spacing:
+          1.25px;
+      }
+
+      .content {
+        margin-top:
+          -35px;
+      }
+
+      .card {
+        border-radius:
+          18px;
+      }
+
+      .card-title {
+        padding:
+          14px 15px;
+      }
+
+      .profile-card .card-title {
+        min-height:
+          76px;
+      }
+
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      #hasilSection .card {
+        animation:
+          none;
+      }
+    }
+
   </style>
 
 </head>
@@ -1718,19 +2683,69 @@
 
   <header class="header">
 
+    <div
+      class="header-pattern"
+      aria-hidden="true"
+    ></div>
+
     <div class="header-inner">
 
-      <div class="logo">
-        📖
+      <div class="header-eyebrow">
+        <span></span>
+        PORTAL INFORMASI SANTRI
+        <span></span>
+      </div>
+
+      <div class="premium-logo">
+
+        <svg
+          viewBox="0 0 64 64"
+          aria-hidden="true"
+        >
+
+          <path
+            d="M14 20c7 0 13 2 18 7v25c-5-5-11-7-18-7V20Z"
+          ></path>
+
+          <path
+            d="M50 20c-7 0-13 2-18 7v25c5-5 11-7 18-7V20Z"
+          ></path>
+
+          <path
+            d="M23 18c1-6 4-10 9-13 5 3 8 7 9 13"
+          ></path>
+
+          <path
+            d="M32 5v-2"
+          ></path>
+
+        </svg>
+
       </div>
 
       <h1>
         CEK DATA SANTRI
       </h1>
 
-      <p>
-        Sistem informasi perkembangan santri
-      </p>
+      <div class="header-class">
+        III i Awwaliyah Putera
+      </div>
+
+      <div class="academic-pill">
+
+        <span>
+          2026–2027 M
+        </span>
+
+        <i></i>
+
+        <span>
+          1447–1448 H
+        </span>
+
+      </div>
+
+      <div class="header-gold-line"></div>
 
     </div>
 
@@ -1827,7 +2842,20 @@
             👤
           </div>
 
-          Profil Santri
+          <div class="profile-heading">
+
+            <div>
+              Profil Santri
+            </div>
+
+            <div
+              id="statusSantri"
+              class="profile-status-badge"
+            >
+              Santri Aktif
+            </div>
+
+          </div>
 
           <div class="absen-badge">
 
@@ -1853,22 +2881,11 @@
                 Nama
               </div>
 
-              <div class="profile-name-wrap">
-
-                <div
-                  id="nama"
-                  class="profile-value"
-                >
-                  -
-                </div>
-
-                <div
-                  id="statusSantri"
-                  class="profile-status-badge"
-                >
-                  Santri Aktif
-                </div>
-
+              <div
+                id="nama"
+                class="profile-value"
+              >
+                -
               </div>
 
             </div>
@@ -2322,7 +3339,21 @@
 
 
     <div class="footer">
-      Cek Data Santri
+
+      <div class="footer-mark">
+        ◆
+      </div>
+
+      <strong>
+        CEK DATA SANTRI
+      </strong>
+
+      <span>
+        III i Awwaliyah Putera
+        •
+        Tahun Ajaran 2026–2027
+      </span>
+
     </div>
 
   </main>
