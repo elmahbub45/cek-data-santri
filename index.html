@@ -1673,6 +1673,273 @@
 
 
     /* ==================================================
+       PRATINJAU KARTU PENCAPAIAN
+       ================================================== */
+
+    .achievement-preview-modal {
+      position:
+        fixed;
+
+      inset:
+        0;
+
+      z-index:
+        999;
+
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      justify-content:
+        center;
+
+      padding:
+        18px;
+
+      background:
+        rgba(3,24,16,0.78);
+
+      backdrop-filter:
+        blur(5px);
+
+      overflow-y:
+        auto;
+    }
+
+    .achievement-preview-panel {
+      width:
+        min(100%, 430px);
+
+      max-height:
+        calc(100vh - 36px);
+
+      padding:
+        15px;
+
+      border:
+        1px solid rgba(225,192,94,0.42);
+
+      border-radius:
+        20px;
+
+      background:
+        #fbfcf7;
+
+      box-shadow:
+        0 24px 60px rgba(0,0,0,0.34);
+
+      overflow-y:
+        auto;
+    }
+
+    .achievement-preview-head {
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      justify-content:
+        space-between;
+
+      gap:
+        12px;
+
+      margin-bottom:
+        12px;
+    }
+
+    .achievement-preview-heading {
+      color:
+        #164b31;
+
+      font-size:
+        14px;
+
+      font-weight:
+        800;
+    }
+
+    .achievement-preview-close {
+      width:
+        34px;
+
+      height:
+        34px;
+
+      flex:
+        0 0 34px;
+
+      border:
+        1px solid #dce5dc;
+
+      border-radius:
+        50%;
+
+      background:
+        #ffffff;
+
+      color:
+        #52665a;
+
+      font-size:
+        20px;
+
+      cursor:
+        pointer;
+    }
+
+    .achievement-preview-image-wrap {
+      width:
+        min(100%, 265px);
+
+      margin:
+        auto;
+
+      padding:
+        5px;
+
+      border:
+        1px solid rgba(212,167,44,0.35);
+
+      border-radius:
+        14px;
+
+      background:
+        #ffffff;
+
+      box-shadow:
+        0 10px 24px rgba(12,61,41,0.12);
+    }
+
+    .achievement-preview-image {
+      width:
+        100%;
+
+      height:
+        auto;
+
+      display:
+        block;
+
+      border-radius:
+        10px;
+
+      -webkit-touch-callout:
+        default;
+    }
+
+    .achievement-preview-instruction {
+      margin:
+        12px auto 0;
+
+      color:
+        #68756d;
+
+      font-size:
+        10px;
+
+      line-height:
+        1.55;
+
+      text-align:
+        center;
+    }
+
+    .achievement-preview-actions {
+      display:
+        grid;
+
+      grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+      gap:
+        8px;
+
+      margin-top:
+        13px;
+    }
+
+    .achievement-preview-button {
+      min-height:
+        42px;
+
+      padding:
+        9px 10px;
+
+      border:
+        1px solid rgba(212,167,44,0.48);
+
+      border-radius:
+        11px;
+
+      background:
+        linear-gradient(135deg, #165a38, #0f432c);
+
+      color:
+        #fffdf4;
+
+      font-size:
+        9px;
+
+      font-weight:
+        800;
+
+      letter-spacing:
+        0.45px;
+
+      cursor:
+        pointer;
+    }
+
+    .achievement-preview-button.secondary {
+      background:
+        #ffffff;
+
+      color:
+        #24543a;
+    }
+
+    .achievement-preview-button:disabled {
+      opacity:
+        0.58;
+
+      cursor:
+        wait;
+    }
+
+    .achievement-preview-feedback {
+      min-height:
+        16px;
+
+      margin-top:
+        8px;
+
+      color:
+        #477257;
+
+      font-size:
+        9px;
+
+      font-weight:
+        700;
+
+      line-height:
+        1.4;
+
+      text-align:
+        center;
+    }
+
+    body.modal-open {
+      overflow:
+        hidden;
+    }
+
+
+    /* ==================================================
        TARGET / LAMA SANTRI
        ================================================== */
 
@@ -3703,7 +3970,7 @@
             📚
           </div>
 
-          Perkembangan Hafalan
+          Perkembangan Hafalan Berjalan
 
         </div>
 
@@ -3790,7 +4057,7 @@
           >
 
             <div class="level-eyebrow">
-              PENCAPAIAN HAFALAN
+              PENCAPAIAN HAFALAN BERJALAN
             </div>
 
             <div
@@ -3817,14 +4084,14 @@
               id="levelCount"
               class="level-count"
             >
-              0 dari 0 hafalan telah diselesaikan
+              0 dari 0 Hafalan Berjalan telah diselesaikan
             </div>
 
             <div
               id="levelNext"
               class="level-next"
             >
-              Mulai setorkan hafalan untuk membuka Level 1
+              Mulai setorkan Hafalan Berjalan untuk membuka Level 1
             </div>
 
             <div
@@ -3920,7 +4187,7 @@
             📖
           </div>
 
-          Daftar Hafalan Belum Diselesaikan
+          Daftar Hafalan Berjalan yang Belum Diselesaikan
 
         </div>
 
@@ -4037,6 +4304,83 @@
 </div>
 
 
+<div
+  id="achievementPreviewModal"
+  class="achievement-preview-modal hidden"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="achievementPreviewHeading"
+>
+
+  <div class="achievement-preview-panel">
+
+    <div class="achievement-preview-head">
+
+      <div
+        id="achievementPreviewHeading"
+        class="achievement-preview-heading"
+      >
+        Kartu Pencapaian Siap
+      </div>
+
+      <button
+        id="btnCloseAchievementPreview"
+        class="achievement-preview-close"
+        type="button"
+        aria-label="Tutup pratinjau"
+      >
+        ×
+      </button>
+
+    </div>
+
+    <div class="achievement-preview-image-wrap">
+
+      <img
+        id="achievementPreviewImage"
+        class="achievement-preview-image"
+        alt="Pratinjau kartu pencapaian Hafalan Berjalan"
+      >
+
+    </div>
+
+    <div class="achievement-preview-instruction">
+      Pilih Bagikan Sekarang atau Simpan Gambar.
+      Jika APK tidak mengunduh, tekan lama gambar lalu pilih
+      simpan atau bagikan gambar.
+    </div>
+
+    <div class="achievement-preview-actions">
+
+      <button
+        id="btnSharePrepared"
+        class="achievement-preview-button"
+        type="button"
+      >
+        BAGIKAN SEKARANG
+      </button>
+
+      <button
+        id="btnDownloadPrepared"
+        class="achievement-preview-button secondary"
+        type="button"
+      >
+        SIMPAN GAMBAR
+      </button>
+
+    </div>
+
+    <div
+      id="achievementPreviewFeedback"
+      class="achievement-preview-feedback"
+      aria-live="polite"
+    ></div>
+
+  </div>
+
+</div>
+
+
 <script>
 
   /* ==================================================
@@ -4072,6 +4416,21 @@
   const shareButtonText =
     document.getElementById('shareButtonText');
 
+  const achievementPreviewModal =
+    document.getElementById('achievementPreviewModal');
+
+  const achievementPreviewImage =
+    document.getElementById('achievementPreviewImage');
+
+  const btnCloseAchievementPreview =
+    document.getElementById('btnCloseAchievementPreview');
+
+  const btnSharePrepared =
+    document.getElementById('btnSharePrepared');
+
+  const btnDownloadPrepared =
+    document.getElementById('btnDownloadPrepared');
+
   const errorBox =
     document.getElementById('errorBox');
 
@@ -4089,6 +4448,9 @@
     0;
 
   let dataPencapaianTerakhir =
+    null;
+
+  let gambarPencapaianTerakhir =
     null;
 
 
@@ -4154,6 +4516,52 @@
   );
 
 
+  btnCloseAchievementPreview.addEventListener(
+    'click',
+    tutupPratinjauPencapaian
+  );
+
+
+  btnSharePrepared.addEventListener(
+    'click',
+    bagikanGambarSiap
+  );
+
+
+  btnDownloadPrepared.addEventListener(
+    'click',
+    simpanGambarSiap
+  );
+
+
+  achievementPreviewModal.addEventListener(
+    'click',
+    function (event) {
+      if (
+        event.target ===
+        achievementPreviewModal
+      ) {
+        tutupPratinjauPencapaian();
+      }
+    }
+  );
+
+
+  document.addEventListener(
+    'keydown',
+    function (event) {
+      if (
+        event.key === 'Escape' &&
+        !achievementPreviewModal.classList.contains(
+          'hidden'
+        )
+      ) {
+        tutupPratinjauPencapaian();
+      }
+    }
+  );
+
+
   document.addEventListener(
     'visibilitychange',
     function () {
@@ -4199,6 +4607,11 @@
 
     dataPencapaianTerakhir =
       null;
+
+    gambarPencapaianTerakhir =
+      null;
+
+    tutupPratinjauPencapaian();
 
     setText(
       'shareFeedback',
@@ -5306,8 +5719,8 @@
         '1 / -1';
 
       complete.textContent =
-        '🎉 Tidak ada hafalan yang tertinggal. ' +
-        'Semua hafalan yang tersedia sudah diselesaikan.';
+        '🎉 Tidak ada Hafalan Berjalan yang tertinggal. ' +
+        'Semua Hafalan Berjalan yang tersedia sudah diselesaikan.';
 
 
       container.appendChild(
@@ -5538,7 +5951,7 @@
       angka(jumlahSudah) +
       ' dari ' +
       angka(jumlahTotal) +
-      ' hafalan telah diselesaikan'
+      ' Hafalan Berjalan telah diselesaikan'
     );
 
 
@@ -5563,12 +5976,12 @@
     if (jumlahTotal <= 0) {
 
       pesanBerikutnya =
-        'Data hafalan belum tersedia.';
+        'Data Hafalan Berjalan belum tersedia.';
 
     } else if (level >= 7) {
 
       pesanBerikutnya =
-        'Seluruh hafalan telah diselesaikan. Pertahankan dan terus murajaah.';
+        'Seluruh Hafalan Berjalan telah diselesaikan. Pertahankan dan terus murajaah.';
 
     } else {
 
@@ -5594,8 +6007,9 @@
 
 
       pesanBerikutnya =
+        'Selesaikan ' +
         angka(jumlahKurang) +
-        ' hafalan lagi untuk mencapai Level ' +
+        ' Hafalan Berjalan lagi untuk mencapai Level ' +
         levelBerikutnya;
     }
 
@@ -5710,6 +6124,15 @@
       'shareFeedback',
       ''
     );
+
+    gambarPencapaianTerakhir =
+      null;
+
+    achievementPreviewImage.removeAttribute(
+      'src'
+    );
+
+    tutupPratinjauPencapaian();
 
 
     dataPencapaianTerakhir = {
@@ -5893,77 +6316,48 @@
         );
 
       const namaFile =
-        'pencapaian-hafalan-' +
+        'pencapaian-hafalan-berjalan-' +
         buatNamaFileAman(
           dataPencapaianTerakhir.nama
         ) +
         '.png';
 
-      const file =
-        new File(
-          [blob],
-          namaFile,
-          {
-            type: 'image/png'
-          }
+      const dataUrl =
+        await blobKeDataUrl(
+          blob
         );
 
-      const dapatBerbagiFile =
-        typeof navigator.share === 'function' &&
-        typeof navigator.canShare === 'function' &&
-        navigator.canShare({
-          files: [file]
-        });
 
-
-      if (dapatBerbagiFile) {
-
-        await navigator.share({
-          files: [file],
-          title: 'Pencapaian Hafalan',
-          text:
-            'Alhamdulillah, pencapaian hafalan Level ' +
-            dataPencapaianTerakhir.level +
-            '.'
-        });
-
-        setText(
-          'shareFeedback',
-          'Gambar siap dibagikan.'
-        );
-
-      } else {
-
-        unduhBlob(
+      gambarPencapaianTerakhir = {
+        blob:
           blob,
+        dataUrl:
+          dataUrl,
+        namaFile:
           namaFile
-        );
+      };
 
-        setText(
-          'shareFeedback',
-          'Gambar telah diunduh dan siap dibagikan.'
-        );
-      }
+      achievementPreviewImage.src =
+        dataUrl;
+
+      setText(
+        'achievementPreviewFeedback',
+        ''
+      );
+
+      bukaPratinjauPencapaian();
+
+      setText(
+        'shareFeedback',
+        'Kartu berhasil dibuat.'
+      );
 
     } catch (error) {
 
-      if (
-        error &&
-        error.name === 'AbortError'
-      ) {
-
-        setText(
-          'shareFeedback',
-          'Berbagi dibatalkan.'
-        );
-
-      } else {
-
-        setText(
-          'shareFeedback',
-          'Gambar belum berhasil dibuat. Silakan coba lagi.'
-        );
-      }
+      setText(
+        'shareFeedback',
+        'Gambar belum berhasil dibuat. Silakan coba lagi.'
+      );
 
     } finally {
 
@@ -5973,6 +6367,204 @@
       shareButtonText.textContent =
         'BAGIKAN PENCAPAIAN';
     }
+  }
+
+
+  function bukaPratinjauPencapaian() {
+
+    achievementPreviewModal.classList.remove(
+      'hidden'
+    );
+
+    document.body.classList.add(
+      'modal-open'
+    );
+
+
+    setTimeout(
+      function () {
+        btnSharePrepared.focus();
+      },
+      50
+    );
+  }
+
+
+  function tutupPratinjauPencapaian() {
+
+    achievementPreviewModal.classList.add(
+      'hidden'
+    );
+
+    document.body.classList.remove(
+      'modal-open'
+    );
+
+    setText(
+      'achievementPreviewFeedback',
+      ''
+    );
+  }
+
+
+  async function bagikanGambarSiap() {
+
+    if (
+      !gambarPencapaianTerakhir ||
+      !dataPencapaianTerakhir
+    ) {
+      return;
+    }
+
+
+    let file =
+      null;
+
+
+    if (
+      typeof File === 'function'
+    ) {
+
+      file =
+        new File(
+          [
+            gambarPencapaianTerakhir.blob
+          ],
+          gambarPencapaianTerakhir.namaFile,
+          {
+            type: 'image/png'
+          }
+        );
+    }
+
+
+    const dapatBerbagiFile =
+      file &&
+      typeof navigator.share === 'function' &&
+      typeof navigator.canShare === 'function' &&
+      navigator.canShare({
+        files: [file]
+      });
+
+
+    if (!dapatBerbagiFile) {
+
+      setText(
+        'achievementPreviewFeedback',
+        'Berbagi langsung tidak didukung pada APK ini. Gunakan Simpan Gambar atau tekan lama gambarnya.'
+      );
+
+      return;
+    }
+
+
+    try {
+
+      await navigator.share({
+        files: [file],
+        title:
+          'Pencapaian Hafalan Berjalan',
+        text:
+          'Alhamdulillah, pencapaian Hafalan Berjalan Level ' +
+          dataPencapaianTerakhir.level +
+          '.'
+      });
+
+      setText(
+        'achievementPreviewFeedback',
+        'Gambar berhasil diteruskan ke menu berbagi.'
+      );
+
+    } catch (error) {
+
+      if (
+        error &&
+        error.name === 'AbortError'
+      ) {
+
+        setText(
+          'achievementPreviewFeedback',
+          'Berbagi dibatalkan.'
+        );
+
+      } else {
+
+        setText(
+          'achievementPreviewFeedback',
+          'APK belum mendukung berbagi langsung. Gunakan Simpan Gambar atau tekan lama gambarnya.'
+        );
+      }
+    }
+  }
+
+
+  function simpanGambarSiap() {
+
+    if (!gambarPencapaianTerakhir) {
+      return;
+    }
+
+
+    const tautan =
+      document.createElement(
+        'a'
+      );
+
+    tautan.href =
+      gambarPencapaianTerakhir.dataUrl;
+
+    tautan.download =
+      gambarPencapaianTerakhir.namaFile;
+
+    document.body.appendChild(
+      tautan
+    );
+
+    tautan.click();
+
+    tautan.remove();
+
+
+    setText(
+      'achievementPreviewFeedback',
+      'Perintah simpan telah dikirim. Jika belum tersimpan, tekan lama gambar lalu pilih simpan.'
+    );
+  }
+
+
+  function blobKeDataUrl(
+    blob
+  ) {
+
+    return new Promise(
+      function (resolve, reject) {
+
+        const pembaca =
+          new FileReader();
+
+
+        pembaca.onload =
+          function () {
+            resolve(
+              pembaca.result
+            );
+          };
+
+        pembaca.onerror =
+          function () {
+            reject(
+              new Error(
+                'Pratinjau gambar gagal dibuat.'
+              )
+            );
+          };
+
+
+        pembaca.readAsDataURL(
+          blob
+        );
+      }
+    );
   }
 
 
@@ -6039,10 +6631,10 @@
           '#ffffff';
 
         context.font =
-          '800 56px Arial, sans-serif';
+          '800 48px Arial, sans-serif';
 
         context.fillText(
-          'PENCAPAIAN HAFALAN',
+          'PENCAPAIAN HAFALAN BERJALAN',
           540,
           260
         );
@@ -6124,7 +6716,7 @@
           angka(data.sudah) +
           ' dari ' +
           angka(data.total) +
-          ' hafalan telah diselesaikan',
+          ' Hafalan Berjalan telah diselesaikan',
           540,
           posisiSetelahNama + 190
         );
@@ -6696,7 +7288,7 @@
   ) {
 
     if (level >= 7) {
-      return 'Seluruh hafalan telah diselesaikan. Pertahankan pencapaian dan teruslah murajaah.';
+      return 'Seluruh Hafalan Berjalan telah diselesaikan. Pertahankan pencapaian dan teruslah murajaah.';
     }
 
     if (level >= 6) {
@@ -6723,47 +7315,6 @@
 
 
     return hasil || 'santri';
-  }
-
-
-  function unduhBlob(
-    blob,
-    namaFile
-  ) {
-
-    const url =
-      URL.createObjectURL(
-        blob
-      );
-
-    const tautan =
-      document.createElement(
-        'a'
-      );
-
-    tautan.href =
-      url;
-
-    tautan.download =
-      namaFile;
-
-    document.body.appendChild(
-      tautan
-    );
-
-    tautan.click();
-
-    tautan.remove();
-
-
-    setTimeout(
-      function () {
-        URL.revokeObjectURL(
-          url
-        );
-      },
-      1500
-    );
   }
 
 
