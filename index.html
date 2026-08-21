@@ -58,10 +58,7 @@
         ),
         var(--background);
       color: var(--text);
-      font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
+      font-family: Arial, Helvetica, sans-serif;
     }
 
     button,
@@ -73,10 +70,6 @@
       cursor: pointer;
     }
 
-    /* =========================================================
-       APP
-    ========================================================= */
-
     .app {
       width: 100%;
       max-width: 620px;
@@ -84,10 +77,6 @@
       margin: 0 auto;
       padding-bottom: 30px;
     }
-
-    /* =========================================================
-       HEADER
-    ========================================================= */
 
     .header {
       position: relative;
@@ -181,10 +170,6 @@
       line-height: 1.6;
     }
 
-    /* =========================================================
-       CONTENT
-    ========================================================= */
-
     .content {
       padding: 0 16px;
       margin-top: -20px;
@@ -198,10 +183,6 @@
       border-radius: var(--radius);
       box-shadow: 0 7px 25px rgba(0,0,0,0.055);
     }
-
-    /* =========================================================
-       SEARCH CARD
-    ========================================================= */
 
     .search-card {
       padding: 20px;
@@ -323,10 +304,6 @@
       color: #9ca3af;
     }
 
-    /* =========================================================
-       MESSAGE
-    ========================================================= */
-
     .message {
       display: none;
       margin-top: 14px;
@@ -355,10 +332,6 @@
       color: #4b5563;
     }
 
-    /* =========================================================
-       RESULT
-    ========================================================= */
-
     .result {
       display: none;
       margin-top: 18px;
@@ -367,10 +340,6 @@
     .result.show {
       display: block;
     }
-
-    /* =========================================================
-       STUDENT PROFILE
-    ========================================================= */
 
     .profile-card {
       padding: 20px;
@@ -442,10 +411,6 @@
       color: var(--text);
       word-break: break-word;
     }
-
-    /* =========================================================
-       STATISTICS
-    ========================================================= */
 
     .section-heading {
       display: flex;
@@ -527,10 +492,6 @@
       line-height: 1;
     }
 
-    /* =========================================================
-       HAFALAN SUMMARY
-    ========================================================= */
-
     .summary-card {
       padding: 20px;
     }
@@ -593,10 +554,6 @@
       color: var(--text);
     }
 
-    /* =========================================================
-       HAFALAN LIST
-    ========================================================= */
-
     .hafalan-card {
       padding: 20px;
     }
@@ -652,10 +609,6 @@
       border-radius: 12px;
     }
 
-    /* =========================================================
-       FOOTER
-    ========================================================= */
-
     .footer {
       padding: 25px 20px 10px;
       text-align: center;
@@ -664,17 +617,9 @@
       line-height: 1.6;
     }
 
-    /* =========================================================
-       HIDDEN
-    ========================================================= */
-
     .hidden {
       display: none !important;
     }
-
-    /* =========================================================
-       LOADING
-    ========================================================= */
 
     .spinner {
       width: 17px;
@@ -694,10 +639,6 @@
       }
     }
 
-    /* =========================================================
-       DESKTOP
-    ========================================================= */
-
     @media (min-width: 700px) {
 
       body {
@@ -716,10 +657,6 @@
         padding: 0 20px;
       }
     }
-
-    /* =========================================================
-       SMALL HP
-    ========================================================= */
 
     @media (max-width: 360px) {
 
@@ -769,10 +706,6 @@
 
   <div class="app">
 
-    <!-- =====================================================
-         HEADER
-    ====================================================== -->
-
     <header class="header">
 
       <div class="header-content">
@@ -784,6 +717,7 @@
           </div>
 
           <div>
+
             <h1 class="brand-title">
               CEK DATA SANTRI
             </h1>
@@ -791,6 +725,7 @@
             <p class="brand-subtitle">
               III i Awwaliyah Putra
             </p>
+
           </div>
 
         </div>
@@ -809,16 +744,7 @@
     </header>
 
 
-    <!-- =====================================================
-         CONTENT
-    ====================================================== -->
-
     <main class="content">
-
-
-      <!-- ===================================================
-           SEARCH
-      ==================================================== -->
 
       <section class="card search-card">
 
@@ -881,19 +807,10 @@
       </section>
 
 
-      <!-- ===================================================
-           RESULT
-      ==================================================== -->
-
       <section
         id="result"
         class="result"
       >
-
-
-        <!-- ================================================
-             IDENTITAS SANTRI
-        ================================================= -->
 
         <div class="card profile-card">
 
@@ -945,7 +862,6 @@
 
             </div>
 
-
             <div class="identity-item">
 
               <div class="identity-label">
@@ -961,7 +877,6 @@
 
             </div>
 
-
             <div class="identity-item">
 
               <div class="identity-label">
@@ -976,7 +891,6 @@
               </div>
 
             </div>
-
 
             <div class="identity-item">
 
@@ -998,10 +912,6 @@
         </div>
 
 
-        <!-- ================================================
-             STATISTIK ABSENSI
-        ================================================= -->
-
         <div class="section-heading">
 
           <h2>
@@ -1016,7 +926,6 @@
 
 
         <div class="stats-grid">
-
 
           <div class="stat-card izin">
 
@@ -1116,10 +1025,6 @@
         </div>
 
 
-        <!-- ================================================
-             RINGKASAN HAFALAN
-        ================================================= -->
-
         <div class="section-heading">
 
           <h2>
@@ -1158,7 +1063,6 @@
 
           </div>
 
-
           <div class="progress">
 
             <div
@@ -1167,7 +1071,6 @@
             ></div>
 
           </div>
-
 
           <div class="summary-counts">
 
@@ -1197,10 +1100,6 @@
         </div>
 
 
-        <!-- ================================================
-             DAFTAR HAFALAN
-        ================================================= -->
-
         <div class="section-heading">
 
           <h2>
@@ -1229,13 +1128,8 @@
 
         </div>
 
-
       </section>
 
-
-      <!-- ===================================================
-           FOOTER
-      ==================================================== -->
 
       <footer class="footer">
 
@@ -1255,79 +1149,121 @@
   <script>
 
     /* =======================================================
+       URL WEB APP GOOGLE APPS SCRIPT
+    ======================================================== */
+
+    const WEB_APP_URL =
+      "https://script.google.com/macros/s/AKfycbzwmAoGDbHTlvnO2VsLtpnOqXOvMw1aLxJQiHnLHf6CoNP_UaIz2XH_W_A2Zle8RrmD/exec";
+
+
+    /* =======================================================
        ELEMEN
     ======================================================== */
 
-    const noHp = document.getElementById("noHp");
-    const clearButton = document.getElementById("clearButton");
-    const searchButton = document.getElementById("searchButton");
-    const message = document.getElementById("message");
-    const result = document.getElementById("result");
+    const noHp =
+      document.getElementById("noHp");
+
+    const clearButton =
+      document.getElementById("clearButton");
+
+    const searchButton =
+      document.getElementById("searchButton");
+
+    const message =
+      document.getElementById("message");
+
+    const result =
+      document.getElementById("result");
 
 
     /* =======================================================
        INPUT HANYA ANGKA
     ======================================================== */
 
-    noHp.addEventListener("input", function () {
+    noHp.addEventListener(
+      "input",
+      function () {
 
-      this.value = this.value
-        .replace(/\D/g, "")
-        .slice(0, 4);
+        this.value =
+          this.value
+            .replace(/\D/g, "")
+            .slice(0, 4);
 
-      if (this.value.length > 0) {
-        clearButton.classList.add("show");
-      } else {
-        clearButton.classList.remove("show");
+        if (this.value.length > 0) {
+
+          clearButton.classList.add("show");
+
+        } else {
+
+          clearButton.classList.remove("show");
+
+        }
+
       }
-
-    });
+    );
 
 
     /* =======================================================
        CLEAR INPUT
     ======================================================== */
 
-    clearButton.addEventListener("click", function () {
+    clearButton.addEventListener(
+      "click",
+      function () {
 
-      noHp.value = "";
+        noHp.value = "";
 
-      clearButton.classList.remove("show");
+        clearButton.classList.remove("show");
 
-      noHp.focus();
+        noHp.focus();
 
-    });
+      }
+    );
 
 
     /* =======================================================
        ENTER UNTUK CEK
     ======================================================== */
 
-    noHp.addEventListener("keydown", function (event) {
+    noHp.addEventListener(
+      "keydown",
+      function (event) {
 
-      if (event.key === "Enter") {
-        cekTampilan();
+        if (event.key === "Enter") {
+
+          cekSantriAPI();
+
+        }
+
       }
-
-    });
+    );
 
 
     /* =======================================================
        TOMBOL CEK
-       
-       CATATAN:
-       Pada Tahap 7 ini belum ada koneksi API.
-       Fungsi ini hanya untuk menguji tampilan.
     ======================================================== */
 
-    searchButton.addEventListener("click", cekTampilan);
+    searchButton.addEventListener(
+      "click",
+      cekSantriAPI
+    );
 
 
-    function cekTampilan() {
+    /* =======================================================
+       HUBUNGKAN DENGAN API CEK SANTRI
+    ======================================================== */
 
-      const nomor = noHp.value.trim();
+    async function cekSantriAPI() {
+
+      const nomor =
+        noHp.value.trim();
+
+
+      /* Validasi */
 
       if (nomor.length !== 4) {
+
+        result.classList.remove("show");
 
         tampilkanPesan(
           "Masukkan 4 digit terakhir nomor HP wali santri.",
@@ -1340,36 +1276,112 @@
       }
 
 
+      /* Loading */
+
       searchButton.disabled = true;
 
       searchButton.innerHTML =
         '<span class="spinner"></span>Memeriksa...';
 
+      result.classList.remove("show");
 
       tampilkanPesan(
-        "Tampilan siap. Koneksi ke data santri akan dilakukan pada Tahap 8.",
+        "Sedang mengambil data santri...",
         "loading"
       );
 
 
-      /*
-       * Belum mengambil data dari API.
-       *
-       * Koneksi ke:
-       * ?api=cekSantri&noHp=XXXX
-       *
-       * akan dibuat pada Tahap 8.
-       */
+      try {
+
+        /*
+         * Membuat URL API:
+         *
+         * /exec?api=cekSantri&noHp=XXXX
+         */
+
+        const url =
+          WEB_APP_URL +
+          "?api=cekSantri&noHp=" +
+          encodeURIComponent(nomor);
 
 
-      setTimeout(function () {
+        const response =
+          await fetch(url, {
+            method: "GET",
+            cache: "no-store"
+          });
+
+
+        if (!response.ok) {
+
+          throw new Error(
+            "Server mengembalikan status " +
+            response.status
+          );
+
+        }
+
+
+        const data =
+          await response.json();
+
+
+        console.log(
+          "Respons API:",
+          data
+        );
+
+
+        /* Santri tidak ditemukan */
+
+        if (!data || data.ada !== true) {
+
+          result.classList.remove("show");
+
+          tampilkanPesan(
+            "Data santri tidak ditemukan. Periksa kembali 4 digit nomor HP yang dimasukkan.",
+            "error"
+          );
+
+          return;
+
+        }
+
+
+        /* Santri ditemukan */
+
+        tampilkanData(data);
+
+        tampilkanPesan(
+          "Data santri berhasil ditemukan.",
+          "success"
+        );
+
+
+      } catch (error) {
+
+        console.error(
+          "Kesalahan API:",
+          error
+        );
+
+
+        result.classList.remove("show");
+
+
+        tampilkanPesan(
+          "Tidak dapat mengambil data. Pastikan koneksi internet aktif dan Web App dapat diakses.",
+          "error"
+        );
+
+      } finally {
 
         searchButton.disabled = false;
 
         searchButton.textContent =
           "Cek Data Santri";
 
-      }, 700);
+      }
 
     }
 
@@ -1378,9 +1390,13 @@
        PESAN
     ======================================================== */
 
-    function tampilkanPesan(teks, tipe) {
+    function tampilkanPesan(
+      teks,
+      tipe
+    ) {
 
-      message.textContent = teks;
+      message.textContent =
+        teks;
 
       message.className =
         "message show " + tipe;
@@ -1389,201 +1405,265 @@
 
 
     /* =======================================================
-       FUNGSI UNTUK MENGISI DATA
-       
-       Fungsi ini sengaja sudah disiapkan untuk Tahap 8.
-       Nanti hasil dari API tinggal dimasukkan ke sini.
+       TAMPILKAN DATA SANTRI
     ======================================================== */
 
     function tampilkanData(data) {
 
-      if (!data) {
-        return;
-      }
-
-
-      document.getElementById("namaSantri").textContent =
+      document.getElementById(
+        "namaSantri"
+      ).textContent =
         data.nama || "-";
 
 
-      document.getElementById("namaLengkap").textContent =
+      document.getElementById(
+        "namaLengkap"
+      ).textContent =
         data.nama || "-";
 
 
-      document.getElementById("nomorInduk").textContent =
+      document.getElementById(
+        "nomorInduk"
+      ).textContent =
         data.induk || "-";
 
 
-      document.getElementById("binSantri").textContent =
+      document.getElementById(
+        "binSantri"
+      ).textContent =
         data.bin || "-";
 
 
-      document.getElementById("nomorAbsen").textContent =
+      /*
+       * API cekSantri yang kita buat sebelumnya
+       * menggunakan nomor absen sebagai proses
+       * pencarian dashboard.
+       *
+       * Jika API mengembalikan noAbsen,
+       * gunakan nilai tersebut.
+       *
+       * Jika belum dikembalikan oleh API,
+       * tampilkan tanda "-".
+       */
+
+      document.getElementById(
+        "nomorAbsen"
+      ).textContent =
         data.noAbsen || "-";
 
 
-      document.getElementById("izin").textContent =
+      document.getElementById(
+        "izin"
+      ).textContent =
         data.izin ?? 0;
 
 
-      document.getElementById("sakit").textContent =
+      document.getElementById(
+        "sakit"
+      ).textContent =
         data.sakit ?? 0;
 
 
-      document.getElementById("alpa").textContent =
+      document.getElementById(
+        "alpa"
+      ).textContent =
         data.alpa ?? 0;
 
 
-      document.getElementById("total").textContent =
+      document.getElementById(
+        "total"
+      ).textContent =
         data.total ?? 0;
 
 
-      document.getElementById("sudah").textContent =
+      document.getElementById(
+        "sudah"
+      ).textContent =
         data.sudah ?? 0;
 
 
-      document.getElementById("belum").textContent =
+      document.getElementById(
+        "belum"
+      ).textContent =
         data.belum ?? 0;
 
 
-      document.getElementById("totalHafalan").textContent =
-        data.totalHafalan ?? data.total ?? 0;
+      /*
+       * Total materi hafalan.
+       *
+       * Pada API sebelumnya nilai total
+       * merupakan total absensi, sehingga
+       * untuk hafalan kita hitung dari
+       * sudah + belum jika tersedia.
+       */
 
+      const sudah =
+        Number(data.sudah) || 0;
+
+      const belum =
+        Number(data.belum) || 0;
+
+      const totalHafalan =
+        sudah + belum;
+
+
+      document.getElementById(
+        "totalHafalan"
+      ).textContent =
+        totalHafalan;
+
+
+      /* Persentase */
 
       const persen =
         Number(data.persentase) || 0;
 
 
-      document.getElementById("persentase").textContent =
+      document.getElementById(
+        "persentase"
+      ).textContent =
         persen + "%";
 
 
-      document.getElementById("progressBar").style.width =
-        Math.min(100, Math.max(0, persen)) + "%";
+      document.getElementById(
+        "progressBar"
+      ).style.width =
+        Math.min(
+          100,
+          Math.max(0, persen)
+        ) + "%";
 
 
-      /* Inisial avatar */
+      /* Avatar */
 
       const nama =
-        String(data.nama || "S").trim();
+        String(
+          data.nama || "S"
+        ).trim();
 
-      document.getElementById("avatar").textContent =
-        nama.charAt(0).toUpperCase();
+
+      document.getElementById(
+        "avatar"
+      ).textContent =
+        nama
+          .charAt(0)
+          .toUpperCase();
 
 
       /* Daftar hafalan */
 
+      tampilkanDaftarHafalan(
+        data.daftar
+      );
+
+
+      /* Tampilkan hasil */
+
+      result.classList.add(
+        "show"
+      );
+
+
+      setTimeout(
+        function () {
+
+          result.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+          });
+
+        },
+        100
+      );
+
+    }
+
+
+    /* =======================================================
+       DAFTAR HAFALAN
+    ======================================================== */
+
+    function tampilkanDaftarHafalan(
+      daftar
+    ) {
+
       const list =
-        document.getElementById("hafalanList");
+        document.getElementById(
+          "hafalanList"
+        );
+
 
       list.innerHTML = "";
 
 
-      const daftar =
-        Array.isArray(data.daftar)
-          ? data.daftar
-          : [];
-
-
-      if (daftar.length === 0) {
+      if (
+        !Array.isArray(daftar) ||
+        daftar.length === 0
+      ) {
 
         list.innerHTML =
           '<div class="empty-hafalan">' +
           'Belum ada data hafalan.' +
           '</div>';
 
-      } else {
+        return;
+      }
 
-        daftar.forEach(function (item, index) {
+
+      daftar.forEach(
+        function (item, index) {
 
           const div =
-            document.createElement("div");
+            document.createElement(
+              "div"
+            );
+
 
           div.className =
             "hafalan-item";
 
 
-          div.innerHTML =
-            '<div class="hafalan-number">' +
-            (index + 1) +
-            '</div>' +
+          const nomor =
+            document.createElement(
+              "div"
+            );
 
-            '<div class="hafalan-name">' +
-            escapeHtml(item) +
-            '</div>';
+          nomor.className =
+            "hafalan-number";
 
-
-          list.appendChild(div);
-
-        });
-
-      }
+          nomor.textContent =
+            index + 1;
 
 
-      result.classList.add("show");
+          const nama =
+            document.createElement(
+              "div"
+            );
 
-      message.className =
-        "message";
+          nama.className =
+            "hafalan-name";
 
-
-      setTimeout(function () {
-
-        result.scrollIntoView({
-          behavior: "smooth",
-          block: "start"
-        });
-
-      }, 100);
-
-    }
+          nama.textContent =
+            item;
 
 
-    /* =======================================================
-       AMANKAN TEXT HTML
-    ======================================================== */
+          div.appendChild(
+            nomor
+          );
 
-    function escapeHtml(text) {
+          div.appendChild(
+            nama
+          );
 
-      const div =
-        document.createElement("div");
 
-      div.textContent =
-        text == null ? "" : String(text);
+          list.appendChild(
+            div
+          );
 
-      return div.innerHTML;
+        }
+      );
 
     }
-
-
-    /* =======================================================
-       DATA CONTOH UNTUK PENGUJIAN TAMPILAN
-       
-       TIDAK AKAN DIGUNAKAN UNTUK API.
-       Sengaja tidak otomatis dijalankan.
-    ======================================================== */
-
-    /*
-    tampilkanData({
-      nama: "Nama Santri",
-      noAbsen: "01",
-      induk: "12345",
-      bin: "Bin Nama Ayah",
-      izin: 2,
-      sakit: 1,
-      alpa: 3,
-      total: 6,
-      sudah: 45,
-      belum: 53,
-      totalHafalan: 98,
-      persentase: 46,
-      daftar: [
-        "المادة الأولى",
-        "المادة الثانية",
-        "المادة الثالثة",
-        "المادة الرابعة"
-      ]
-    });
-    */
 
   </script>
 
