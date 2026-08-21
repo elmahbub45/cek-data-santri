@@ -371,7 +371,7 @@
         grid;
 
       grid-template-columns:
-        repeat(4, 1fr);
+        repeat(3, 1fr);
 
       gap:
         10px;
@@ -431,14 +431,14 @@
       min-width:
         42px;
 
-      height:
+      min-height:
         28px;
 
       padding:
-        0 10px;
+        4px 10px;
 
       border-radius:
-        999px;
+        8px;
 
       background:
         #ccfbf1;
@@ -447,7 +447,7 @@
         #0f766e;
 
       font-size:
-        13px;
+        14px;
 
       font-weight:
         800;
@@ -1338,7 +1338,9 @@
                 id="noAbsen"
                 class="profile-value"
               >
-                <span class="absen-badge">-</span>
+                <span class="absen-badge">
+                  -
+                </span>
               </div>
 
             </div>
@@ -1771,6 +1773,14 @@
 <script>
 
   /* ==================================================
+     KONFIGURASI API
+     ================================================== */
+
+  const API_URL =
+    'https://script.google.com/macros/s/AKfycbzwmAoGDbHTlvnO2VsLtpnOqXOvMw1aLxJQiHnLHf6CoNP_UaIz2XH_W_A2Zle8RrmD/exec';
+
+
+  /* ==================================================
      ELEMENT
      ================================================== */
 
@@ -1834,13 +1844,9 @@
 
   /* ==================================================
      CEK DATA
-     
-     Menggunakan google.script.run agar tidak
-     terkena masalah "Failed to fetch" akibat
-     fetch ke URL Web App Google Apps Script.
      ================================================== */
 
-  function cekData() {
+  async function cekData() {
 
     const nomor =
       noHp.value.trim();
@@ -1866,104 +1872,74 @@
       'none';
 
 
-    /*
-     * Google Apps Script menyediakan
-     * google.script.run ketika Index.html
-     * dijalankan melalui HtmlService.
-     */
+    try {
 
-    if (
-      typeof google !== 'undefined' &&
-      google.script &&
-      google.script.run
-    ) {
-
-      google.script.run
-
-        .withSuccessHandler(
-          function (data) {
-
-            btnCek.disabled =
-              false;
-
-            btnCek.textContent =
-              'Cek Data Santri';
+      const url =
+        API_URL +
+        '?api=cekSantri&noHp=' +
+        encodeURIComponent(nomor);
 
 
-            if (
-              !data ||
-              !data.ada
-            ) {
-
-              tampilkanError(
-                stripHtml(
-                  data &&
-                  data.pesan
-                    ? data.pesan
-                    : 'Data santri tidak ditemukan.'
-                )
-              );
-
-              return;
-
-            }
-
-
-            tampilkanData(
-              data
-            );
-
+      const response =
+        await fetch(
+          url,
+          {
+            method: 'GET',
+            cache: 'no-store'
           }
-        )
-
-        .withFailureHandler(
-          function (error) {
-
-            btnCek.disabled =
-              false;
-
-            btnCek.textContent =
-              'Cek Data Santri';
-
-
-            tampilkanError(
-              error &&
-              error.message
-                ? error.message
-                : 'Terjadi kesalahan saat mengambil data.'
-            );
-
-          }
-        )
-
-        .cekSantri(
-          nomor
         );
 
 
-      return;
+      if (!response.ok) {
+
+        throw new Error(
+          'Server tidak dapat dihubungi.'
+        );
+
+      }
+
+
+      const data =
+        await response.json();
+
+
+      if (!data.ada) {
+
+        throw new Error(
+          stripHtml(
+            data.pesan ||
+            'Data santri tidak ditemukan.'
+          )
+        );
+
+      }
+
+
+      tampilkanData(data);
+
+
+    } catch (error) {
+
+      console.error(
+        'Gagal mengambil data:',
+        error
+      );
+
+
+      tampilkanError(
+        error.message ||
+        'Terjadi kesalahan saat mengambil data.'
+      );
+
+    } finally {
+
+      btnCek.disabled =
+        false;
+
+      btnCek.textContent =
+        'Cek Data Santri';
 
     }
-
-
-    /*
-     * Fallback jika file HTML dibuka
-     * bukan melalui Google Apps Script.
-     *
-     * Dalam kondisi normal Web App GAS,
-     * bagian ini tidak digunakan.
-     */
-
-    tampilkanError(
-      'Halaman tidak terhubung ke Google Apps Script. Pastikan Index.html dijalankan melalui Web App Google Apps Script.'
-    );
-
-
-    btnCek.disabled =
-      false;
-
-    btnCek.textContent =
-      'Cek Data Santri';
 
   }
 
@@ -1974,47 +1950,15 @@
 
   function tampilkanData(data) {
 
-
     /* -----------------------------------------------
        PROFIL
        ----------------------------------------------- */
 
-
-    /*
-     * Mendukung beberapa kemungkinan nama properti
-     * nomor absen dari Code.gs.
-     */
-
-    const nomorAbsen =
-      data.noAbsen ??
-      data.nomorAbsen ??
-      data.absen ??
-      data.no_absen ??
-      '-';
-
-
-    const badge =
-      document.createElement(
-        'span'
-      );
-
-    badge.className =
-      'absen-badge';
-
-    badge.textContent =
-      nomorAbsen;
-
-
-    const absenElement =
-      document.getElementById(
-        'noAbsen'
-      );
-
-    absenElement.innerHTML =
-      '';
-
-    absenElement.appendChild(
-      badge
+    setAbsen(
+      data.noAbsen ||
+      data.nomorAbsen ||
+      data.absen ||
+      '-'
     );
 
 
@@ -2023,10 +1967,12 @@
       data.nama || '-'
     );
 
+
     setText(
       'induk',
       data.induk || '-'
     );
+
 
     setText(
       'bin',
@@ -2043,20 +1989,24 @@
       angka(data.totalHadir)
     );
 
+
     setText(
       'totalSakit',
       angka(data.totalSakit)
     );
+
 
     setText(
       'totalIzin',
       angka(data.totalIzin)
     );
 
+
     setText(
       'totalAlpa',
       angka(data.totalAlpa)
     );
+
 
     setText(
       'totalHariAktif',
@@ -2113,10 +2063,12 @@
       angka(data.sudah)
     );
 
+
     setText(
       'belum',
       angka(data.belum)
     );
+
 
     setText(
       'totalHafalan',
@@ -2134,11 +2086,13 @@
       '⚪'
     );
 
+
     setText(
       'predicateName',
       data.predikatHafalan ||
       'BELUM MENYETOR'
     );
+
 
     setText(
       'predicateDescription',
@@ -2155,6 +2109,7 @@
       'targetProgres',
       angka(data.targetProgres) + '%'
     );
+
 
     setText(
       'targetLabel',
@@ -2192,6 +2147,7 @@
       ).textContent =
         keterangan;
 
+
       document.getElementById(
         'keteranganSection'
       ).classList.remove(
@@ -2217,14 +2173,64 @@
       'hidden'
     );
 
+
     hasilSection.classList.remove(
       'hidden'
     );
+
 
     window.scrollTo({
       top: 0,
       behavior: 'smooth'
     });
+
+  }
+
+
+  /* ==================================================
+     NOMOR ABSEN
+     ================================================== */
+
+  function setAbsen(
+    value
+  ) {
+
+    const element =
+      document.getElementById(
+        'noAbsen'
+      );
+
+
+    if (!element) {
+      return;
+    }
+
+
+    const badge =
+      document.createElement(
+        'span'
+      );
+
+
+    badge.className =
+      'absen-badge';
+
+
+    badge.textContent =
+      value === null ||
+      value === undefined ||
+      value === ''
+        ? '-'
+        : value;
+
+
+    element.innerHTML =
+      '';
+
+
+    element.appendChild(
+      badge
+    );
 
   }
 
@@ -2257,6 +2263,7 @@
         'Data rekap absensi bulanan belum tersedia.' +
         '</div>';
 
+
       return;
 
     }
@@ -2270,39 +2277,11 @@
         }
 
 
-        /*
-         * =================================================
-         * SYAWWAL TIDAK DIHITUNG
-         *
-         * Absensi dimulai pada Dzul Qa'dah.
-         *
-         * Syawwal tidak ditampilkan pada rekap.
-         * =================================================
-         */
-
-        const namaBulan =
-          String(
-            item.bulan ||
-            ''
-          )
-          .trim()
-          .toLowerCase();
-
-
-        if (
-          namaBulan === 'syawwal' ||
-          namaBulan === 'syawal'
-        ) {
-
-          return;
-
-        }
-
-
         const wrapper =
           document.createElement(
             'div'
           );
+
 
         wrapper.className =
           'monthly-item';
@@ -2313,6 +2292,7 @@
             'div'
           );
 
+
         head.className =
           'monthly-head';
 
@@ -2322,8 +2302,10 @@
             'div'
           );
 
+
         name.className =
           'monthly-name';
+
 
         name.textContent =
           item.bulan ||
@@ -2334,6 +2316,7 @@
           document.createElement(
             'div'
           );
+
 
         status.className =
           'monthly-status';
@@ -2355,6 +2338,7 @@
             'status-sudah'
           );
 
+
           status.textContent =
             'SUDAH DIINPUT';
 
@@ -2369,6 +2353,7 @@
             'status-belum'
           );
 
+
           status.textContent =
             'BELUM DIINPUT';
 
@@ -2380,6 +2365,7 @@
             'status-error'
           );
 
+
           status.textContent =
             item.statusText ||
             'DATA TIDAK TERSEDIA';
@@ -2390,6 +2376,7 @@
         head.appendChild(
           name
         );
+
 
         head.appendChild(
           status
@@ -2420,12 +2407,15 @@
                 'div'
               );
 
+
             info.className =
               'monthly-period';
+
 
             info.textContent =
               item.statusText ||
               'Belum diinput';
+
 
             wrapper.appendChild(
               info
@@ -2437,6 +2427,7 @@
           container.appendChild(
             wrapper
           );
+
 
           return;
 
@@ -2452,6 +2443,7 @@
             'div'
           );
 
+
         data.className =
           'monthly-data';
 
@@ -2462,11 +2454,13 @@
           'Hari Aktif'
         );
 
+
         tambahStatBulanan(
           data,
           item.hadir,
           'Hadir'
         );
+
 
         tambahStatBulanan(
           data,
@@ -2474,11 +2468,13 @@
           'Sakit'
         );
 
+
         tambahStatBulanan(
           data,
           item.izin,
           'Izin'
         );
+
 
         tambahStatBulanan(
           data,
@@ -2502,8 +2498,10 @@
               'div'
             );
 
+
           periode.className =
             'monthly-period';
+
 
           periode.textContent =
             (
@@ -2515,6 +2513,7 @@
               item.tanggalSelesai ||
               '-'
             );
+
 
           wrapper.appendChild(
             periode
@@ -2548,6 +2547,7 @@
         'div'
       );
 
+
     box.className =
       'monthly-stat';
 
@@ -2556,6 +2556,7 @@
       document.createElement(
         'strong'
       );
+
 
     number.textContent =
       angka(value);
@@ -2566,6 +2567,7 @@
         'span'
       );
 
+
     text.textContent =
       label;
 
@@ -2573,6 +2575,7 @@
     box.appendChild(
       number
     );
+
 
     box.appendChild(
       text
@@ -2614,11 +2617,14 @@
           'div'
         );
 
+
       complete.className =
         'all-complete';
 
+
       complete.style.gridColumn =
         '1 / -1';
+
 
       complete.textContent =
         '🎉 Tidak ada hafalan yang tertinggal. ' +
@@ -2629,6 +2635,7 @@
         complete
       );
 
+
       return;
 
     }
@@ -2637,8 +2644,19 @@
     daftar.forEach(
       function (item, index) {
 
+        /*
+         * Backend mengirim object:
+         *
+         * {
+         *   nomor: 1,
+         *   judul: "..."
+         * }
+         */
+
+
         let nomor =
           index + 1;
+
 
         let judul =
           '';
@@ -2652,6 +2670,7 @@
           nomor =
             item.nomor ||
             nomor;
+
 
           judul =
             item.judul ||
@@ -2676,9 +2695,7 @@
         if (
           judul === ''
         ) {
-
           return;
-
         }
 
 
@@ -2686,6 +2703,7 @@
           document.createElement(
             'div'
           );
+
 
         element.className =
           'hafalan-item';
@@ -2696,8 +2714,10 @@
             'div'
           );
 
+
         number.className =
           'hafalan-number';
+
 
         number.textContent =
           nomor;
@@ -2708,8 +2728,10 @@
             'div'
           );
 
+
         title.className =
           'hafalan-title';
+
 
         title.textContent =
           judul;
@@ -2718,6 +2740,7 @@
         element.appendChild(
           number
         );
+
 
         element.appendChild(
           title
@@ -2776,6 +2799,7 @@
 
       const s =
         Number(sudah) || 0;
+
 
       const t =
         Number(total) || 0;
@@ -2891,8 +2915,10 @@
     errorBox.innerHTML =
       '';
 
+
     errorBox.textContent =
       pesan;
+
 
     errorBox.style.display =
       'block';
@@ -2913,8 +2939,12 @@
         'div'
       );
 
+
     div.innerHTML =
-      String(text || '');
+      String(
+        text || ''
+      );
+
 
     return (
       div.textContent ||
