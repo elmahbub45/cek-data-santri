@@ -3101,7 +3101,7 @@
         rgba(255,255,255,0.20);
 
       background:
-        rgba(255,255,255,0.12);
+        #ffe591;
     }
 
     .profile-status-badge {
@@ -6417,6 +6417,33 @@
     }
 
 
+    const jembatanAndroid =
+      window.CekDataSantriAndroid;
+
+
+    if (
+      jembatanAndroid &&
+      typeof jembatanAndroid.shareJpeg === 'function'
+    ) {
+
+      const hasilNative =
+        jembatanAndroid.shareJpeg(
+          gambarPencapaianTerakhir.dataUrl,
+          gambarPencapaianTerakhir.namaFile
+        );
+
+
+      setText(
+        'achievementPreviewFeedback',
+        hasilNative === 'OK'
+          ? 'Gambar berhasil diteruskan ke menu berbagi Android.'
+          : 'Gambar belum berhasil dibagikan. Silakan coba lagi.'
+      );
+
+      return;
+    }
+
+
     let file =
       null;
 
@@ -6501,6 +6528,44 @@
   function simpanGambarSiap() {
 
     if (!gambarPencapaianTerakhir) {
+      return;
+    }
+
+
+    const jembatanAndroid =
+      window.CekDataSantriAndroid;
+
+
+    if (
+      jembatanAndroid &&
+      typeof jembatanAndroid.saveJpeg === 'function'
+    ) {
+
+      const hasilNative =
+        jembatanAndroid.saveJpeg(
+          gambarPencapaianTerakhir.dataUrl,
+          gambarPencapaianTerakhir.namaFile
+        );
+
+
+      let pesanNative =
+        'Gambar belum berhasil disimpan. Silakan coba lagi.';
+
+
+      if (hasilNative === 'OK') {
+        pesanNative =
+          'Gambar berhasil disimpan ke galeri.';
+      } else if (hasilNative === 'PERMISSION') {
+        pesanNative =
+          'Berikan izin penyimpanan untuk menyimpan gambar.';
+      }
+
+
+      setText(
+        'achievementPreviewFeedback',
+        pesanNative
+      );
+
       return;
     }
 
