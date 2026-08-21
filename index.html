@@ -557,6 +557,69 @@
         #173b2a;
     }
 
+    .profile-name-wrap {
+      min-width:
+        0;
+    }
+
+    .profile-status-badge {
+      width:
+        fit-content;
+
+      margin-top:
+        7px;
+
+      padding:
+        5px 9px;
+
+      border:
+        1px solid #bfe3c8;
+
+      border-radius:
+        99px;
+
+      background:
+        #eaf7ee;
+
+      color:
+        #166534;
+
+      font-size:
+        9px;
+
+      font-weight:
+        800;
+
+      letter-spacing:
+        0.35px;
+    }
+
+    .profile-status-badge::before {
+      content:
+        "";
+
+      width:
+        6px;
+
+      height:
+        6px;
+
+      margin-right:
+        6px;
+
+      display:
+        inline-block;
+
+      border-radius:
+        50%;
+
+      background:
+        #22a447;
+
+      vertical-align:
+        1px;
+    }
+
 
     /* ==================================================
        STATS
@@ -624,6 +687,257 @@
     .stat.alpa .stat-number {
       color:
         #dc2626;
+    }
+
+
+    /* ==================================================
+       APRESIASI ABSENSI
+       ================================================== */
+
+    .attendance-award {
+      margin-top:
+        15px;
+
+      padding:
+        18px 16px 16px;
+
+      border:
+        1px solid #b9ddc4;
+
+      border-radius:
+        15px;
+
+      background:
+        linear-gradient(
+          145deg,
+          #eff9f1,
+          #e8f5ec
+        );
+
+      text-align:
+        center;
+
+      position:
+        relative;
+
+      overflow:
+        hidden;
+    }
+
+    .attendance-award::after {
+      content:
+        "";
+
+      position:
+        absolute;
+
+      width:
+        100px;
+
+      height:
+        100px;
+
+      top:
+        -58px;
+
+      right:
+        -38px;
+
+      border-radius:
+        50%;
+
+      background:
+        rgba(255,255,255,0.48);
+    }
+
+    .attendance-award-icon {
+      width:
+        48px;
+
+      height:
+        48px;
+
+      margin:
+        0 auto 8px;
+
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      justify-content:
+        center;
+
+      border-radius:
+        15px;
+
+      background:
+        rgba(255,255,255,0.72);
+
+      box-shadow:
+        0 5px 14px
+        rgba(22,101,52,0.09);
+
+      font-size:
+        25px;
+
+      position:
+        relative;
+
+      z-index:
+        1;
+    }
+
+    .attendance-award-label {
+      color:
+        #5f806a;
+
+      font-size:
+        9px;
+
+      font-weight:
+        800;
+
+      letter-spacing:
+        1.15px;
+    }
+
+    .attendance-award-title {
+      margin-top:
+        6px;
+
+      color:
+        #166534;
+
+      font-size:
+        17px;
+
+      font-weight:
+        800;
+
+      line-height:
+        1.3;
+    }
+
+    .attendance-award-message {
+      margin-top:
+        6px;
+
+      color:
+        #52705d;
+
+      font-size:
+        12px;
+
+      line-height:
+        1.55;
+    }
+
+    .attendance-award-adjustment {
+      margin-top:
+        8px;
+
+      color:
+        #8a6b13;
+
+      font-size:
+        10px;
+
+      font-weight:
+        600;
+    }
+
+    .attendance-award-rule {
+      margin-top:
+        10px;
+
+      padding-top:
+        9px;
+
+      border-top:
+        1px solid rgba(22,101,52,0.10);
+
+      color:
+        #7b8f81;
+
+      font-size:
+        9px;
+
+      font-style:
+        italic;
+
+      line-height:
+        1.4;
+    }
+
+    .attendance-terdisiplin {
+      background:
+        linear-gradient(145deg, #eff9f1, #e4f4e8);
+      border-color:
+        #acd6b8;
+    }
+
+    .attendance-sangat-baik {
+      background:
+        linear-gradient(145deg, #f1faf3, #e8f6ec);
+      border-color:
+        #b9ddc4;
+    }
+
+    .attendance-baik {
+      background:
+        linear-gradient(145deg, #f4faf1, #edf7e8);
+      border-color:
+        #c8dfbc;
+    }
+
+    .attendance-cukup {
+      background:
+        linear-gradient(145deg, #fafbed, #f4f6df);
+      border-color:
+        #dce2a9;
+    }
+
+    .attendance-cukup .attendance-award-title {
+      color:
+        #667329;
+    }
+
+    .attendance-disiplin {
+      background:
+        linear-gradient(145deg, #fffaf0, #fff4da);
+      border-color:
+        #ead397;
+    }
+
+    .attendance-disiplin .attendance-award-title {
+      color:
+        #946a12;
+    }
+
+    .attendance-perhatian {
+      background:
+        linear-gradient(145deg, #fff7ed, #ffedd5);
+      border-color:
+        #edc28e;
+    }
+
+    .attendance-perhatian .attendance-award-title {
+      color:
+        #a45312;
+    }
+
+    .attendance-berubah {
+      background:
+        linear-gradient(145deg, #fff3f3, #fee7e7);
+      border-color:
+        #e8b4b4;
+    }
+
+    .attendance-berubah .attendance-award-title {
+      color:
+        #b42323;
     }
 
 
@@ -881,6 +1195,82 @@
 
       gap:
         9px;
+    }
+
+    .monthly-details summary {
+      min-height:
+        48px;
+
+      padding:
+        0 14px;
+
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      justify-content:
+        space-between;
+
+      gap:
+        12px;
+
+      border:
+        1px solid #dce9df;
+
+      border-radius:
+        12px;
+
+      background:
+        #f1f8f3;
+
+      color:
+        #24543a;
+
+      font-size:
+        12px;
+
+      font-weight:
+        700;
+
+      cursor:
+        pointer;
+
+      list-style:
+        none;
+    }
+
+    .monthly-details summary::-webkit-details-marker {
+      display:
+        none;
+    }
+
+    .monthly-details summary::after {
+      content:
+        "⌄";
+
+      color:
+        #4f8060;
+
+      font-size:
+        18px;
+
+      line-height:
+        1;
+
+      transition:
+        transform 0.2s ease;
+    }
+
+    .monthly-details[open] summary::after {
+      transform:
+        rotate(180deg);
+    }
+
+    .monthly-details-content {
+      padding-top:
+        12px;
     }
 
     .monthly-item {
@@ -1267,6 +1657,16 @@
           right;
       }
 
+      .profile-name-wrap {
+        text-align:
+          right;
+      }
+
+      .profile-status-badge {
+        margin-left:
+          auto;
+      }
+
       .stats {
         grid-template-columns:
           repeat(5, 1fr);
@@ -1453,11 +1853,22 @@
                 Nama
               </div>
 
-              <div
-                id="nama"
-                class="profile-value"
-              >
-                -
+              <div class="profile-name-wrap">
+
+                <div
+                  id="nama"
+                  class="profile-value"
+                >
+                  -
+                </div>
+
+                <div
+                  id="statusSantri"
+                  class="profile-status-badge"
+                >
+                  Santri Aktif
+                </div>
+
               </div>
 
             </div>
@@ -1486,63 +1897,6 @@
               <div
                 id="bin"
                 class="profile-value"
-              >
-                -
-              </div>
-
-            </div>
-
-          </div>
-
-        </div>
-
-      </section>
-
-
-      <!-- ==================================================
-           INFO SANTRI
-           ================================================== -->
-
-      <section class="card">
-
-        <div class="card-title">
-
-          <div class="card-title-icon">
-            🗓️
-          </div>
-
-          Informasi Santri
-
-        </div>
-
-        <div class="card-body">
-
-          <div class="info-grid">
-
-            <div class="info-box">
-
-              <div class="info-box-label">
-                Tanggal Masuk
-              </div>
-
-              <div
-                id="tanggalMasuk"
-                class="info-box-value"
-              >
-                -
-              </div>
-
-            </div>
-
-            <div class="info-box">
-
-              <div class="info-box-label">
-                Lama Menjadi Santri
-              </div>
-
-              <div
-                id="lamaSantri"
-                class="info-box-value"
               >
                 -
               </div>
@@ -1653,6 +2007,50 @@
 
           </div>
 
+          <div
+            id="attendanceAward"
+            class="attendance-award attendance-terdisiplin"
+          >
+
+            <div
+              id="attendanceAwardIcon"
+              class="attendance-award-icon"
+            >
+              🏆
+            </div>
+
+            <div class="attendance-award-label">
+              APRESIASI KEDISIPLINAN
+            </div>
+
+            <div
+              id="attendanceAwardTitle"
+              class="attendance-award-title"
+            >
+              SANTRI TERDISIPLIN
+            </div>
+
+            <div
+              id="attendanceAwardMessage"
+              class="attendance-award-message"
+            >
+              Sangat bagus, terus pertahankan!
+            </div>
+
+            <div
+              id="attendanceAwardAdjustment"
+              class="attendance-award-adjustment hidden"
+            >
+              Predikat disesuaikan dari jumlah kehadiran.
+            </div>
+
+            <div class="attendance-award-rule">
+              Predikat berdasarkan jumlah Alpa dan
+              persentase Sakit + Izin
+            </div>
+
+          </div>
+
         </div>
 
       </section>
@@ -1676,10 +2074,22 @@
 
         <div class="card-body">
 
-          <div
-            id="monthlyList"
-            class="monthly-list"
-          ></div>
+          <details class="monthly-details">
+
+            <summary>
+              Lihat Rincian Bulanan
+            </summary>
+
+            <div class="monthly-details-content">
+
+              <div
+                id="monthlyList"
+                class="monthly-list"
+              ></div>
+
+            </div>
+
+          </details>
 
         </div>
 
@@ -2086,6 +2496,268 @@
 
 
   /* ==================================================
+     APRESIASI ABSENSI
+     ================================================== */
+
+  function tentukanPenaltiAbsensi(
+    totalSakit,
+    totalIzin,
+    totalHariAktif
+  ) {
+
+    const sakit =
+      Number(angka(totalSakit));
+
+    const izin =
+      Number(angka(totalIzin));
+
+    const hariAktif =
+      Number(angka(totalHariAktif));
+
+    const sakitIzin =
+      sakit + izin;
+
+
+    if (
+      sakitIzin <= 0 ||
+      hariAktif <= 0
+    ) {
+
+      return {
+        persen: 0,
+        tingkat: 0
+      };
+
+    }
+
+
+    const persen =
+      (sakitIzin / hariAktif) * 100;
+
+
+    if (persen <= 10) {
+
+      return {
+        persen: persen,
+        tingkat: 1
+      };
+
+    }
+
+
+    if (persen <= 20) {
+
+      return {
+        persen: persen,
+        tingkat: 2
+      };
+
+    }
+
+
+    return {
+      persen: persen,
+      tingkat: 3
+    };
+
+  }
+
+
+  function tentukanApresiasiAbsensi(
+    totalAlpa,
+    totalHariAktif,
+    totalHadir,
+    totalSakit,
+    totalIzin
+  ) {
+
+    const alpa =
+      Number(angka(totalAlpa));
+
+    const hariAktif =
+      Number(angka(totalHariAktif));
+
+    const hadir =
+      Number(angka(totalHadir));
+
+
+    const daftar = [
+
+      {
+        icon: '🏆',
+        judul: 'SANTRI TERDISIPLIN',
+        pesan: 'Sangat bagus, terus pertahankan!',
+        kelas: 'attendance-terdisiplin'
+      },
+
+      {
+        icon: '🌟',
+        judul: 'SANGAT BAIK!',
+        pesan: 'Kehadiran sangat baik. Terus pertahankan!',
+        kelas: 'attendance-sangat-baik'
+      },
+
+      {
+        icon: '👏',
+        judul: 'BAIK!',
+        pesan: 'Kehadiran cukup baik. Terus tingkatkan kedisiplinan!',
+        kelas: 'attendance-baik'
+      },
+
+      {
+        icon: '👍',
+        judul: 'CUKUP BAIK',
+        pesan: 'Masih bisa ditingkatkan. Mari lebih disiplin lagi!',
+        kelas: 'attendance-cukup'
+      },
+
+      {
+        icon: '⚠️',
+        judul: 'PERLU LEBIH DISIPLIN',
+        pesan: 'Mari kurangi ketidakhadiran dan tingkatkan kedisiplinan.',
+        kelas: 'attendance-disiplin'
+      },
+
+      {
+        icon: '🔶',
+        judul: 'PERLU PERHATIAN',
+        pesan: 'Kehadiran perlu mendapat perhatian lebih. Yuk, mulai lebih disiplin!',
+        kelas: 'attendance-perhatian'
+      }
+
+    ];
+
+
+    /* Alpa 30 atau lebih langsung PERLU BERUBAH. */
+
+    if (alpa >= 30) {
+
+      return {
+        icon: '🔴',
+        judul: 'PERLU BERUBAH',
+        pesan: 'Catatan Alpa sudah sangat tinggi. Jangan ada Alpa lagi mulai sekarang!',
+        kelas: 'attendance-berubah',
+        penalti: 0,
+        persen: 0
+      };
+
+    }
+
+
+    let levelDasar = 0;
+
+
+    if (alpa >= 21) {
+      levelDasar = 5;
+    } else if (alpa >= 12) {
+      levelDasar = 4;
+    } else if (alpa >= 6) {
+      levelDasar = 3;
+    } else if (alpa >= 3) {
+      levelDasar = 2;
+    } else if (alpa >= 1) {
+      levelDasar = 1;
+    }
+
+
+    const penalti =
+      tentukanPenaltiAbsensi(
+        totalSakit,
+        totalIzin,
+        totalHariAktif
+      );
+
+
+    if (
+      alpa === 0 &&
+      hariAktif > 0 &&
+      hadir === hariAktif &&
+      penalti.tingkat === 0
+    ) {
+
+      return {
+        ...daftar[0],
+        penalti: 0,
+        persen: penalti.persen
+      };
+
+    }
+
+
+    const levelFinal =
+      Math.min(
+        5,
+        levelDasar + penalti.tingkat
+      );
+
+
+    return {
+      ...daftar[levelFinal],
+      penalti: penalti.tingkat,
+      persen: penalti.persen
+    };
+
+  }
+
+
+  function tampilkanApresiasiAbsensi(
+    totalAlpa,
+    totalHariAktif,
+    totalHadir,
+    totalSakit,
+    totalIzin
+  ) {
+
+    const hasil =
+      tentukanApresiasiAbsensi(
+        totalAlpa,
+        totalHariAktif,
+        totalHadir,
+        totalSakit,
+        totalIzin
+      );
+
+    const kartu =
+      document.getElementById(
+        'attendanceAward'
+      );
+
+    const penyesuaian =
+      document.getElementById(
+        'attendanceAwardAdjustment'
+      );
+
+
+    kartu.className =
+      'attendance-award ' +
+      hasil.kelas;
+
+    setText(
+      'attendanceAwardIcon',
+      hasil.icon
+    );
+
+    setText(
+      'attendanceAwardTitle',
+      hasil.judul
+    );
+
+    setText(
+      'attendanceAwardMessage',
+      hasil.pesan
+    );
+
+
+    if (hasil.penalti > 0) {
+      penyesuaian.classList.remove('hidden');
+    } else {
+      penyesuaian.classList.add('hidden');
+    }
+
+  }
+
+
+  /* ==================================================
      TAMPILKAN DATA
      ================================================== */
 
@@ -2113,6 +2785,12 @@
     setText(
       'absen',
       data.absen || '-'
+    );
+
+    setText(
+      'statusSantri',
+      data.statusSantri ||
+      'Santri Aktif'
     );
 
 
@@ -2173,6 +2851,14 @@
     setText(
       'totalHariAktif',
       angka(data.totalHariAktif)
+    );
+
+    tampilkanApresiasiAbsensi(
+      data.totalAlpa,
+      data.totalHariAktif,
+      data.totalHadir,
+      data.totalSakit,
+      data.totalIzin
     );
 
 
