@@ -1,625 +1,597 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
+
   <meta charset="UTF-8">
 
   <meta
     name="viewport"
-    content="width=device-width, initial-scale=1.0, maximum-scale=1.0"
+    content="width=device-width, initial-scale=1.0"
   >
 
-  <meta name="theme-color" content="#0f766e">
+  <meta
+    name="theme-color"
+    content="#0f766e"
+  >
 
   <title>Cek Data Santri</title>
 
   <style>
 
-    /* =====================================================
-       RESET
-    ===================================================== */
-
     * {
       box-sizing: border-box;
-      margin: 0;
-      padding: 0;
     }
 
-    html {
+    html,
+    body {
+      margin: 0;
+      padding: 0;
       width: 100%;
       min-height: 100%;
-      scroll-behavior: smooth;
+      font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+      background:
+        #f4f7f7;
+      color:
+        #1f2937;
     }
 
     body {
-      width: 100%;
       min-height: 100vh;
-
-      font-family:
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        Roboto,
-        Arial,
-        sans-serif;
-
-      background:
-        linear-gradient(
-          180deg,
-          #ecfdf5 0%,
-          #f8fafc 42%,
-          #f8fafc 100%
-        );
-
-      color: #172033;
     }
 
     button,
     input {
-      font: inherit;
+      font-family: inherit;
     }
-
-    button {
-      cursor: pointer;
-    }
-
-    /* =====================================================
-       APP
-    ===================================================== */
 
     .app {
       width: 100%;
       min-height: 100vh;
     }
 
-    .page {
-      width: 100%;
-      max-width: 760px;
-      margin: 0 auto;
-      padding: 20px 15px 40px;
-    }
 
-    /* =====================================================
+    /* ==================================================
        HEADER
-    ===================================================== */
+       ================================================== */
 
-    .top-header {
-      padding: 20px 4px 24px;
-      text-align: center;
-    }
-
-    .brand-icon {
-      width: 62px;
-      height: 62px;
-      margin: 0 auto 14px;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      border-radius: 20px;
-
-      background:
-        linear-gradient(
-          145deg,
-          #0f766e,
-          #14b8a6
-        );
-
-      color: white;
-
-      font-size: 28px;
-
-      box-shadow:
-        0 12px 25px rgba(15, 118, 110, .20);
-    }
-
-    .top-header h1 {
-      font-size: 24px;
-      font-weight: 800;
-      letter-spacing: -.4px;
-      color: #0f172a;
-    }
-
-    .top-header p {
-      margin-top: 6px;
-      font-size: 13px;
-      color: #64748b;
-    }
-
-    /* =====================================================
-       SEARCH CARD
-    ===================================================== */
-
-    .search-card {
-      background: rgba(255,255,255,.96);
-
-      border: 1px solid #e2e8f0;
-
-      border-radius: 22px;
-
-      padding: 24px 20px;
-
-      box-shadow:
-        0 12px 35px rgba(15,23,42,.07);
-    }
-
-    .search-title {
-      font-size: 18px;
-      font-weight: 800;
-      color: #0f172a;
-      text-align: center;
-    }
-
-    .search-description {
-      margin-top: 7px;
-      text-align: center;
-
-      font-size: 13px;
-      line-height: 1.6;
-
-      color: #64748b;
-    }
-
-    .input-wrapper {
-      margin-top: 20px;
-    }
-
-    .input-label {
-      display: block;
-
-      margin-bottom: 8px;
-
-      font-size: 13px;
-      font-weight: 700;
-
-      color: #334155;
-    }
-
-    .phone-input {
-      width: 100%;
-      height: 54px;
-
-      border: 1.5px solid #cbd5e1;
-      border-radius: 14px;
-
-      padding: 0 16px;
-
-      text-align: center;
-
-      font-size: 22px;
-      font-weight: 800;
-      letter-spacing: 7px;
-
-      color: #0f172a;
-
-      outline: none;
-
-      transition:
-        border-color .2s,
-        box-shadow .2s;
-    }
-
-    .phone-input:focus {
-      border-color: #0f766e;
-
-      box-shadow:
-        0 0 0 4px rgba(15,118,110,.10);
-    }
-
-    .search-button {
-      width: 100%;
-      height: 52px;
-
-      margin-top: 13px;
-
-      border: 0;
-      border-radius: 14px;
-
-      background:
-        linear-gradient(
-          135deg,
-          #0f766e,
-          #0d9488
-        );
-
-      color: white;
-
-      font-size: 15px;
-      font-weight: 800;
-
-      box-shadow:
-        0 8px 18px rgba(15,118,110,.18);
-
-      transition:
-        transform .15s,
-        opacity .15s;
-    }
-
-    .search-button:active {
-      transform: scale(.98);
-    }
-
-    .search-button:disabled {
-      opacity: .65;
-      cursor: not-allowed;
-    }
-
-    .help-text {
-      margin-top: 13px;
-
-      text-align: center;
-
-      font-size: 11px;
-      line-height: 1.6;
-
-      color: #94a3b8;
-    }
-
-    /* =====================================================
-       ERROR
-    ===================================================== */
-
-    .error-box {
-      display: none;
-
-      margin-top: 14px;
-
-      padding: 13px 14px;
-
-      border-radius: 13px;
-
-      background: #fef2f2;
-      border: 1px solid #fecaca;
-
-      color: #b91c1c;
-
-      font-size: 13px;
-      line-height: 1.6;
-
-      text-align: center;
-    }
-
-    .error-box.show {
-      display: block;
-    }
-
-    /* =====================================================
-       LOADING
-    ===================================================== */
-
-    .loading {
-      display: none;
-
-      position: fixed;
-      inset: 0;
-
-      z-index: 999;
-
-      background: rgba(248,250,252,.78);
-
-      backdrop-filter: blur(5px);
-
-      align-items: center;
-      justify-content: center;
-    }
-
-    .loading.show {
-      display: flex;
-    }
-
-    .loading-card {
-      width: calc(100% - 40px);
-      max-width: 320px;
-
-      background: white;
-
-      border-radius: 20px;
-
-      padding: 25px;
-
-      text-align: center;
-
-      box-shadow:
-        0 20px 50px rgba(15,23,42,.15);
-    }
-
-    .spinner {
-      width: 38px;
-      height: 38px;
-
-      margin: 0 auto 14px;
-
-      border-radius: 50%;
-
-      border: 4px solid #d1fae5;
-      border-top-color: #0f766e;
-
-      animation:
-        spin .8s linear infinite;
-    }
-
-    @keyframes spin {
-      to {
-        transform: rotate(360deg);
-      }
-    }
-
-    .loading-card strong {
-      display: block;
-
-      font-size: 15px;
-      color: #0f172a;
-    }
-
-    .loading-card span {
-      display: block;
-
-      margin-top: 5px;
-
-      font-size: 12px;
-      color: #64748b;
-    }
-
-    /* =====================================================
-       DASHBOARD
-    ===================================================== */
-
-    #dashboard {
-      display: none;
-    }
-
-    #dashboard.show {
-      display: block;
-    }
-
-    /* =====================================================
-       PROFILE
-    ===================================================== */
-
-    .profile-card {
-      position: relative;
-
-      overflow: hidden;
-
+    .header {
       background:
         linear-gradient(
           135deg,
           #0f766e,
           #115e59
         );
-
-      border-radius: 24px;
-
-      padding: 23px 20px;
-
       color: white;
-
-      box-shadow:
-        0 15px 35px rgba(15,118,110,.22);
+      padding:
+        28px 20px 34px;
+      text-align: center;
     }
 
-    .profile-card::after {
-      content: "";
+    .header-inner {
+      width: 100%;
+      max-width: 760px;
+      margin: auto;
+    }
 
-      position: absolute;
+    .logo {
+      width: 58px;
+      height: 58px;
+      margin: 0 auto 12px;
 
-      width: 150px;
-      height: 150px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
 
-      right: -65px;
-      top: -65px;
+      border-radius: 18px;
 
-      border-radius: 50%;
+      background:
+        rgba(255,255,255,0.16);
 
-      background: rgba(255,255,255,.08);
+      font-size: 28px;
+    }
+
+    .header h1 {
+      margin:
+        0 0 5px;
+
+      font-size:
+        25px;
+
+      font-weight:
+        700;
+    }
+
+    .header p {
+      margin:
+        0;
+
+      color:
+        rgba(255,255,255,0.82);
+
+      font-size:
+        14px;
+    }
+
+
+    /* ==================================================
+       CONTENT
+       ================================================== */
+
+    .content {
+      width: 100%;
+      max-width: 760px;
+
+      margin:
+        -16px auto 0;
+
+      padding:
+        0 14px 40px;
+
+      position: relative;
+    }
+
+
+    /* ==================================================
+       CARD
+       ================================================== */
+
+    .card {
+      background:
+        white;
+
+      border-radius:
+        18px;
+
+      box-shadow:
+        0 6px 25px
+        rgba(15, 23, 42, 0.07);
+
+      margin-bottom:
+        14px;
+
+      overflow:
+        hidden;
+    }
+
+    .card-title {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+
+      padding:
+        17px 18px;
+
+      font-size:
+        15px;
+
+      font-weight:
+        700;
+
+      border-bottom:
+        1px solid #eef2f2;
+    }
+
+    .card-title-icon {
+      width: 32px;
+      height: 32px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      border-radius:
+        10px;
+
+      background:
+        #ecfdf5;
+
+      font-size:
+        16px;
+    }
+
+    .card-body {
+      padding:
+        18px;
+    }
+
+
+    /* ==================================================
+       LOGIN
+       ================================================== */
+
+    .login-card {
+      margin-top:
+        0;
+    }
+
+    .login-description {
+      margin:
+        0 0 18px;
+
+      color:
+        #6b7280;
+
+      font-size:
+        14px;
+
+      line-height:
+        1.6;
+
+      text-align:
+        center;
+    }
+
+    .input-label {
+      display:
+        block;
+
+      margin-bottom:
+        7px;
+
+      font-size:
+        13px;
+
+      font-weight:
+        600;
+
+      color:
+        #374151;
+    }
+
+    .input-wrap {
+      position:
+        relative;
+    }
+
+    .input {
+      width:
+        100%;
+
+      height:
+        50px;
+
+      padding:
+        0 16px;
+
+      border:
+        1px solid #d7dfdf;
+
+      border-radius:
+        12px;
+
+      outline:
+        none;
+
+      font-size:
+        18px;
+
+      text-align:
+        center;
+
+      letter-spacing:
+        5px;
+
+      transition:
+        0.2s;
+    }
+
+    .input:focus {
+      border-color:
+        #0f766e;
+
+      box-shadow:
+        0 0 0 3px
+        rgba(15,118,110,0.10);
+    }
+
+    .btn {
+      width:
+        100%;
+
+      min-height:
+        50px;
+
+      margin-top:
+        13px;
+
+      border:
+        none;
+
+      border-radius:
+        12px;
+
+      background:
+        #0f766e;
+
+      color:
+        white;
+
+      font-size:
+        15px;
+
+      font-weight:
+        700;
+
+      cursor:
+        pointer;
+
+      transition:
+        0.2s;
+    }
+
+    .btn:hover {
+      background:
+        #115e59;
+    }
+
+    .btn:disabled {
+      opacity:
+        0.6;
+
+      cursor:
+        not-allowed;
+    }
+
+    .error {
+      margin-top:
+        13px;
+
+      padding:
+        12px 14px;
+
+      border-radius:
+        11px;
+
+      background:
+        #fef2f2;
+
+      color:
+        #b91c1c;
+
+      font-size:
+        13px;
+
+      line-height:
+        1.5;
+
+      display:
+        none;
+    }
+
+
+    /* ==================================================
+       PROFILE
+       ================================================== */
+
+    .profile {
+      display:
+        grid;
+
+      grid-template-columns:
+        repeat(4, 1fr);
+
+      gap:
+        10px;
+    }
+
+    .profile-item {
+      padding:
+        13px;
+
+      border-radius:
+        12px;
+
+      background:
+        #f8fafc;
+
+      min-width:
+        0;
     }
 
     .profile-label {
-      font-size: 11px;
-      font-weight: 700;
+      color:
+        #6b7280;
 
-      letter-spacing: .8px;
+      font-size:
+        11px;
 
-      opacity: .75;
-      text-transform: uppercase;
+      margin-bottom:
+        5px;
     }
 
-    .profile-name {
-      margin-top: 7px;
+    .profile-value {
+      font-size:
+        14px;
 
-      font-size: 24px;
-      font-weight: 850;
+      font-weight:
+        700;
 
-      line-height: 1.25;
+      overflow-wrap:
+        anywhere;
     }
 
-    .profile-bin {
-      margin-top: 4px;
 
-      font-size: 13px;
-
-      opacity: .82;
-    }
-
-    .profile-bottom {
-      display: flex;
-
-      align-items: center;
-      justify-content: space-between;
-
-      gap: 10px;
-
-      margin-top: 18px;
-    }
+    /* ==================================================
+       BADGE NOMOR ABSEN
+       ================================================== */
 
     .absen-badge {
-      display: inline-flex;
+      display:
+        inline-flex;
 
-      align-items: center;
+      align-items:
+        center;
 
-      gap: 6px;
+      justify-content:
+        center;
 
-      padding: 8px 12px;
+      min-width:
+        42px;
 
-      border-radius: 999px;
+      height:
+        28px;
 
-      background: rgba(255,255,255,.16);
+      padding:
+        0 10px;
 
-      border: 1px solid rgba(255,255,255,.20);
+      border-radius:
+        999px;
 
-      font-size: 12px;
-      font-weight: 800;
+      background:
+        #ccfbf1;
+
+      color:
+        #0f766e;
+
+      font-size:
+        13px;
+
+      font-weight:
+        800;
     }
 
-    .absen-badge strong {
-      font-size: 14px;
-    }
 
-    .student-status {
-      font-size: 11px;
+    /* ==================================================
+       STATS
+       ================================================== */
 
-      padding: 7px 10px;
-
-      border-radius: 999px;
-
-      background: rgba(255,255,255,.13);
-
-      opacity: .9;
-    }
-
-    /* =====================================================
-       SECTION
-    ===================================================== */
-
-    .section {
-      margin-top: 18px;
-    }
-
-    .section-title {
-      display: flex;
-
-      align-items: center;
-      justify-content: space-between;
-
-      margin-bottom: 10px;
-    }
-
-    .section-title h2 {
-      font-size: 16px;
-      font-weight: 850;
-      color: #0f172a;
-    }
-
-    .section-title span {
-      font-size: 11px;
-      color: #94a3b8;
-    }
-
-    /* =====================================================
-       STATISTICS
-    ===================================================== */
-
-    .stats-grid {
-      display: grid;
+    .stats {
+      display:
+        grid;
 
       grid-template-columns:
-        repeat(3, 1fr);
+        repeat(5, 1fr);
 
-      gap: 10px;
+      gap:
+        8px;
     }
 
-    .stat-card {
-      background: white;
+    .stat {
+      text-align:
+        center;
 
-      border: 1px solid #e2e8f0;
+      padding:
+        13px 5px;
 
-      border-radius: 17px;
+      border-radius:
+        12px;
 
-      padding: 15px 10px;
-
-      text-align: center;
-
-      box-shadow:
-        0 7px 20px rgba(15,23,42,.04);
+      background:
+        #f8fafc;
     }
 
-    .stat-icon {
-      font-size: 19px;
-    }
+    .stat-number {
+      font-size:
+        20px;
 
-    .stat-value {
-      margin-top: 5px;
+      font-weight:
+        800;
 
-      font-size: 22px;
-      font-weight: 850;
-
-      color: #0f172a;
+      margin-bottom:
+        4px;
     }
 
     .stat-label {
-      margin-top: 2px;
+      font-size:
+        10px;
 
-      font-size: 10px;
-
-      color: #64748b;
+      color:
+        #6b7280;
     }
 
-    /* =====================================================
-       HAFALAN
-    ===================================================== */
-
-    .progress-card {
-      background: white;
-
-      border: 1px solid #e2e8f0;
-
-      border-radius: 20px;
-
-      padding: 18px;
-
-      box-shadow:
-        0 7px 20px rgba(15,23,42,.04);
+    .stat.hadir .stat-number {
+      color:
+        #15803d;
     }
 
-    .progress-head {
-      display: flex;
+    .stat.sakit .stat-number {
+      color:
+        #2563eb;
+    }
 
-      justify-content: space-between;
-      align-items: flex-end;
+    .stat.izin .stat-number {
+      color:
+        #ca8a04;
+    }
 
-      gap: 10px;
+    .stat.alpa .stat-number {
+      color:
+        #dc2626;
+    }
+
+
+    /* ==================================================
+       HAFALAN PROGRESS
+       ================================================== */
+
+    .progress-summary {
+      display:
+        flex;
+
+      justify-content:
+        space-between;
+
+      align-items:
+        center;
+
+      margin-bottom:
+        12px;
     }
 
     .progress-percent {
-      font-size: 31px;
-      font-weight: 900;
+      font-size:
+        30px;
 
-      color: #0f766e;
+      font-weight:
+        800;
+
+      color:
+        #0f766e;
     }
 
-    .progress-label {
-      font-size: 11px;
-      color: #64748b;
+    .progress-caption {
+      text-align:
+        right;
+
+      font-size:
+        12px;
+
+      color:
+        #6b7280;
+
+      line-height:
+        1.5;
     }
 
     .progress-bar {
-      width: 100%;
-      height: 10px;
+      width:
+        100%;
 
-      margin-top: 12px;
+      height:
+        10px;
 
-      overflow: hidden;
+      border-radius:
+        99px;
 
-      border-radius: 999px;
+      background:
+        #e5e7eb;
 
-      background: #e2e8f0;
+      overflow:
+        hidden;
     }
 
     .progress-fill {
-      width: 0%;
-      height: 100%;
+      height:
+        100%;
 
-      border-radius: inherit;
+      width:
+        0%;
+
+      border-radius:
+        inherit;
 
       background:
         linear-gradient(
@@ -628,727 +600,995 @@
           #14b8a6
         );
 
-      transition: width .6s ease;
+      transition:
+        width 0.7s ease;
     }
 
-    .hafalan-count {
-      display: grid;
+    .progress-numbers {
+      display:
+        grid;
 
       grid-template-columns:
         repeat(3, 1fr);
 
-      gap: 8px;
+      gap:
+        8px;
 
-      margin-top: 15px;
+      margin-top:
+        15px;
     }
 
-    .count-item {
-      padding: 11px 8px;
+    .progress-number {
+      text-align:
+        center;
 
-      border-radius: 13px;
+      padding:
+        11px 5px;
 
-      background: #f8fafc;
+      background:
+        #f8fafc;
 
-      text-align: center;
+      border-radius:
+        11px;
     }
 
-    .count-item strong {
-      display: block;
+    .progress-number strong {
+      display:
+        block;
 
-      font-size: 18px;
-      font-weight: 850;
+      font-size:
+        19px;
     }
 
-    .count-item span {
-      display: block;
+    .progress-number span {
+      display:
+        block;
 
-      margin-top: 2px;
+      margin-top:
+        3px;
 
-      font-size: 10px;
+      font-size:
+        10px;
 
-      color: #64748b;
+      color:
+        #6b7280;
     }
 
-    .predikat {
-      margin-top: 14px;
 
-      padding: 13px;
+    /* ==================================================
+       PREDIKAT
+       ================================================== */
 
-      border-radius: 14px;
+    .predicate {
+      margin-top:
+        15px;
 
-      background: #f0fdfa;
+      padding:
+        15px;
 
-      border: 1px solid #ccfbf1;
+      border-radius:
+        13px;
 
-      text-align: center;
+      background:
+        #f0fdfa;
+
+      border:
+        1px solid #ccfbf1;
+
+      text-align:
+        center;
     }
 
-    .predikat-main {
-      font-size: 14px;
-      font-weight: 850;
+    .predicate-icon {
+      font-size:
+        26px;
 
-      color: #0f766e;
+      margin-bottom:
+        4px;
     }
 
-    .predikat-desc {
-      margin-top: 5px;
+    .predicate-name {
+      font-size:
+        16px;
 
-      font-size: 11px;
-      line-height: 1.55;
+      font-weight:
+        800;
 
-      color: #64748b;
+      color:
+        #0f766e;
     }
 
-    /* =====================================================
+    .predicate-description {
+      margin-top:
+        7px;
+
+      color:
+        #5f6b6b;
+
+      font-size:
+        12px;
+
+      line-height:
+        1.5;
+    }
+
+
+    /* ==================================================
+       TARGET
+       ================================================== */
+
+    .info-grid {
+      display:
+        grid;
+
+      grid-template-columns:
+        repeat(2, 1fr);
+
+      gap:
+        10px;
+    }
+
+    .info-box {
+      padding:
+        13px;
+
+      border-radius:
+        12px;
+
+      background:
+        #f8fafc;
+    }
+
+    .info-box-label {
+      font-size:
+        11px;
+
+      color:
+        #6b7280;
+
+      margin-bottom:
+        5px;
+    }
+
+    .info-box-value {
+      font-size:
+        14px;
+
+      font-weight:
+        700;
+    }
+
+
+    /* ==================================================
        REKAP BULANAN
-    ===================================================== */
+       ================================================== */
 
     .monthly-list {
-      display: flex;
-      flex-direction: column;
+      display:
+        flex;
 
-      gap: 9px;
+      flex-direction:
+        column;
+
+      gap:
+        9px;
     }
 
-    .month-card {
-      background: white;
+    .monthly-item {
+      border:
+        1px solid #e5e7eb;
 
-      border: 1px solid #e2e8f0;
+      border-radius:
+        13px;
 
-      border-radius: 16px;
+      overflow:
+        hidden;
 
-      padding: 13px 14px;
-
-      box-shadow:
-        0 5px 15px rgba(15,23,42,.035);
+      background:
+        #fff;
     }
 
-    .month-top {
-      display: flex;
+    .monthly-head {
+      display:
+        flex;
 
-      align-items: center;
-      justify-content: space-between;
+      justify-content:
+        space-between;
 
-      gap: 10px;
+      align-items:
+        center;
+
+      padding:
+        12px 13px;
+
+      background:
+        #f8fafc;
     }
 
-    .month-name {
-      font-size: 14px;
-      font-weight: 800;
+    .monthly-name {
+      font-weight:
+        700;
 
-      color: #0f172a;
+      font-size:
+        14px;
     }
 
-    .month-status {
-      padding: 5px 8px;
+    .monthly-status {
+      font-size:
+        10px;
 
-      border-radius: 999px;
+      font-weight:
+        700;
 
-      font-size: 9px;
-      font-weight: 800;
+      padding:
+        5px 8px;
 
-      background: #dcfce7;
-      color: #166534;
+      border-radius:
+        99px;
     }
 
-    .month-status.pending {
-      background: #fef3c7;
-      color: #92400e;
+    .status-sudah {
+      background:
+        #dcfce7;
+
+      color:
+        #166534;
     }
 
-    .month-status.na {
-      background: #f1f5f9;
-      color: #64748b;
+    .status-belum {
+      background:
+        #fef3c7;
+
+      color:
+        #92400e;
     }
 
-    .month-stats {
-      display: grid;
+    .status-error {
+      background:
+        #fee2e2;
+
+      color:
+        #991b1b;
+    }
+
+    .monthly-data {
+      display:
+        grid;
 
       grid-template-columns:
-        repeat(4, 1fr);
+        repeat(5, 1fr);
 
-      gap: 6px;
+      padding:
+        12px;
 
-      margin-top: 11px;
+      gap:
+        6px;
     }
 
-    .month-stat {
-      text-align: center;
-
-      padding: 7px 4px;
-
-      border-radius: 9px;
-
-      background: #f8fafc;
+    .monthly-stat {
+      text-align:
+        center;
     }
 
-    .month-stat strong {
-      display: block;
+    .monthly-stat strong {
+      display:
+        block;
 
-      font-size: 14px;
+      font-size:
+        15px;
     }
 
-    .month-stat span {
-      display: block;
+    .monthly-stat span {
+      display:
+        block;
 
-      margin-top: 2px;
+      margin-top:
+        3px;
 
-      font-size: 8px;
+      font-size:
+        9px;
 
-      color: #64748b;
+      color:
+        #6b7280;
     }
 
-    /* =====================================================
-       DAFTAR HAFALAN
-    ===================================================== */
+    .monthly-period {
+      padding:
+        0 12px 10px;
+
+      font-size:
+        10px;
+
+      color:
+        #9ca3af;
+
+      text-align:
+        center;
+    }
+
+    .monthly-empty {
+      padding:
+        20px;
+
+      text-align:
+        center;
+
+      color:
+        #6b7280;
+
+      font-size:
+        13px;
+    }
+
+
+    /* ==================================================
+       HAFALAN LIST
+       ================================================== */
 
     .hafalan-list {
-      display: grid;
+      display:
+        grid;
 
       grid-template-columns:
-        repeat(2, minmax(0, 1fr));
+        repeat(2, 1fr);
 
-      gap: 8px;
+      gap:
+        9px;
     }
 
     .hafalan-item {
-      display: flex;
+      display:
+        flex;
 
-      align-items: flex-start;
+      align-items:
+        flex-start;
 
-      gap: 8px;
+      gap:
+        9px;
 
-      min-width: 0;
+      padding:
+        11px;
 
-      padding: 11px;
+      border-radius:
+        11px;
 
-      background: white;
+      background:
+        #f8fafc;
 
-      border: 1px solid #e2e8f0;
+      border:
+        1px solid #edf0f2;
 
-      border-radius: 13px;
+      min-width:
+        0;
     }
 
     .hafalan-number {
-      flex: 0 0 25px;
+      flex:
+        0 0 27px;
 
-      width: 25px;
-      height: 25px;
+      width:
+        27px;
 
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      height:
+        27px;
 
-      border-radius: 8px;
+      display:
+        flex;
 
-      background: #ccfbf1;
+      align-items:
+        center;
 
-      color: #0f766e;
+      justify-content:
+        center;
 
-      font-size: 10px;
-      font-weight: 850;
+      border-radius:
+        8px;
+
+      background:
+        #ccfbf1;
+
+      color:
+        #0f766e;
+
+      font-size:
+        11px;
+
+      font-weight:
+        800;
     }
 
     .hafalan-title {
-      min-width: 0;
+      font-size:
+        12px;
 
-      font-size: 11px;
-      line-height: 1.45;
+      line-height:
+        1.45;
 
-      color: #334155;
+      font-weight:
+        600;
 
-      word-break: break-word;
+      overflow-wrap:
+        anywhere;
     }
 
-    .empty-list {
-      padding: 20px;
+    .all-complete {
+      padding:
+        20px;
 
-      border-radius: 15px;
+      text-align:
+        center;
 
-      background: white;
+      background:
+        #f0fdf4;
 
-      border: 1px solid #e2e8f0;
+      border-radius:
+        13px;
 
-      text-align: center;
+      color:
+        #166534;
 
-      color: #64748b;
+      font-size:
+        13px;
 
-      font-size: 12px;
+      line-height:
+        1.5;
     }
 
-    /* =====================================================
-       FOOTER BUTTON
-    ===================================================== */
 
-    .back-button {
-      width: 100%;
+    /* ==================================================
+       KETERANGAN
+       ================================================== */
 
-      height: 48px;
+    .note {
+      padding:
+        13px 14px;
 
-      margin-top: 22px;
+      border-radius:
+        12px;
 
-      border: 1px solid #cbd5e1;
+      background:
+        #f8fafc;
 
-      border-radius: 13px;
+      color:
+        #6b7280;
 
-      background: white;
+      font-size:
+        12px;
 
-      color: #334155;
-
-      font-size: 13px;
-      font-weight: 750;
+      line-height:
+        1.6;
     }
 
-    .back-button:active {
-      transform: scale(.98);
-    }
+
+    /* ==================================================
+       FOOTER
+       ================================================== */
 
     .footer {
-      margin-top: 25px;
+      text-align:
+        center;
 
-      text-align: center;
+      padding:
+        10px 15px 25px;
 
-      font-size: 10px;
+      color:
+        #9ca3af;
 
-      color: #94a3b8;
+      font-size:
+        10px;
     }
 
-    /* =====================================================
+
+    /* ==================================================
+       UTILITIES
+       ================================================== */
+
+    .hidden {
+      display:
+        none !important;
+    }
+
+    .loading {
+      text-align:
+        center;
+
+      padding:
+        25px 10px;
+
+      color:
+        #6b7280;
+
+      font-size:
+        13px;
+    }
+
+
+    /* ==================================================
        RESPONSIVE
-    ===================================================== */
+       ================================================== */
 
-    @media (max-width: 480px) {
+    @media (max-width: 600px) {
 
-      .page {
+      .header {
         padding:
-          12px
-          11px
-          30px;
+          23px 16px 30px;
       }
 
-      .top-header {
-        padding-top: 12px;
-        padding-bottom: 17px;
+      .header h1 {
+        font-size:
+          22px;
       }
 
-      .brand-icon {
-        width: 54px;
-        height: 54px;
-
-        border-radius: 17px;
-
-        font-size: 24px;
+      .content {
+        padding:
+          0 10px 30px;
       }
 
-      .top-header h1 {
-        font-size: 21px;
+      .card-body {
+        padding:
+          15px;
       }
 
-      .search-card {
-        border-radius: 20px;
-        padding: 21px 16px;
+      .profile {
+        grid-template-columns:
+          1fr;
       }
 
-      .profile-card {
-        border-radius: 21px;
-        padding: 20px 17px;
+      .profile-item {
+        display:
+          flex;
+
+        align-items:
+          center;
+
+        justify-content:
+          space-between;
+
+        gap:
+          10px;
       }
 
-      .profile-name {
-        font-size: 21px;
+      .profile-label {
+        margin:
+          0;
       }
 
-      .stats-grid {
-        gap: 7px;
+      .profile-value {
+        text-align:
+          right;
       }
 
-      .stat-card {
-        padding: 13px 7px;
+      .stats {
+        grid-template-columns:
+          repeat(5, 1fr);
+
+        gap:
+          5px;
       }
 
-      .stat-value {
-        font-size: 19px;
+      .stat {
+        padding:
+          10px 2px;
+      }
+
+      .stat-number {
+        font-size:
+          17px;
+      }
+
+      .stat-label {
+        font-size:
+          8px;
       }
 
       .hafalan-list {
-        gap: 7px;
-      }
-
-      .hafalan-item {
-        padding: 9px;
-      }
-
-    }
-
-    @media (max-width: 350px) {
-
-      .stats-grid {
         grid-template-columns:
-          repeat(2, 1fr);
+          1fr;
       }
 
-      .hafalan-list {
-        grid-template-columns: 1fr;
-      }
-
-      .month-stats {
+      .monthly-data {
         grid-template-columns:
-          repeat(2, 1fr);
+          repeat(5, 1fr);
       }
 
     }
 
   </style>
+
 </head>
+
 
 <body>
 
 <div class="app">
 
-  <div class="page">
 
-    <!-- =================================================
-         HALAMAN AWAL
-    ================================================== -->
+  <!-- ==================================================
+       HEADER
+       ================================================== -->
 
-    <section id="searchPage">
+  <header class="header">
 
-      <header class="top-header">
+    <div class="header-inner">
 
-        <div class="brand-icon">
-          📖
+      <div class="logo">
+        📖
+      </div>
+
+      <h1>
+        CEK DATA SANTRI
+      </h1>
+
+      <p>
+        Sistem informasi perkembangan santri
+      </p>
+
+    </div>
+
+  </header>
+
+
+  <!-- ==================================================
+       CONTENT
+       ================================================== -->
+
+  <main class="content">
+
+
+    <!-- ==================================================
+         LOGIN
+         ================================================== -->
+
+    <section
+      id="loginSection"
+      class="card login-card"
+    >
+
+      <div class="card-title">
+
+        <div class="card-title-icon">
+          🔐
         </div>
 
-        <h1>Cek Data Santri</h1>
+        Verifikasi Data Santri
 
-        <p>
-          Sistem informasi perkembangan santri
+      </div>
+
+      <div class="card-body">
+
+        <p class="login-description">
+          Masukkan 4 digit terakhir nomor HP
+          orang tua untuk melihat data santri.
         </p>
 
-      </header>
+        <label
+          class="input-label"
+          for="noHp"
+        >
+          4 digit terakhir nomor HP
+        </label>
 
+        <input
+          id="noHp"
+          class="input"
+          type="tel"
+          inputmode="numeric"
+          maxlength="4"
+          autocomplete="off"
+          placeholder="••••"
+        >
 
-      <main class="search-card">
+        <button
+          id="btnCek"
+          class="btn"
+          type="button"
+        >
+          Cek Data Santri
+        </button>
 
-        <div class="search-title">
-          Masuk untuk melihat data
-        </div>
+        <div
+          id="errorBox"
+          class="error"
+        ></div>
 
-        <div class="search-description">
-          Masukkan 4 digit terakhir nomor HP
-          orang tua yang terdaftar.
-        </div>
-
-
-        <div class="input-wrapper">
-
-          <label
-            class="input-label"
-            for="noHp"
-          >
-            4 digit terakhir nomor HP
-          </label>
-
-          <input
-            id="noHp"
-            class="phone-input"
-            type="tel"
-            inputmode="numeric"
-            autocomplete="off"
-            maxlength="4"
-            placeholder="••••"
-          >
-
-          <button
-            id="searchButton"
-            class="search-button"
-            type="button"
-          >
-            🔍 &nbsp; Lihat Data Santri
-          </button>
-
-          <div
-            id="errorBox"
-            class="error-box"
-          ></div>
-
-          <div class="help-text">
-            Data hanya dapat diakses menggunakan
-            nomor HP orang tua yang terdaftar.
-          </div>
-
-        </div>
-
-      </main>
+      </div>
 
     </section>
 
 
-    <!-- =================================================
-         DASHBOARD
-    ================================================== -->
+    <!-- ==================================================
+         HASIL
+         ================================================== -->
 
-    <section id="dashboard">
+    <div
+      id="hasilSection"
+      class="hidden"
+    >
 
-      <!-- PROFILE -->
 
-      <div class="profile-card">
+      <!-- ==================================================
+           PROFIL
+           ================================================== -->
 
-        <div class="profile-label">
-          DATA SANTRI
-        </div>
+      <section class="card">
 
-        <div
-          id="namaSantri"
-          class="profile-name"
-        >
-          -
-        </div>
+        <div class="card-title">
 
-        <div
-          id="binSantri"
-          class="profile-bin"
-        >
-          -
-        </div>
-
-        <div class="profile-bottom">
-
-          <div class="absen-badge">
-            <span>Absen</span>
-            <strong id="nomorAbsen">-</strong>
+          <div class="card-title-icon">
+            👤
           </div>
+
+          Profil Santri
+
+        </div>
+
+        <div class="card-body">
+
+          <div class="profile">
+
+            <!-- NOMOR ABSEN -->
+
+            <div class="profile-item">
+
+              <div class="profile-label">
+                No. Absen
+              </div>
+
+              <div
+                id="noAbsen"
+                class="profile-value"
+              >
+                <span class="absen-badge">-</span>
+              </div>
+
+            </div>
+
+
+            <!-- NAMA -->
+
+            <div class="profile-item">
+
+              <div class="profile-label">
+                Nama
+              </div>
+
+              <div
+                id="nama"
+                class="profile-value"
+              >
+                -
+              </div>
+
+            </div>
+
+
+            <!-- NO INDUK -->
+
+            <div class="profile-item">
+
+              <div class="profile-label">
+                No. Induk
+              </div>
+
+              <div
+                id="induk"
+                class="profile-value"
+              >
+                -
+              </div>
+
+            </div>
+
+
+            <!-- BIN -->
+
+            <div class="profile-item">
+
+              <div class="profile-label">
+                Bin
+              </div>
+
+              <div
+                id="bin"
+                class="profile-value"
+              >
+                -
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- ==================================================
+           ABSENSI
+           ================================================== -->
+
+      <section class="card">
+
+        <div class="card-title">
+
+          <div class="card-title-icon">
+            📊
+          </div>
+
+          Statistik Absensi
+
+        </div>
+
+        <div class="card-body">
+
+          <div class="stats">
+
+            <div class="stat hadir">
+
+              <div
+                id="totalHadir"
+                class="stat-number"
+              >
+                0
+              </div>
+
+              <div class="stat-label">
+                HADIR
+              </div>
+
+            </div>
+
+            <div class="stat sakit">
+
+              <div
+                id="totalSakit"
+                class="stat-number"
+              >
+                0
+              </div>
+
+              <div class="stat-label">
+                SAKIT
+              </div>
+
+            </div>
+
+            <div class="stat izin">
+
+              <div
+                id="totalIzin"
+                class="stat-number"
+              >
+                0
+              </div>
+
+              <div class="stat-label">
+                IZIN
+              </div>
+
+            </div>
+
+            <div class="stat alpa">
+
+              <div
+                id="totalAlpa"
+                class="stat-number"
+              >
+                0
+              </div>
+
+              <div class="stat-label">
+                ALPA
+              </div>
+
+            </div>
+
+            <div class="stat">
+
+              <div
+                id="totalHariAktif"
+                class="stat-number"
+              >
+                0
+              </div>
+
+              <div class="stat-label">
+                HARI AKTIF
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- ==================================================
+           REKAP BULANAN
+           ================================================== -->
+
+      <section class="card">
+
+        <div class="card-title">
+
+          <div class="card-title-icon">
+            📅
+          </div>
+
+          Rekap Absensi Bulanan
+
+        </div>
+
+        <div class="card-body">
 
           <div
-            id="statusSantri"
-            class="student-status"
-          >
-            -
-          </div>
-
-        </div>
-
-      </div>
-
-
-      <!-- =================================================
-           ABSENSI
-      ================================================== -->
-
-      <section class="section">
-
-        <div class="section-title">
-
-          <h2>Statistik Absensi</h2>
-
-          <span>
-            Rekap keseluruhan
-          </span>
-
-        </div>
-
-        <div class="stats-grid">
-
-          <div class="stat-card">
-
-            <div class="stat-icon">
-              📅
-            </div>
-
-            <div
-              id="totalHariAktif"
-              class="stat-value"
-            >
-              0
-            </div>
-
-            <div class="stat-label">
-              Hari Aktif
-            </div>
-
-          </div>
-
-
-          <div class="stat-card">
-
-            <div class="stat-icon">
-              ✅
-            </div>
-
-            <div
-              id="totalHadir"
-              class="stat-value"
-            >
-              0
-            </div>
-
-            <div class="stat-label">
-              Hadir
-            </div>
-
-          </div>
-
-
-          <div class="stat-card">
-
-            <div class="stat-icon">
-              🤒
-            </div>
-
-            <div
-              id="totalSakit"
-              class="stat-value"
-            >
-              0
-            </div>
-
-            <div class="stat-label">
-              Sakit
-            </div>
-
-          </div>
-
-
-          <div class="stat-card">
-
-            <div class="stat-icon">
-              📝
-            </div>
-
-            <div
-              id="totalIzin"
-              class="stat-value"
-            >
-              0
-            </div>
-
-            <div class="stat-label">
-              Izin
-            </div>
-
-          </div>
-
-
-          <div class="stat-card">
-
-            <div class="stat-icon">
-              ⚠️
-            </div>
-
-            <div
-              id="totalAlpa"
-              class="stat-value"
-            >
-              0
-            </div>
-
-            <div class="stat-label">
-              Alpa
-            </div>
-
-          </div>
-
-
-          <div class="stat-card">
-
-            <div class="stat-icon">
-              📊
-            </div>
-
-            <div
-              id="persentaseHadir"
-              class="stat-value"
-            >
-              0%
-            </div>
-
-            <div class="stat-label">
-              Kehadiran
-            </div>
-
-          </div>
+            id="monthlyList"
+            class="monthly-list"
+          ></div>
 
         </div>
 
       </section>
 
 
-      <!-- =================================================
-           REKAP BULANAN
-      ================================================== -->
-
-      <section class="section">
-
-        <div class="section-title">
-
-          <h2>Rekap Absensi Bulanan</h2>
-
-          <span>
-            Dzul Qa'dah – Rabiul Awwal
-          </span>
-
-        </div>
-
-        <div
-          id="monthlyList"
-          class="monthly-list"
-        ></div>
-
-      </section>
-
-
-      <!-- =================================================
+      <!-- ==================================================
            HAFALAN
-      ================================================== -->
+           ================================================== -->
 
-      <section class="section">
+      <section class="card">
 
-        <div class="section-title">
+        <div class="card-title">
 
-          <h2>Perkembangan Hafalan</h2>
+          <div class="card-title-icon">
+            📚
+          </div>
 
-          <span>
-            Target 100%
-          </span>
+          Perkembangan Hafalan
 
         </div>
 
+        <div class="card-body">
 
-        <div class="progress-card">
-
-          <div class="progress-head">
-
-            <div>
-              <div class="progress-label">
-                Persentase hafalan
-              </div>
-            </div>
+          <div class="progress-summary">
 
             <div
-              id="hafalanPercent"
+              id="persentase"
               class="progress-percent"
             >
               0%
             </div>
 
-          </div>
+            <div class="progress-caption">
 
+              <div>
+                Target Akhir
+              </div>
+
+              <strong>
+                100%
+              </strong>
+
+            </div>
+
+          </div>
 
           <div class="progress-bar">
 
             <div
-              id="hafalanProgress"
+              id="progressFill"
               class="progress-fill"
             ></div>
 
           </div>
 
+          <div class="progress-numbers">
 
-          <div class="hafalan-count">
+            <div class="progress-number">
 
-            <div class="count-item">
-
-              <strong id="hafalanSudah">
+              <strong id="sudah">
                 0
               </strong>
 
@@ -1358,10 +1598,9 @@
 
             </div>
 
+            <div class="progress-number">
 
-            <div class="count-item">
-
-              <strong id="hafalanBelum">
+              <strong id="belum">
                 0
               </strong>
 
@@ -1371,10 +1610,9 @@
 
             </div>
 
+            <div class="progress-number">
 
-            <div class="count-item">
-
-              <strong id="hafalanTotal">
+              <strong id="totalHafalan">
                 0
               </strong>
 
@@ -1387,20 +1625,69 @@
           </div>
 
 
-          <div class="predikat">
+          <!-- PREDIKAT -->
+
+          <div class="predicate">
 
             <div
-              id="predikatHafalan"
-              class="predikat-main"
+              id="predicateIcon"
+              class="predicate-icon"
             >
-              ⚪ BELUM MENYETOR
+              ⚪
             </div>
 
             <div
-              id="deskripsiHafalan"
-              class="predikat-desc"
+              id="predicateName"
+              class="predicate-name"
+            >
+              BELUM MENYETOR
+            </div>
+
+            <div
+              id="predicateDescription"
+              class="predicate-description"
             >
               -
+            </div>
+
+          </div>
+
+
+          <!-- TARGET -->
+
+          <div
+            class="info-grid"
+            style="margin-top: 12px;"
+          >
+
+            <div class="info-box">
+
+              <div class="info-box-label">
+                Target Progres
+              </div>
+
+              <div
+                id="targetProgres"
+                class="info-box-value"
+              >
+                0%
+              </div>
+
+            </div>
+
+            <div class="info-box">
+
+              <div class="info-box-label">
+                Keterangan Target
+              </div>
+
+              <div
+                id="targetLabel"
+                class="info-box-value"
+              >
+                -
+              </div>
+
             </div>
 
           </div>
@@ -1410,174 +1697,104 @@
       </section>
 
 
-      <!-- =================================================
+      <!-- ==================================================
            DAFTAR HAFALAN
-      ================================================== -->
+           ================================================== -->
 
-      <section class="section">
+      <section class="card">
 
-        <div class="section-title">
+        <div class="card-title">
 
-          <h2>Daftar Hafalan Belum Selesai</h2>
+          <div class="card-title-icon">
+            📖
+          </div>
 
-          <span id="jumlahBelum">
-            0 materi
-          </span>
+          Daftar Hafalan Belum Diselesaikan
 
         </div>
 
-        <div
-          id="hafalanList"
-          class="hafalan-list"
-        ></div>
+        <div class="card-body">
+
+          <div
+            id="hafalanList"
+            class="hafalan-list"
+          ></div>
+
+        </div>
 
       </section>
 
 
-      <!-- =================================================
-           KEMBALI
-      ================================================== -->
+      <!-- ==================================================
+           KETERANGAN ABSENSI
+           ================================================== -->
 
-      <button
-        id="backButton"
-        class="back-button"
-        type="button"
+      <section
+        id="keteranganSection"
+        class="card hidden"
       >
-        ← Cek Santri Lain
-      </button>
+
+        <div class="card-title">
+
+          <div class="card-title-icon">
+            ℹ️
+          </div>
+
+          Keterangan
+
+        </div>
+
+        <div class="card-body">
+
+          <div
+            id="keteranganAbsensi"
+            class="note"
+          ></div>
+
+        </div>
+
+      </section>
 
 
-      <div class="footer">
-        Cek Data Santri
-      </div>
-
-    </section>
-
-  </div>
-
-</div>
+    </div>
 
 
-<!-- =====================================================
-     LOADING
-====================================================== -->
+    <div class="footer">
+      Cek Data Santri
+    </div>
 
-<div
-  id="loading"
-  class="loading"
->
-
-  <div class="loading-card">
-
-    <div class="spinner"></div>
-
-    <strong>
-      Memuat data santri...
-    </strong>
-
-    <span>
-      Mohon tunggu sebentar
-    </span>
-
-  </div>
+  </main>
 
 </div>
 
 
 <script>
 
-  /* =====================================================
+  /* ==================================================
      ELEMENT
-  ===================================================== */
+     ================================================== */
 
-  const searchPage =
-    document.getElementById(
-      'searchPage'
-    );
+  const noHp =
+    document.getElementById('noHp');
 
-  const dashboard =
-    document.getElementById(
-      'dashboard'
-    );
-
-  const noHpInput =
-    document.getElementById(
-      'noHp'
-    );
-
-  const searchButton =
-    document.getElementById(
-      'searchButton'
-    );
+  const btnCek =
+    document.getElementById('btnCek');
 
   const errorBox =
-    document.getElementById(
-      'errorBox'
-    );
+    document.getElementById('errorBox');
 
-  const loading =
-    document.getElementById(
-      'loading'
-    );
+  const loginSection =
+    document.getElementById('loginSection');
 
-
-  /* =====================================================
-     ERROR
-  ===================================================== */
-
-  function tampilkanError(pesan) {
-
-    errorBox.innerHTML =
-      pesan || 'Terjadi kesalahan.';
-
-    errorBox.classList.add(
-      'show'
-    );
-  }
+  const hasilSection =
+    document.getElementById('hasilSection');
 
 
-  function sembunyikanError() {
-
-    errorBox.classList.remove(
-      'show'
-    );
-
-    errorBox.innerHTML = '';
-  }
-
-
-  /* =====================================================
-     LOADING
-  ===================================================== */
-
-  function setLoading(status) {
-
-    if (status) {
-
-      loading.classList.add(
-        'show'
-      );
-
-      searchButton.disabled =
-        true;
-
-    } else {
-
-      loading.classList.remove(
-        'show'
-      );
-
-      searchButton.disabled =
-        false;
-    }
-  }
-
-
-  /* =====================================================
+  /* ==================================================
      INPUT
-  ===================================================== */
+     ================================================== */
 
-  noHpInput.addEventListener(
+  noHp.addEventListener(
     'input',
     function () {
 
@@ -1586,13 +1803,14 @@
           .replace(/\D/g, '')
           .slice(0, 4);
 
-      sembunyikanError();
+      errorBox.style.display =
+        'none';
 
     }
   );
 
 
-  noHpInput.addEventListener(
+  noHp.addEventListener(
     'keydown',
     function (event) {
 
@@ -1608,52 +1826,51 @@
   );
 
 
-  searchButton.addEventListener(
+  btnCek.addEventListener(
     'click',
     cekData
   );
 
 
-  /* =====================================================
+  /* ==================================================
      CEK DATA
      
-     JALUR UTAMA:
-     google.script.run
-
-     Ini sengaja digunakan ketika halaman
-     dijalankan langsung sebagai Google Apps Script,
-     sehingga tidak terkena masalah CORS / Failed to fetch.
-  ===================================================== */
+     Menggunakan google.script.run agar tidak
+     terkena masalah "Failed to fetch" akibat
+     fetch ke URL Web App Google Apps Script.
+     ================================================== */
 
   function cekData() {
 
-    sembunyikanError();
-
-    const noHp =
-      noHpInput.value.trim();
+    const nomor =
+      noHp.value.trim();
 
 
-    if (
-      noHp.length !== 4
-    ) {
+    if (nomor.length !== 4) {
 
       tampilkanError(
-        'Masukkan tepat <b>4 digit</b> terakhir nomor HP orang tua.'
+        'Masukkan tepat 4 digit terakhir nomor HP orang tua.'
       );
-
-      noHpInput.focus();
 
       return;
     }
 
 
-    setLoading(true);
+    btnCek.disabled =
+      true;
+
+    btnCek.textContent =
+      'Memeriksa data...';
+
+    errorBox.style.display =
+      'none';
 
 
     /*
-      Jika Index.html berjalan di Google Apps Script,
-      google.script.run tersedia.
-    */
+     * Google Apps Script menyediakan
+     * google.script.run ketika Index.html
+     * dijalankan melalui HtmlService.
+     */
 
     if (
       typeof google !== 'undefined' &&
@@ -1664,12 +1881,36 @@
       google.script.run
 
         .withSuccessHandler(
-          function (hasil) {
+          function (data) {
 
-            setLoading(false);
+            btnCek.disabled =
+              false;
 
-            prosesHasil(
-              hasil
+            btnCek.textContent =
+              'Cek Data Santri';
+
+
+            if (
+              !data ||
+              !data.ada
+            ) {
+
+              tampilkanError(
+                stripHtml(
+                  data &&
+                  data.pesan
+                    ? data.pesan
+                    : 'Data santri tidak ditemukan.'
+                )
+              );
+
+              return;
+
+            }
+
+
+            tampilkanData(
+              data
             );
 
           }
@@ -1678,400 +1919,327 @@
         .withFailureHandler(
           function (error) {
 
-            setLoading(false);
+            btnCek.disabled =
+              false;
+
+            btnCek.textContent =
+              'Cek Data Santri';
+
 
             tampilkanError(
-              'Terjadi kesalahan saat mengambil data.<br><br>' +
-              (
-                error &&
-                error.message
-                  ? error.message
-                  : 'Server tidak dapat dihubungi.'
-              )
+              error &&
+              error.message
+                ? error.message
+                : 'Terjadi kesalahan saat mengambil data.'
             );
 
           }
         )
 
         .cekSantri(
-          noHp
+          nomor
         );
 
+
       return;
+
     }
 
 
     /*
-      Fallback jika halaman dijalankan di luar
-      Google Apps Script.
-    */
+     * Fallback jika file HTML dibuka
+     * bukan melalui Google Apps Script.
+     *
+     * Dalam kondisi normal Web App GAS,
+     * bagian ini tidak digunakan.
+     */
 
-    const webAppUrl =
-      'https://script.google.com/macros/s/AKfycbzwmAoGDbHTlvnO2VsLtpnOqXOvMw1aLxJQiHnLHf6CoNP_UaIz2XH_W_A2Zle8RrmD/exec';
+    tampilkanError(
+      'Halaman tidak terhubung ke Google Apps Script. Pastikan Index.html dijalankan melalui Web App Google Apps Script.'
+    );
 
 
-    fetch(
-      webAppUrl +
-      '?api=cekSantri&noHp=' +
-      encodeURIComponent(noHp),
-      {
-        method: 'GET'
-      }
-    )
+    btnCek.disabled =
+      false;
 
-      .then(
-        function (response) {
-
-          if (!response.ok) {
-
-            throw new Error(
-              'Server mengembalikan status ' +
-              response.status
-            );
-
-          }
-
-          return response.json();
-
-        }
-      )
-
-      .then(
-        function (hasil) {
-
-          setLoading(false);
-
-          prosesHasil(
-            hasil
-          );
-
-        }
-      )
-
-      .catch(
-        function (error) {
-
-          setLoading(false);
-
-          tampilkanError(
-            'Tidak dapat terhubung ke server.<br><br>' +
-            '<b>Failed to fetch</b><br>' +
-            (
-              error.message ||
-              'Koneksi gagal.'
-            )
-          );
-
-        }
-      );
+    btnCek.textContent =
+      'Cek Data Santri';
 
   }
 
 
-  /* =====================================================
-     PROSES HASIL
-  ===================================================== */
+  /* ==================================================
+     TAMPILKAN DATA
+     ================================================== */
 
-  function prosesHasil(hasil) {
+  function tampilkanData(data) {
 
-    if (!hasil) {
 
-      tampilkanError(
-        'Server tidak mengirimkan data.'
+    /* -----------------------------------------------
+       PROFIL
+       ----------------------------------------------- */
+
+
+    /*
+     * Mendukung beberapa kemungkinan nama properti
+     * nomor absen dari Code.gs.
+     */
+
+    const nomorAbsen =
+      data.noAbsen ??
+      data.nomorAbsen ??
+      data.absen ??
+      data.no_absen ??
+      '-';
+
+
+    const badge =
+      document.createElement(
+        'span'
       );
 
-      return;
-    }
+    badge.className =
+      'absen-badge';
+
+    badge.textContent =
+      nomorAbsen;
 
 
-    if (
-      hasil.ada !== true
-    ) {
-
-      tampilkanError(
-        hasil.pesan ||
-        'Data santri tidak ditemukan.'
+    const absenElement =
+      document.getElementById(
+        'noAbsen'
       );
 
-      return;
-    }
+    absenElement.innerHTML =
+      '';
 
-
-    tampilkanDashboard(
-      hasil
-    );
-
-  }
-
-
-  /* =====================================================
-     DASHBOARD
-  ===================================================== */
-
-  function tampilkanDashboard(
-    data
-  ) {
-
-    searchPage.style.display =
-      'none';
-
-    dashboard.classList.add(
-      'show'
+    absenElement.appendChild(
+      badge
     );
 
 
-    /* PROFILE */
+    setText(
+      'nama',
+      data.nama || '-'
+    );
 
-    document.getElementById(
-      'namaSantri'
-    ).textContent =
-      data.nama || '-';
+    setText(
+      'induk',
+      data.induk || '-'
+    );
 
-
-    document.getElementById(
-      'binSantri'
-    ).textContent =
-      data.bin
-        ? 'Bin ' + data.bin
-        : '';
-
-
-    document.getElementById(
-      'nomorAbsen'
-    ).textContent =
-      data.absen || '-';
+    setText(
+      'bin',
+      data.bin || '-'
+    );
 
 
-    document.getElementById(
-      'statusSantri'
-    ).textContent =
-      data.statusSantri || 'Santri';
+    /* -----------------------------------------------
+       STATISTIK ABSENSI
+       ----------------------------------------------- */
+
+    setText(
+      'totalHadir',
+      angka(data.totalHadir)
+    );
+
+    setText(
+      'totalSakit',
+      angka(data.totalSakit)
+    );
+
+    setText(
+      'totalIzin',
+      angka(data.totalIzin)
+    );
+
+    setText(
+      'totalAlpa',
+      angka(data.totalAlpa)
+    );
+
+    setText(
+      'totalHariAktif',
+      angka(data.totalHariAktif)
+    );
 
 
-    /* ABSENSI */
+    /* -----------------------------------------------
+       REKAP BULANAN
+       ----------------------------------------------- */
 
-    const hariAktif =
-      Number(
-        data.totalHariAktif
-      ) || 0;
-
-    const hadir =
-      Number(
-        data.totalHadir
-      ) || 0;
-
-    const sakit =
-      Number(
-        data.totalSakit
-      ) || 0;
-
-    const izin =
-      Number(
-        data.totalIzin
-      ) || 0;
-
-    const alpa =
-      Number(
-        data.totalAlpa
-      ) || 0;
+    tampilkanRekapBulanan(
+      data.rincianAbsensi
+    );
 
 
-    document.getElementById(
-      'totalHariAktif'
-    ).textContent =
-      hariAktif;
+    /* -----------------------------------------------
+       HAFALAN
+       ----------------------------------------------- */
 
-
-    document.getElementById(
-      'totalHadir'
-    ).textContent =
-      hadir;
-
-
-    document.getElementById(
-      'totalSakit'
-    ).textContent =
-      sakit;
-
-
-    document.getElementById(
-      'totalIzin'
-    ).textContent =
-      izin;
-
-
-    document.getElementById(
-      'totalAlpa'
-    ).textContent =
-      alpa;
-
-
-    let persenHadir = 0;
-
-    if (
-      hariAktif > 0
-    ) {
-
-      persenHadir =
-        (
-          hadir /
-          hariAktif
-        ) * 100;
-
-      persenHadir =
-        Math.max(
-          0,
-          Math.min(
-            100,
-            persenHadir
-          )
-        );
-
-    }
-
-
-    document.getElementById(
-      'persentaseHadir'
-    ).textContent =
-      persenHadir.toFixed(0) +
-      '%';
-
-
-    /* HAFALAN */
-
-    const sudah =
-      Number(
-        data.sudah
-      ) || 0;
-
-    const belum =
-      Number(
-        data.belum
-      ) || 0;
-
-    const total =
-      Number(
+    const persentase =
+      normalisasiPersentase(
+        data.persentase,
+        data.progresHafalan,
+        data.sudah,
         data.total
-      ) || 0;
-
-
-    let progres =
-      Number(
-        data.progresHafalan
       );
 
 
-    if (
-      isNaN(progres)
-    ) {
-
-      progres = 0;
-
-    }
+    setText(
+      'persentase',
+      persentase.toFixed(2) + '%'
+    );
 
 
-    progres =
+    const progress =
       Math.max(
         0,
         Math.min(
           100,
-          progres
+          persentase
         )
       );
 
 
     document.getElementById(
-      'hafalanPercent'
-    ).textContent =
-      progres.toFixed(0) +
-      '%';
-
-
-    document.getElementById(
-      'hafalanProgress'
+      'progressFill'
     ).style.width =
-      progres + '%';
+      progress + '%';
 
 
-    document.getElementById(
-      'hafalanSudah'
-    ).textContent =
-      sudah;
+    setText(
+      'sudah',
+      angka(data.sudah)
+    );
+
+    setText(
+      'belum',
+      angka(data.belum)
+    );
+
+    setText(
+      'totalHafalan',
+      angka(data.total)
+    );
 
 
-    document.getElementById(
-      'hafalanBelum'
-    ).textContent =
-      belum;
+    /* -----------------------------------------------
+       PREDIKAT
+       ----------------------------------------------- */
 
+    setText(
+      'predicateIcon',
+      data.ikonPredikatHafalan ||
+      '⚪'
+    );
 
-    document.getElementById(
-      'hafalanTotal'
-    ).textContent =
-      total;
+    setText(
+      'predicateName',
+      data.predikatHafalan ||
+      'BELUM MENYETOR'
+    );
 
-
-    document.getElementById(
-      'predikatHafalan'
-    ).textContent =
-      (
-        data.ikonPredikatHafalan ||
-        '⚪'
-      ) +
-      ' ' +
-      (
-        data.predikatHafalan ||
-        'BELUM MENYETOR'
-      );
-
-
-    document.getElementById(
-      'deskripsiHafalan'
-    ).textContent =
+    setText(
+      'predicateDescription',
       data.deskripsiPredikatHafalan ||
-      '';
+      '-'
+    );
 
 
-    /* DAFTAR HAFALAN */
+    /* -----------------------------------------------
+       TARGET
+       ----------------------------------------------- */
 
-    renderDaftarHafalan(
+    setText(
+      'targetProgres',
+      angka(data.targetProgres) + '%'
+    );
+
+    setText(
+      'targetLabel',
+      data.targetProgresLabel ||
+      '-'
+    );
+
+
+    /* -----------------------------------------------
+       DAFTAR HAFALAN
+       ----------------------------------------------- */
+
+    tampilkanDaftarHafalan(
       data.daftar
     );
 
 
-    /* REKAP BULANAN */
+    /* -----------------------------------------------
+       KETERANGAN
+       ----------------------------------------------- */
 
-    renderRekapBulanan(
-      data.rincianAbsensi
+    const keterangan =
+      String(
+        data.keteranganAbsensi ||
+        ''
+      ).trim();
+
+
+    if (
+      keterangan !== ''
+    ) {
+
+      document.getElementById(
+        'keteranganAbsensi'
+      ).textContent =
+        keterangan;
+
+      document.getElementById(
+        'keteranganSection'
+      ).classList.remove(
+        'hidden'
+      );
+
+    } else {
+
+      document.getElementById(
+        'keteranganSection'
+      ).classList.add(
+        'hidden'
+      );
+
+    }
+
+
+    /* -----------------------------------------------
+       TAMPILKAN HASIL
+       ----------------------------------------------- */
+
+    loginSection.classList.add(
+      'hidden'
     );
 
-
-    window.scrollTo(
-      {
-        top: 0,
-        behavior: 'smooth'
-      }
+    hasilSection.classList.remove(
+      'hidden'
     );
+
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
 
   }
 
 
-  /* =====================================================
-     DAFTAR HAFALAN
-  ===================================================== */
+  /* ==================================================
+     REKAP ABSENSI BULANAN
+     ================================================== */
 
-  function renderDaftarHafalan(
+  function tampilkanRekapBulanan(
     daftar
   ) {
 
     const container =
       document.getElementById(
-        'hafalanList'
-      );
-
-    const jumlah =
-      document.getElementById(
-        'jumlahBelum'
+        'monthlyList'
       );
 
 
@@ -2084,50 +2252,417 @@
       daftar.length === 0
     ) {
 
-      jumlah.textContent =
-        'Tidak ada';
-
       container.innerHTML =
-        '<div class="empty-list">' +
-        '🎉 Semua hafalan telah selesai.' +
+        '<div class="monthly-empty">' +
+        'Data rekap absensi bulanan belum tersedia.' +
         '</div>';
 
       return;
+
     }
 
 
-    jumlah.textContent =
-      daftar.length +
-      ' materi';
+    daftar.forEach(
+      function (item) {
+
+        if (!item) {
+          return;
+        }
+
+
+        /*
+         * =================================================
+         * SYAWWAL TIDAK DIHITUNG
+         *
+         * Absensi dimulai pada Dzul Qa'dah.
+         *
+         * Syawwal tidak ditampilkan pada rekap.
+         * =================================================
+         */
+
+        const namaBulan =
+          String(
+            item.bulan ||
+            ''
+          )
+          .trim()
+          .toLowerCase();
+
+
+        if (
+          namaBulan === 'syawwal' ||
+          namaBulan === 'syawal'
+        ) {
+
+          return;
+
+        }
+
+
+        const wrapper =
+          document.createElement(
+            'div'
+          );
+
+        wrapper.className =
+          'monthly-item';
+
+
+        const head =
+          document.createElement(
+            'div'
+          );
+
+        head.className =
+          'monthly-head';
+
+
+        const name =
+          document.createElement(
+            'div'
+          );
+
+        name.className =
+          'monthly-name';
+
+        name.textContent =
+          item.bulan ||
+          '-';
+
+
+        const status =
+          document.createElement(
+            'div'
+          );
+
+        status.className =
+          'monthly-status';
+
+
+        const statusValue =
+          String(
+            item.status ||
+            ''
+          );
+
+
+        if (
+          statusValue ===
+          'sudah-input'
+        ) {
+
+          status.classList.add(
+            'status-sudah'
+          );
+
+          status.textContent =
+            'SUDAH DIINPUT';
+
+        }
+
+        else if (
+          statusValue ===
+          'belum-input'
+        ) {
+
+          status.classList.add(
+            'status-belum'
+          );
+
+          status.textContent =
+            'BELUM DIINPUT';
+
+        }
+
+        else {
+
+          status.classList.add(
+            'status-error'
+          );
+
+          status.textContent =
+            item.statusText ||
+            'DATA TIDAK TERSEDIA';
+
+        }
+
+
+        head.appendChild(
+          name
+        );
+
+        head.appendChild(
+          status
+        );
+
+
+        wrapper.appendChild(
+          head
+        );
+
+
+        /* --------------------------------------------
+           Jika belum diinput / kalender error
+           -------------------------------------------- */
+
+        if (
+          item.status !==
+          'sudah-input'
+        ) {
+
+          if (
+            item.status ===
+            'belum-input'
+          ) {
+
+            const info =
+              document.createElement(
+                'div'
+              );
+
+            info.className =
+              'monthly-period';
+
+            info.textContent =
+              item.statusText ||
+              'Belum diinput';
+
+            wrapper.appendChild(
+              info
+            );
+
+          }
+
+
+          container.appendChild(
+            wrapper
+          );
+
+          return;
+
+        }
+
+
+        /* --------------------------------------------
+           DATA BULAN
+           -------------------------------------------- */
+
+        const data =
+          document.createElement(
+            'div'
+          );
+
+        data.className =
+          'monthly-data';
+
+
+        tambahStatBulanan(
+          data,
+          item.hariAktif,
+          'Hari Aktif'
+        );
+
+        tambahStatBulanan(
+          data,
+          item.hadir,
+          'Hadir'
+        );
+
+        tambahStatBulanan(
+          data,
+          item.sakit,
+          'Sakit'
+        );
+
+        tambahStatBulanan(
+          data,
+          item.izin,
+          'Izin'
+        );
+
+        tambahStatBulanan(
+          data,
+          item.alpa,
+          'Alpa'
+        );
+
+
+        wrapper.appendChild(
+          data
+        );
+
+
+        if (
+          item.tanggalMulai ||
+          item.tanggalSelesai
+        ) {
+
+          const periode =
+            document.createElement(
+              'div'
+            );
+
+          periode.className =
+            'monthly-period';
+
+          periode.textContent =
+            (
+              item.tanggalMulai ||
+              '-'
+            ) +
+            ' — ' +
+            (
+              item.tanggalSelesai ||
+              '-'
+            );
+
+          wrapper.appendChild(
+            periode
+          );
+
+        }
+
+
+        container.appendChild(
+          wrapper
+        );
+
+      }
+    );
+
+  }
+
+
+  /* ==================================================
+     STATISTIK BULANAN
+     ================================================== */
+
+  function tambahStatBulanan(
+    parent,
+    value,
+    label
+  ) {
+
+    const box =
+      document.createElement(
+        'div'
+      );
+
+    box.className =
+      'monthly-stat';
+
+
+    const number =
+      document.createElement(
+        'strong'
+      );
+
+    number.textContent =
+      angka(value);
+
+
+    const text =
+      document.createElement(
+        'span'
+      );
+
+    text.textContent =
+      label;
+
+
+    box.appendChild(
+      number
+    );
+
+    box.appendChild(
+      text
+    );
+
+
+    parent.appendChild(
+      box
+    );
+
+  }
+
+
+  /* ==================================================
+     DAFTAR HAFALAN
+     ================================================== */
+
+  function tampilkanDaftarHafalan(
+    daftar
+  ) {
+
+    const container =
+      document.getElementById(
+        'hafalanList'
+      );
+
+
+    container.innerHTML =
+      '';
+
+
+    if (
+      !Array.isArray(daftar) ||
+      daftar.length === 0
+    ) {
+
+      const complete =
+        document.createElement(
+          'div'
+        );
+
+      complete.className =
+        'all-complete';
+
+      complete.style.gridColumn =
+        '1 / -1';
+
+      complete.textContent =
+        '🎉 Tidak ada hafalan yang tertinggal. ' +
+        'Semua hafalan yang tersedia sudah diselesaikan.';
+
+
+      container.appendChild(
+        complete
+      );
+
+      return;
+
+    }
 
 
     daftar.forEach(
       function (item, index) {
 
-        /*
-          Perlindungan terhadap kasus
-          [object Object].
-        */
+        let nomor =
+          index + 1;
 
-        let judul = '';
+        let judul =
+          '';
 
 
         if (
-          typeof item === 'string'
-        ) {
-
-          judul = item;
-
-        } else if (
           item &&
           typeof item === 'object'
         ) {
 
+          nomor =
+            item.nomor ||
+            nomor;
+
           judul =
             item.judul ||
-            item.nama ||
-            item.title ||
             '';
+
+        } else {
+
+          judul =
+            String(
+              item || ''
+            );
 
         }
 
@@ -2142,278 +2677,55 @@
           judul === ''
         ) {
 
-          judul =
-            'Materi hafalan';
+          return;
 
         }
 
 
-        let nomor =
-          index + 1;
-
-
-        if (
-          item &&
-          typeof item === 'object' &&
-          item.nomor !== undefined
-        ) {
-
-          nomor =
-            item.nomor;
-
-        }
-
-
-        const div =
+        const element =
           document.createElement(
             'div'
           );
 
-        div.className =
+        element.className =
           'hafalan-item';
 
 
-        div.innerHTML =
-
-          '<div class="hafalan-number">' +
-          escapeHtml(
-            String(nomor)
-          ) +
-          '</div>' +
-
-          '<div class="hafalan-title">' +
-          escapeHtml(
-            judul
-          ) +
-          '</div>';
-
-
-        container.appendChild(
-          div
-        );
-
-      }
-    );
-
-  }
-
-
-  /* =====================================================
-     REKAP BULANAN
-     
-     SYAWAL TIDAK DITAMPILKAN SEBAGAI
-     BULAN PERHITUNGAN.
-  ===================================================== */
-
-  function renderRekapBulanan(
-    data
-  ) {
-
-    const container =
-      document.getElementById(
-        'monthlyList'
-      );
-
-
-    container.innerHTML =
-      '';
-
-
-    if (
-      !Array.isArray(data)
-    ) {
-
-      container.innerHTML =
-        '<div class="empty-list">' +
-        'Data rekap absensi belum tersedia.' +
-        '</div>';
-
-      return;
-    }
-
-
-    /*
-      Hanya tampilkan mulai Dzul Qa'dah.
-    */
-
-    const bulanAktif =
-      data.filter(
-        function (item) {
-
-          if (!item) {
-            return false;
-          }
-
-          const nama =
-            String(
-              item.bulan || ''
-            )
-            .toLowerCase()
-            .trim();
-
-
-          return nama !==
-            'syawwal';
-
-        }
-      );
-
-
-    if (
-      bulanAktif.length === 0
-    ) {
-
-      container.innerHTML =
-        '<div class="empty-list">' +
-        'Belum ada rekap absensi.' +
-        '</div>';
-
-      return;
-    }
-
-
-    bulanAktif.forEach(
-      function (item) {
-
-        const card =
+        const number =
           document.createElement(
             'div'
           );
 
-        card.className =
-          'month-card';
+        number.className =
+          'hafalan-number';
+
+        number.textContent =
+          nomor;
 
 
-        const status =
-          String(
-            item.status || ''
+        const title =
+          document.createElement(
+            'div'
           );
 
+        title.className =
+          'hafalan-title';
 
-        let statusText =
-          item.statusText ||
-          '';
-
-
-        let statusClass =
-          '';
+        title.textContent =
+          judul;
 
 
-        if (
-          status ===
-          'belum-input'
-        ) {
+        element.appendChild(
+          number
+        );
 
-          statusClass =
-            'pending';
-
-        }
-
-
-        if (
-          status ===
-          'kalender-tidak-ditemukan'
-        ) {
-
-          statusClass =
-            'na';
-
-        }
-
-
-        if (
-          statusText === ''
-        ) {
-
-          statusText =
-            'Belum tersedia';
-
-        }
-
-
-        /*
-          Angka.
-        */
-
-        const hariAktif =
-          nilaiTampilan(
-            item.hariAktif
-          );
-
-        const hadir =
-          nilaiTampilan(
-            item.hadir
-          );
-
-        const sakit =
-          nilaiTampilan(
-            item.sakit
-          );
-
-        const izin =
-          nilaiTampilan(
-            item.izin
-          );
-
-        const alpa =
-          nilaiTampilan(
-            item.alpa
-          );
-
-
-        card.innerHTML =
-
-          '<div class="month-top">' +
-
-            '<div class="month-name">' +
-              escapeHtml(
-                item.bulan || '-'
-              ) +
-            '</div>' +
-
-            '<div class="month-status ' +
-              statusClass +
-            '">' +
-              escapeHtml(
-                statusText
-              ) +
-            '</div>' +
-
-          '</div>' +
-
-
-          '<div class="month-stats">' +
-
-            buatStatBulan(
-              hariAktif,
-              'Hari Aktif'
-            ) +
-
-            buatStatBulan(
-              hadir,
-              'Hadir'
-            ) +
-
-            buatStatBulan(
-              sakit,
-              'Sakit'
-            ) +
-
-            buatStatBulan(
-              izin,
-              'Izin'
-            ) +
-
-            buatStatBulan(
-              alpa,
-              'Alpa'
-            ) +
-
-          '</div>';
+        element.appendChild(
+          title
+        );
 
 
         container.appendChild(
-          card
+          element
         );
 
       }
@@ -2422,138 +2734,195 @@
   }
 
 
-  /* =====================================================
-     STAT BULAN
-  ===================================================== */
+  /* ==================================================
+     NORMALISASI PERSENTASE
+     ================================================== */
 
-  function buatStatBulan(
-    nilai,
-    label
+  function normalisasiPersentase(
+    nilaiPersentase,
+    progresHafalan,
+    sudah,
+    total
   ) {
 
-    return (
+    let angkaPersen =
+      parseFloat(
+        String(
+          nilaiPersentase || ''
+        )
+        .replace('%', '')
+        .replace(',', '.')
+      );
 
-      '<div class="month-stat">' +
 
-        '<strong>' +
-          escapeHtml(
-            String(nilai)
-          ) +
-        '</strong>' +
+    if (
+      !isFinite(angkaPersen)
+    ) {
 
-        '<span>' +
-          escapeHtml(label) +
-        '</span>' +
+      angkaPersen =
+        parseFloat(
+          String(
+            progresHafalan || ''
+          )
+          .replace(',', '.')
+        );
 
-      '</div>'
+    }
 
-    );
+
+    if (
+      !isFinite(angkaPersen)
+    ) {
+
+      const s =
+        Number(sudah) || 0;
+
+      const t =
+        Number(total) || 0;
+
+
+      angkaPersen =
+        t > 0
+          ? (s / t) * 100
+          : 0;
+
+    }
+
+
+    if (
+      angkaPersen < 0
+    ) {
+
+      angkaPersen =
+        0;
+
+    }
+
+
+    if (
+      angkaPersen > 100
+    ) {
+
+      angkaPersen =
+        100;
+
+    }
+
+
+    return angkaPersen;
 
   }
 
 
-  /* =====================================================
-     NILAI TAMPILAN
-  ===================================================== */
+  /* ==================================================
+     HELPER ANGKA
+     ================================================== */
 
-  function nilaiTampilan(
-    nilai
+  function angka(
+    value
   ) {
 
     if (
-      nilai === null ||
-      nilai === undefined ||
-      nilai === ''
+      value === null ||
+      value === undefined ||
+      value === ''
     ) {
 
-      return '-';
+      return '0';
+
+    }
+
+
+    const n =
+      Number(value);
+
+
+    if (
+      !isFinite(n)
+    ) {
+
+      return '0';
 
     }
 
 
     return String(
-      nilai
+      n
     );
 
   }
 
 
-  /* =====================================================
-     ESCAPE HTML
-  ===================================================== */
+  /* ==================================================
+     HELPER TEXT
+     ================================================== */
 
-  function escapeHtml(
-    teks
+  function setText(
+    id,
+    value
   ) {
 
-    return String(
-      teks || ''
-    )
-      .replace(
-        /&/g,
-        '&amp;'
-      )
-      .replace(
-        /</g,
-        '&lt;'
-      )
-      .replace(
-        />/g,
-        '&gt;'
-      )
-      .replace(
-        /"/g,
-        '&quot;'
-      )
-      .replace(
-        /'/g,
-        '&#039;'
+    const element =
+      document.getElementById(
+        id
       );
+
+
+    if (
+      element
+    ) {
+
+      element.textContent =
+        value;
+
+    }
 
   }
 
 
-  /* =====================================================
-     KEMBALI
-  ===================================================== */
+  /* ==================================================
+     ERROR
+     ================================================== */
 
-  document.getElementById(
-    'backButton'
-  ).addEventListener(
-    'click',
-    function () {
+  function tampilkanError(
+    pesan
+  ) {
 
-      dashboard.classList.remove(
-        'show'
+    errorBox.innerHTML =
+      '';
+
+    errorBox.textContent =
+      pesan;
+
+    errorBox.style.display =
+      'block';
+
+  }
+
+
+  /* ==================================================
+     HAPUS HTML DARI PESAN ERROR
+     ================================================== */
+
+  function stripHtml(
+    text
+  ) {
+
+    const div =
+      document.createElement(
+        'div'
       );
 
-      searchPage.style.display =
-        'block';
+    div.innerHTML =
+      String(text || '');
 
-      noHpInput.value =
-        '';
+    return (
+      div.textContent ||
+      div.innerText ||
+      ''
+    ).trim();
 
-      sembunyikanError();
-
-      window.scrollTo(
-        {
-          top: 0,
-          behavior: 'smooth'
-        }
-      );
-
-      setTimeout(
-        function () {
-
-          noHpInput.focus();
-
-        },
-        300
-      );
-
-    }
-  );
-
+  }
 
 </script>
 
