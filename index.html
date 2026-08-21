@@ -11,16 +11,12 @@
 
   <meta
     name="theme-color"
-    content="#0f766e"
+    content="#14532d"
   >
 
   <title>Cek Data Santri</title>
 
   <style>
-
-    /* ==================================================
-       RESET
-       ================================================== */
 
     * {
       box-sizing: border-box;
@@ -32,15 +28,17 @@
       padding: 0;
       width: 100%;
       min-height: 100%;
-
       font-family:
         Arial,
         Helvetica,
         sans-serif;
-
       background:
-        #f3f7f7;
-
+        linear-gradient(
+          180deg,
+          #edf8f0 0,
+          #f7faf8 330px,
+          #f3f7f4 100%
+        );
       color:
         #1f2937;
     }
@@ -68,97 +66,77 @@
       background:
         linear-gradient(
           135deg,
-          #0f766e 0%,
-          #115e59 100%
+          #14532d 0%,
+          #166534 58%,
+          #2f855a 100%
         );
-
       color: white;
-
       padding:
-        30px 20px 42px;
-
+        28px 20px 34px;
       text-align: center;
 
       position: relative;
+      overflow: hidden;
+    }
+
+    .header::before,
+    .header::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.07);
+      pointer-events: none;
+    }
+
+    .header::before {
+      width: 190px;
+      height: 190px;
+      top: -112px;
+      right: -54px;
     }
 
     .header::after {
-      content: "";
-
-      position: absolute;
-
-      left: 0;
-      right: 0;
-      bottom: -1px;
-
-      height: 25px;
-
-      background:
-        #f3f7f7;
-
-      border-radius:
-        50% 50% 0 0 /
-        100% 100% 0 0;
+      width: 120px;
+      height: 120px;
+      bottom: -78px;
+      left: -36px;
     }
 
     .header-inner {
       width: 100%;
       max-width: 760px;
-
-      margin:
-        auto;
+      margin: auto;
 
       position: relative;
-
-      z-index: 2;
+      z-index: 1;
     }
 
     .logo {
-      width: 60px;
-      height: 60px;
+      width: 58px;
+      height: 58px;
+      margin: 0 auto 12px;
 
-      margin:
-        0 auto 13px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
 
-      display:
-        flex;
-
-      align-items:
-        center;
-
-      justify-content:
-        center;
-
-      border-radius:
-        18px;
+      border-radius: 18px;
 
       background:
-        rgba(255,255,255,0.15);
-
-      border:
-        1px solid
         rgba(255,255,255,0.16);
 
-      box-shadow:
-        0 8px 25px
-        rgba(0,0,0,0.08);
-
-      font-size:
-        29px;
+      font-size: 28px;
     }
 
     .header h1 {
       margin:
-        0 0 6px;
+        0 0 5px;
 
       font-size:
         25px;
 
       font-weight:
-        800;
-
-      letter-spacing:
-        0.2px;
+        700;
     }
 
     .header p {
@@ -169,7 +147,7 @@
         rgba(255,255,255,0.82);
 
       font-size:
-        13px;
+        14px;
     }
 
 
@@ -182,14 +160,12 @@
       max-width: 760px;
 
       margin:
-        -5px auto 0;
+        -16px auto 0;
 
       padding:
-        0 14px 35px;
+        0 14px 40px;
 
       position: relative;
-
-      z-index: 5;
     }
 
 
@@ -199,74 +175,65 @@
 
     .card {
       background:
-        #ffffff;
+        white;
 
       border-radius:
         18px;
 
       box-shadow:
-        0 7px 28px
-        rgba(15,23,42,0.065);
+        0 8px 28px
+        rgba(20, 83, 45, 0.08);
+
+      border:
+        1px solid rgba(22,101,52,0.07);
 
       margin-bottom:
         14px;
 
       overflow:
         hidden;
-
-      border:
-        1px solid
-        rgba(226,232,240,0.65);
     }
 
     .card-title {
-      display:
-        flex;
-
-      align-items:
-        center;
-
-      gap:
-        10px;
+      display: flex;
+      align-items: center;
+      gap: 9px;
 
       padding:
-        16px 18px;
+        17px 18px;
 
       font-size:
         15px;
 
       font-weight:
-        750;
+        700;
 
       border-bottom:
-        1px solid
-        #edf2f2;
+        1px solid #e6efe8;
+
+      color:
+        #173b2a;
     }
 
     .card-title-icon {
       width: 32px;
       height: 32px;
 
-      display:
-        flex;
-
-      align-items:
-        center;
-
-      justify-content:
-        center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
 
       border-radius:
         10px;
 
       background:
-        #ecfdf5;
+        #e7f7eb;
+
+      color:
+        #166534;
 
       font-size:
         16px;
-
-      flex:
-        0 0 32px;
     }
 
     .card-body {
@@ -318,49 +285,50 @@
         #374151;
     }
 
+    .input-wrap {
+      position:
+        relative;
+    }
+
     .input {
       width:
         100%;
 
       height:
-        52px;
+        50px;
 
       padding:
         0 16px;
 
       border:
-        1px solid
-        #d7dfdf;
+        1px solid #cfe0d4;
 
       border-radius:
-        13px;
+        12px;
 
       outline:
         none;
 
       font-size:
-        19px;
+        18px;
 
       text-align:
         center;
 
       letter-spacing:
-        6px;
+        5px;
 
       transition:
         0.2s;
-
-      background:
-        #ffffff;
     }
 
     .input:focus {
       border-color:
-        #0f766e;
+        #166534;
 
       box-shadow:
-        0 0 0 4px
-        rgba(15,118,110,0.09);
+        0 0 0 3px
+        rgba(22,101,52,0.10);
     }
 
     .btn {
@@ -368,7 +336,7 @@
         100%;
 
       min-height:
-        51px;
+        50px;
 
       margin-top:
         13px;
@@ -377,14 +345,18 @@
         none;
 
       border-radius:
-        13px;
+        12px;
 
       background:
         linear-gradient(
           135deg,
-          #0f766e,
-          #0d9488
+          #16803d,
+          #166534
         );
+
+      box-shadow:
+        0 7px 18px
+        rgba(22,101,52,0.20);
 
       color:
         white;
@@ -400,19 +372,11 @@
 
       transition:
         0.2s;
-
-      box-shadow:
-        0 5px 14px
-        rgba(15,118,110,0.18);
     }
 
     .btn:hover {
-      transform:
-        translateY(-1px);
-
-      box-shadow:
-        0 7px 18px
-        rgba(15,118,110,0.23);
+      background:
+        #14532d;
     }
 
     .btn:disabled {
@@ -421,9 +385,6 @@
 
       cursor:
         not-allowed;
-
-      transform:
-        none;
     }
 
     .error {
@@ -468,19 +429,104 @@
         10px;
     }
 
-    .profile-item {
+    .profile-card .card-title {
+      min-height:
+        74px;
+    }
+
+    .absen-badge {
+      width:
+        76px;
+
+      min-width:
+        76px;
+
+      min-height:
+        52px;
+
+      margin-left:
+        auto;
+
       padding:
-        14px;
+        7px 8px 6px;
 
-      border-radius:
-        13px;
+      display:
+        flex;
 
-      background:
-        #f8fafc;
+      flex-direction:
+        column;
+
+      align-items:
+        center;
+
+      justify-content:
+        center;
 
       border:
-        1px solid
-        #eef2f2;
+        1px solid #bfe3c8;
+
+      border-radius:
+        14px;
+
+      background:
+        linear-gradient(
+          145deg,
+          #effaf2,
+          #e4f5e9
+        );
+
+      box-shadow:
+        0 4px 12px
+        rgba(22,101,52,0.08);
+    }
+
+    .absen-badge strong {
+      color:
+        #166534;
+
+      font-size:
+        21px;
+
+      font-weight:
+        800;
+
+      line-height:
+        1;
+    }
+
+    .absen-badge span {
+      margin-top:
+        5px;
+
+      color:
+        #4f8060;
+
+      font-size:
+        7px;
+
+      font-weight:
+        800;
+
+      letter-spacing:
+        0.8px;
+    }
+
+    .profile-item {
+      padding:
+        13px;
+
+      border-radius:
+        12px;
+
+      background:
+        linear-gradient(
+          145deg,
+          #fbfdfb,
+          #f0f7f2
+        );
+
+      border:
+        1px solid #e1ede4;
 
       min-width:
         0;
@@ -506,6 +552,9 @@
 
       overflow-wrap:
         anywhere;
+
+      color:
+        #173b2a;
     }
 
 
@@ -529,17 +578,13 @@
         center;
 
       padding:
-        14px 5px;
+        13px 5px;
 
       border-radius:
-        13px;
+        12px;
 
       background:
-        #f8fafc;
-
-      border:
-        1px solid
-        #eef2f2;
+        #f3f8f4;
     }
 
     .stat-number {
@@ -568,7 +613,7 @@
 
     .stat.sakit .stat-number {
       color:
-        #2563eb;
+        #7c3aed;
     }
 
     .stat.izin .stat-number {
@@ -579,6 +624,247 @@
     .stat.alpa .stat-number {
       color:
         #dc2626;
+    }
+
+
+    /* ==================================================
+       HAFALAN PROGRESS
+       ================================================== */
+
+    .progress-summary {
+      display:
+        flex;
+
+      justify-content:
+        space-between;
+
+      align-items:
+        center;
+
+      margin-bottom:
+        12px;
+    }
+
+    .progress-percent {
+      font-size:
+        30px;
+
+      font-weight:
+        800;
+
+      color:
+        #166534;
+    }
+
+    .progress-caption {
+      text-align:
+        right;
+
+      font-size:
+        12px;
+
+      color:
+        #6b7280;
+
+      line-height:
+        1.5;
+    }
+
+    .progress-bar {
+      width:
+        100%;
+
+      height:
+        10px;
+
+      border-radius:
+        99px;
+
+      background:
+        #e1e9e3;
+
+      overflow:
+        hidden;
+    }
+
+    .progress-fill {
+      height:
+        100%;
+
+      width:
+        0%;
+
+      border-radius:
+        inherit;
+
+      background:
+        linear-gradient(
+          90deg,
+          #166534,
+          #22c55e
+        );
+
+      transition:
+        width 0.7s ease;
+    }
+
+    .progress-numbers {
+      display:
+        grid;
+
+      grid-template-columns:
+        repeat(3, 1fr);
+
+      gap:
+        8px;
+
+      margin-top:
+        15px;
+    }
+
+    .progress-number {
+      text-align:
+        center;
+
+      padding:
+        11px 5px;
+
+      background:
+        #f3f8f4;
+
+      border-radius:
+        11px;
+    }
+
+    .progress-number strong {
+      display:
+        block;
+
+      font-size:
+        19px;
+    }
+
+    .progress-number span {
+      display:
+        block;
+
+      margin-top:
+        3px;
+
+      font-size:
+        10px;
+
+      color:
+        #6b7280;
+    }
+
+
+    /* ==================================================
+       PREDIKAT
+       ================================================== */
+
+    .predicate {
+      margin-top:
+        15px;
+
+      padding:
+        15px;
+
+      border-radius:
+        13px;
+
+      background:
+        #eef8f1;
+
+      border:
+        1px solid #c8ebd2;
+
+      text-align:
+        center;
+    }
+
+    .predicate-icon {
+      font-size:
+        26px;
+
+      margin-bottom:
+        4px;
+    }
+
+    .predicate-name {
+      font-size:
+        16px;
+
+      font-weight:
+        800;
+
+      color:
+        #166534;
+    }
+
+    .predicate-description {
+      margin-top:
+        7px;
+
+      color:
+        #5f7165;
+
+      font-size:
+        12px;
+
+      line-height:
+        1.5;
+    }
+
+
+    /* ==================================================
+       TARGET / LAMA SANTRI
+       ================================================== */
+
+    .info-grid {
+      display:
+        grid;
+
+      grid-template-columns:
+        repeat(2, 1fr);
+
+      gap:
+        10px;
+    }
+
+    .target-info {
+      display:
+        none;
+    }
+
+    .info-box {
+      padding:
+        13px;
+
+      border-radius:
+        12px;
+
+      background:
+        #f3f8f4;
+    }
+
+    .info-box-label {
+      font-size:
+        11px;
+
+      color:
+        #6b7280;
+
+      margin-bottom:
+        5px;
+    }
+
+    .info-box-value {
+      font-size:
+        14px;
+
+      font-weight:
+        700;
     }
 
 
@@ -599,8 +885,7 @@
 
     .monthly-item {
       border:
-        1px solid
-        #e5e7eb;
+        1px solid #e1e9e3;
 
       border-radius:
         13px;
@@ -609,7 +894,7 @@
         hidden;
 
       background:
-        #ffffff;
+        #fff;
     }
 
     .monthly-head {
@@ -622,14 +907,11 @@
       align-items:
         center;
 
-      gap:
-        10px;
-
       padding:
         12px 13px;
 
       background:
-        #f8fafc;
+        #f3f8f4;
     }
 
     .monthly-name {
@@ -652,9 +934,6 @@
 
       border-radius:
         99px;
-
-      white-space:
-        nowrap;
     }
 
     .status-sudah {
@@ -752,246 +1031,6 @@
 
 
     /* ==================================================
-       HAFALAN PROGRESS
-       ================================================== */
-
-    .progress-top {
-      display:
-        flex;
-
-      justify-content:
-        space-between;
-
-      align-items:
-        flex-end;
-
-      gap:
-        15px;
-
-      margin-bottom:
-        12px;
-    }
-
-    .progress-percent {
-      font-size:
-        34px;
-
-      font-weight:
-        850;
-
-      line-height:
-        1;
-
-      color:
-        #0f766e;
-
-      letter-spacing:
-        -1px;
-    }
-
-    .progress-target {
-      text-align:
-        right;
-
-      color:
-        #6b7280;
-
-      font-size:
-        12px;
-
-      line-height:
-        1.45;
-    }
-
-    .progress-target strong {
-      color:
-        #0f766e;
-
-      font-size:
-        13px;
-    }
-
-    .progress-bar {
-      width:
-        100%;
-
-      height:
-        11px;
-
-      border-radius:
-        99px;
-
-      background:
-        #e5e7eb;
-
-      overflow:
-        hidden;
-    }
-
-    .progress-fill {
-      height:
-        100%;
-
-      width:
-        0%;
-
-      border-radius:
-        inherit;
-
-      background:
-        linear-gradient(
-          90deg,
-          #0f766e,
-          #14b8a6
-        );
-
-      transition:
-        width 0.7s ease;
-    }
-
-    .progress-numbers {
-      display:
-        grid;
-
-      grid-template-columns:
-        repeat(3, 1fr);
-
-      gap:
-        8px;
-
-      margin-top:
-        15px;
-    }
-
-    .progress-number {
-      text-align:
-        center;
-
-      padding:
-        13px 5px;
-
-      background:
-        #f8fafc;
-
-      border:
-        1px solid
-        #eef2f2;
-
-      border-radius:
-        12px;
-    }
-
-    .progress-number strong {
-      display:
-        block;
-
-      font-size:
-        20px;
-
-      line-height:
-        1.1;
-    }
-
-    .progress-number span {
-      display:
-        block;
-
-      margin-top:
-        4px;
-
-      font-size:
-        10px;
-
-      color:
-        #6b7280;
-    }
-
-
-    /* ==================================================
-       PREDIKAT
-       ================================================== */
-
-    .predicate {
-      margin-top:
-        15px;
-
-      padding:
-        17px 14px;
-
-      border-radius:
-        14px;
-
-      background:
-        linear-gradient(
-          135deg,
-          #f0fdfa,
-          #ecfdf5
-        );
-
-      border:
-        1px solid
-        #ccfbf1;
-
-      text-align:
-        center;
-    }
-
-    .predicate-icon {
-      width:
-        28px;
-
-      height:
-        28px;
-
-      margin:
-        0 auto 6px;
-
-      display:
-        flex;
-
-      align-items:
-        center;
-
-      justify-content:
-        center;
-
-      border-radius:
-        50%;
-
-      font-size:
-        22px;
-    }
-
-    .predicate-name {
-      font-size:
-        17px;
-
-      font-weight:
-        850;
-
-      color:
-        #0f766e;
-    }
-
-    .predicate-description {
-      max-width:
-        560px;
-
-      margin:
-        7px auto 0;
-
-      color:
-        #5f6b6b;
-
-      font-size:
-        12px;
-
-      line-height:
-        1.55;
-    }
-
-
-    /* ==================================================
        HAFALAN LIST
        ================================================== */
 
@@ -1023,36 +1062,24 @@
         11px;
 
       background:
-        #f8fafc;
+        #f3f8f4;
 
       border:
-        1px solid
-        #edf0f2;
+        1px solid #e1ede4;
 
       min-width:
         0;
-
-      transition:
-        0.15s;
-    }
-
-    .hafalan-item:hover {
-      background:
-        #f0fdfa;
-
-      border-color:
-        #ccfbf1;
     }
 
     .hafalan-number {
       flex:
-        0 0 28px;
+        0 0 27px;
 
       width:
-        28px;
+        27px;
 
       height:
-        28px;
+        27px;
 
       display:
         flex;
@@ -1067,10 +1094,10 @@
         8px;
 
       background:
-        #ccfbf1;
+        #c8ebd2;
 
       color:
-        #0f766e;
+        #166534;
 
       font-size:
         11px;
@@ -1084,16 +1111,13 @@
         12px;
 
       line-height:
-        1.5;
+        1.45;
 
       font-weight:
         600;
 
       overflow-wrap:
         anywhere;
-
-      padding-top:
-        3px;
     }
 
     .all-complete {
@@ -1105,10 +1129,6 @@
 
       background:
         #f0fdf4;
-
-      border:
-        1px solid
-        #dcfce7;
 
       border-radius:
         13px;
@@ -1136,7 +1156,7 @@
         12px;
 
       background:
-        #f8fafc;
+        #f3f8f4;
 
       color:
         #6b7280;
@@ -1158,7 +1178,7 @@
         center;
 
       padding:
-        8px 15px 25px;
+        10px 15px 25px;
 
       color:
         #9ca3af;
@@ -1200,7 +1220,7 @@
 
       .header {
         padding:
-          24px 16px 36px;
+          23px 16px 30px;
       }
 
       .header h1 {
@@ -1208,24 +1228,9 @@
           22px;
       }
 
-      .header p {
-        font-size:
-          12px;
-      }
-
       .content {
         padding:
           0 10px 30px;
-      }
-
-      .card {
-        border-radius:
-          16px;
-      }
-
-      .card-title {
-        padding:
-          14px 15px;
       }
 
       .card-body {
@@ -1285,16 +1290,6 @@
           8px;
       }
 
-      .progress-percent {
-        font-size:
-          30px;
-      }
-
-      .progress-top {
-        margin-bottom:
-          11px;
-      }
-
       .hafalan-list {
         grid-template-columns:
           1fr;
@@ -1303,41 +1298,6 @@
       .monthly-data {
         grid-template-columns:
           repeat(5, 1fr);
-      }
-
-    }
-
-
-    @media (max-width: 380px) {
-
-      .stats {
-        gap:
-          3px;
-      }
-
-      .stat {
-        padding:
-          9px 1px;
-      }
-
-      .stat-number {
-        font-size:
-          15px;
-      }
-
-      .stat-label {
-        font-size:
-          7px;
-      }
-
-      .progress-percent {
-        font-size:
-          27px;
-      }
-
-      .progress-target {
-        font-size:
-          10px;
       }
 
     }
@@ -1459,7 +1419,7 @@
            PROFIL
            ================================================== -->
 
-      <section class="card">
+      <section class="card profile-card">
 
         <div class="card-title">
 
@@ -1468,6 +1428,18 @@
           </div>
 
           Profil Santri
+
+          <div class="absen-badge">
+
+            <strong id="absen">
+              -
+            </strong>
+
+            <span>
+              NO. ABSEN
+            </span>
+
+          </div>
 
         </div>
 
@@ -1514,6 +1486,63 @@
               <div
                 id="bin"
                 class="profile-value"
+              >
+                -
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- ==================================================
+           INFO SANTRI
+           ================================================== -->
+
+      <section class="card">
+
+        <div class="card-title">
+
+          <div class="card-title-icon">
+            🗓️
+          </div>
+
+          Informasi Santri
+
+        </div>
+
+        <div class="card-body">
+
+          <div class="info-grid">
+
+            <div class="info-box">
+
+              <div class="info-box-label">
+                Tanggal Masuk
+              </div>
+
+              <div
+                id="tanggalMasuk"
+                class="info-box-value"
+              >
+                -
+              </div>
+
+            </div>
+
+            <div class="info-box">
+
+              <div class="info-box-label">
+                Lama Menjadi Santri
+              </div>
+
+              <div
+                id="lamaSantri"
+                class="info-box-value"
               >
                 -
               </div>
@@ -1658,7 +1687,7 @@
 
 
       <!-- ==================================================
-           PERKEMBANGAN HAFALAN
+           HAFALAN
            ================================================== -->
 
       <section class="card">
@@ -1675,7 +1704,7 @@
 
         <div class="card-body">
 
-          <div class="progress-top">
+          <div class="progress-summary">
 
             <div
               id="persentase"
@@ -1684,7 +1713,7 @@
               0%
             </div>
 
-            <div class="progress-target">
+            <div class="progress-caption">
 
               <div>
                 Target Akhir
@@ -1698,7 +1727,6 @@
 
           </div>
 
-
           <div class="progress-bar">
 
             <div
@@ -1707,7 +1735,6 @@
             ></div>
 
           </div>
-
 
           <div class="progress-numbers">
 
@@ -1773,6 +1800,46 @@
               class="predicate-description"
             >
               -
+            </div>
+
+          </div>
+
+
+          <!-- TARGET -->
+
+          <div
+            class="info-grid target-info"
+            style="margin-top: 12px;"
+          >
+
+            <div class="info-box">
+
+              <div class="info-box-label">
+                Target Progres
+              </div>
+
+              <div
+                id="targetProgres"
+                class="info-box-value"
+              >
+                0%
+              </div>
+
+            </div>
+
+            <div class="info-box">
+
+              <div class="info-box-label">
+                Keterangan Target
+              </div>
+
+              <div
+                id="targetLabel"
+                class="info-box-value"
+              >
+                -
+              </div>
+
             </div>
 
           </div>
@@ -2043,6 +2110,41 @@
       data.bin || '-'
     );
 
+    setText(
+      'absen',
+      data.absen || '-'
+    );
+
+
+    /* -----------------------------------------------
+       INFORMASI SANTRI
+       ----------------------------------------------- */
+
+    setText(
+      'tanggalMasuk',
+      data.tanggalMasuk || '-'
+    );
+
+
+    let lama =
+      '-';
+
+    if (
+      data.lamaSantri &&
+      data.lamaSantri.tersedia
+    ) {
+
+      lama =
+        data.lamaSantri.teks ||
+        '-';
+
+    }
+
+    setText(
+      'lamaSantri',
+      lama
+    );
+
 
     /* -----------------------------------------------
        STATISTIK ABSENSI
@@ -2153,6 +2255,22 @@
     setText(
       'predicateDescription',
       data.deskripsiPredikatHafalan ||
+      '-'
+    );
+
+
+    /* -----------------------------------------------
+       TARGET
+       ----------------------------------------------- */
+
+    setText(
+      'targetProgres',
+      angka(data.targetProgres) + '%'
+    );
+
+    setText(
+      'targetLabel',
+      data.targetProgresLabel ||
       '-'
     );
 
@@ -2364,6 +2482,10 @@
         );
 
 
+        /* --------------------------------------------
+           Jika belum diinput / kalender error
+           -------------------------------------------- */
+
         if (
           item.status !==
           'sudah-input'
@@ -2401,6 +2523,10 @@
 
         }
 
+
+        /* --------------------------------------------
+           DATA BULAN
+           -------------------------------------------- */
 
         const data =
           document.createElement(
@@ -2592,6 +2718,23 @@
     daftar.forEach(
       function (item, index) {
 
+        /*
+         * PENTING:
+         * Backend mengirim object:
+         *
+         * {
+         *   nomor: 1,
+         *   judul: "..."
+         * }
+         *
+         * Jangan menggunakan:
+         *
+         * element.textContent = item
+         *
+         * karena hasilnya [object Object].
+         */
+
+
         let nomor =
           index + 1;
 
@@ -2613,6 +2756,11 @@
             '';
 
         } else {
+
+          /*
+           * Pengaman jika suatu saat backend
+           * mengirim string biasa.
+           */
 
           judul =
             String(
@@ -2695,6 +2843,15 @@
     sudah,
     total
   ) {
+
+    /*
+     * Prioritas:
+     *
+     * 1. persentase dari backend
+     * 2. progresHafalan dari backend
+     * 3. hitung dari sudah / total
+     */
+
 
     let angkaPersen =
       parseFloat(
