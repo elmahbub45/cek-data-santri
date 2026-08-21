@@ -3,7 +3,7 @@
   "name": "TARAQQI SANTRI",
   "short_name": "TARAQQI",
   "description": "Informasi perkembangan santri kelas III i Awwaliyah Putera.",
-  "start_url": "./?pwa=1.6",
+  "start_url": "./?pwa=1.7",
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait",

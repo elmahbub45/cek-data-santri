@@ -16,10 +16,10 @@
 
   <title>TARAQQI SANTRI • III i</title>
 
-  <link rel="manifest" href="./manifest.json?v=1.6">
-  <link rel="icon" type="image/png" sizes="32x32" href="./icons/icon-32.png?v=1.6">
-  <link rel="icon" type="image/png" sizes="192x192" href="./icons/icon-192.png?v=1.6">
-  <link rel="apple-touch-icon" href="./icons/icon-192.png?v=1.6">
+  <link rel="manifest" href="./manifest.json?v=1.7">
+  <link rel="icon" type="image/png" sizes="32x32" href="./icons/icon-32.png?v=1.7">
+  <link rel="icon" type="image/png" sizes="192x192" href="./icons/icon-192.png?v=1.7">
+  <link rel="apple-touch-icon" href="./icons/icon-192.png?v=1.7">
 
   <style>
 
@@ -973,6 +973,23 @@
         1.3;
     }
 
+    .attendance-award-percentage {
+      margin-top:
+        8px;
+
+      color:
+        #166534;
+
+      font-size:
+        28px;
+
+      font-weight:
+        900;
+
+      line-height:
+        1;
+    }
+
     .attendance-award-message {
       margin-top:
         6px;
@@ -1089,6 +1106,11 @@
     }
 
     .attendance-berubah .attendance-award-title {
+      color:
+        #b42323;
+    }
+
+    .attendance-berubah .attendance-award-percentage {
       color:
         #b42323;
     }
@@ -3660,9 +3682,8 @@
       <div class="card-body">
 
         <p class="login-description">
-          Masukkan 5 digit Nomor Induk Santri.
-         <br>
-          Hubungi Wali kelas atau Ketua kelas untuk mengetahui nomor induk kamu.
+          Masukkan 5 digit Nomor Induk Santri
+          untuk melihat data santri.
         </p>
 
         <label
@@ -3913,6 +3934,13 @@
             </div>
 
             <div
+              id="attendanceAwardPercentage"
+              class="attendance-award-percentage"
+            >
+              0%
+            </div>
+
+            <div
               id="attendanceAwardMessage"
               class="attendance-award-message"
             >
@@ -3923,11 +3951,11 @@
               id="attendanceAwardAdjustment"
               class="attendance-award-adjustment hidden"
             >
-              Predikat disesuaikan dari jumlah kehadiran.
+              Predikat disesuaikan berdasarkan jumlah Alpa.
             </div>
 
             <div class="attendance-award-rule">
-              Predikat berdasarkan jumlah Alpa dan ketidak hadiran
+              Predikat berdasarkan persentase kehadiran, dengan Alpa sebagai pertimbangan utama. Batas toleransi pondok adalah 30 Alpa.
             </div>
 
           </div>
@@ -4808,66 +4836,36 @@
      APRESIASI ABSENSI
      ================================================== */
 
-  function tentukanPenaltiAbsensi(
-    totalSakit,
-    totalIzin,
+  function hitungPersentaseKehadiran(
+    totalHadir,
     totalHariAktif
   ) {
 
-    const sakit =
-      Number(angka(totalSakit));
-
-    const izin =
-      Number(angka(totalIzin));
+    const hadir =
+      Math.max(
+        0,
+        Number(angka(totalHadir))
+      );
 
     const hariAktif =
-      Number(angka(totalHariAktif));
+      Math.max(
+        0,
+        Number(angka(totalHariAktif))
+      );
 
-    const sakitIzin =
-      sakit + izin;
 
-
-    if (
-      sakitIzin <= 0 ||
-      hariAktif <= 0
-    ) {
-
-      return {
-        persen: 0,
-        tingkat: 0
-      };
-
+    if (hariAktif <= 0) {
+      return 0;
     }
 
 
-    const persen =
-      (sakitIzin / hariAktif) * 100;
-
-
-    if (persen <= 10) {
-
-      return {
-        persen: persen,
-        tingkat: 1
-      };
-
-    }
-
-
-    if (persen <= 20) {
-
-      return {
-        persen: persen,
-        tingkat: 2
-      };
-
-    }
-
-
-    return {
-      persen: persen,
-      tingkat: 3
-    };
+    return Math.max(
+      0,
+      Math.min(
+        100,
+        (hadir / hariAktif) * 100
+      )
+    );
 
   }
 
@@ -4881,13 +4879,22 @@
   ) {
 
     const alpa =
-      Number(angka(totalAlpa));
+      Math.max(
+        0,
+        Number(angka(totalAlpa))
+      );
 
     const hariAktif =
-      Number(angka(totalHariAktif));
+      Math.max(
+        0,
+        Number(angka(totalHariAktif))
+      );
 
-    const hadir =
-      Number(angka(totalHadir));
+    const persentaseKehadiran =
+      hitungPersentaseKehadiran(
+        totalHadir,
+        totalHariAktif
+      );
 
 
     const daftar = [
@@ -4895,7 +4902,7 @@
       {
         icon: '🏆',
         judul: 'SANTRI TERDISIPLIN',
-        pesan: 'Sangat bagus, terus pertahankan!',
+        pesan: 'Kehadiran sempurna tanpa Alpa. Pertahankan kedisiplinan ini!',
         kelas: 'attendance-terdisiplin'
       },
 
@@ -4909,7 +4916,7 @@
       {
         icon: '👏',
         judul: 'BAIK!',
-        pesan: 'Kehadiran cukup baik. Terus tingkatkan kedisiplinan!',
+        pesan: 'Kehadiran baik. Terus tingkatkan kedisiplinan!',
         kelas: 'attendance-baik'
       },
 
@@ -4923,7 +4930,7 @@
       {
         icon: '⚠️',
         judul: 'PERLU LEBIH DISIPLIN',
-        pesan: 'Mari kurangi ketidakhadiran dan tingkatkan kedisiplinan.',
+        pesan: 'Kehadiran perlu ditingkatkan. Mari lebih disiplin lagi.',
         kelas: 'attendance-disiplin'
       },
 
@@ -4937,73 +4944,99 @@
     ];
 
 
-    /* Alpa 30 atau lebih langsung PERLU BERUBAH. */
+    if (hariAktif <= 0) {
+
+      return {
+        icon: 'ℹ️',
+        judul: 'DATA BELUM TERSEDIA',
+        pesan: 'Data hari aktif dan kehadiran belum tersedia.',
+        kelas: 'attendance-cukup',
+        persen: 0,
+        keterangan: ''
+      };
+
+    }
+
+
+    /*
+     * Alpa 30 atau lebih telah mencapai batas toleransi
+     * pondok. Aplikasi hanya memberi tanda perlunya tindak
+     * lanjut dan tidak menentukan keputusan kenaikan kelas.
+     */
 
     if (alpa >= 30) {
 
       return {
-        icon: '🔴',
-        judul: 'PERLU BERUBAH',
-        pesan: 'Catatan Alpa sudah sangat tinggi. Jangan ada Alpa lagi mulai sekarang!',
+        icon: '⚠️',
+        judul: 'PERLU TINDAK LANJUT',
+        pesan: 'Jumlah Alpa telah mencapai batas toleransi pondok. Diperlukan perhatian dan tindak lanjut bersama wali kelas.',
         kelas: 'attendance-berubah',
-        penalti: 0,
-        persen: 0
+        persen: persentaseKehadiran,
+        keterangan: 'Batas toleransi pondok: 30 Alpa.'
       };
 
     }
 
 
-    let levelDasar = 0;
+    /* Predikat dasar berdasarkan persentase kehadiran. */
+
+    let levelKehadiran = 5;
+
+
+    if (persentaseKehadiran >= 100) {
+      levelKehadiran = 0;
+    } else if (persentaseKehadiran >= 95) {
+      levelKehadiran = 1;
+    } else if (persentaseKehadiran >= 85) {
+      levelKehadiran = 2;
+    } else if (persentaseKehadiran >= 75) {
+      levelKehadiran = 3;
+    } else if (persentaseKehadiran >= 60) {
+      levelKehadiran = 4;
+    }
+
+
+    /* Alpa menentukan batas predikat tertinggi. */
+
+    let levelAlpa = 0;
 
 
     if (alpa >= 21) {
-      levelDasar = 5;
+      levelAlpa = 5;
     } else if (alpa >= 12) {
-      levelDasar = 4;
+      levelAlpa = 4;
     } else if (alpa >= 6) {
-      levelDasar = 3;
+      levelAlpa = 3;
     } else if (alpa >= 3) {
-      levelDasar = 2;
+      levelAlpa = 2;
     } else if (alpa >= 1) {
-      levelDasar = 1;
-    }
-
-
-    const penalti =
-      tentukanPenaltiAbsensi(
-        totalSakit,
-        totalIzin,
-        totalHariAktif
-      );
-
-
-    if (
-      alpa === 0 &&
-      hariAktif > 0 &&
-      hadir === hariAktif &&
-      penalti.tingkat === 0
-    ) {
-
-      return {
-        ...daftar[0],
-        penalti: 0,
-        persen: penalti.persen
-      };
-
+      levelAlpa = 1;
     }
 
 
     const levelFinal =
-      Math.min(
-        5,
-        levelDasar + penalti.tingkat
+      Math.max(
+        levelKehadiran,
+        levelAlpa
       );
+
+
+    let keterangan = '';
+
+
+    if (alpa > 0) {
+      keterangan =
+        'Jumlah Alpa: ' +
+        angka(alpa) +
+        '. Batas predikat berdasarkan Alpa: ' +
+        daftar[levelAlpa].judul;
+    }
 
 
     return {
       ...daftar[levelFinal],
-      penalti: penalti.tingkat,
-      persen: penalti.persen
+      persen: persentaseKehadiran,
+      keterangan: keterangan
     };
 
   }
@@ -5052,12 +5085,22 @@
     );
 
     setText(
+      'attendanceAwardPercentage',
+      Number(hasil.persen || 0).toFixed(2) + '%'
+    );
+
+    setText(
       'attendanceAwardMessage',
       hasil.pesan
     );
 
 
-    if (hasil.penalti > 0) {
+    if (hasil.keterangan) {
+      setText(
+        'attendanceAwardAdjustment',
+        hasil.keterangan
+      );
+
       penyesuaian.classList.remove('hidden');
     } else {
       penyesuaian.classList.add('hidden');
