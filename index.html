@@ -16,6 +16,10 @@
 
   <title>Cek Data Santri</title>
 
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" type="image/png" sizes="192x192" href="./icons/icon-192.png">
+  <link rel="apple-touch-icon" href="./icons/icon-192.png">
+
   <style>
 
     * {
@@ -387,6 +391,69 @@
         not-allowed;
     }
 
+    .result-actions {
+      display:
+        flex;
+
+      justify-content:
+        flex-start;
+
+      margin-bottom:
+        10px;
+    }
+
+    .home-button {
+      min-height:
+        42px;
+
+      display:
+        inline-flex;
+
+      align-items:
+        center;
+
+      justify-content:
+        center;
+
+      gap:
+        8px;
+
+      padding:
+        9px 17px;
+
+      border:
+        1px solid rgba(212,167,44,0.55);
+
+      border-radius:
+        14px;
+
+      background:
+        linear-gradient(135deg, #14532d, #0b3d2e);
+
+      color:
+        #ffffff;
+
+      box-shadow:
+        0 7px 18px rgba(11,61,46,0.16);
+
+      font-size:
+        12px;
+
+      font-weight:
+        800;
+
+      letter-spacing:
+        0.8px;
+
+      cursor:
+        pointer;
+    }
+
+    .home-button:active {
+      transform:
+        translateY(1px);
+    }
+
     .error {
       margin-top:
         13px;
@@ -636,7 +703,7 @@
         grid;
 
       grid-template-columns:
-        repeat(5, 1fr);
+        repeat(4, 1fr);
 
       gap:
         8px;
@@ -1361,7 +1428,7 @@
         grid;
 
       grid-template-columns:
-        repeat(5, 1fr);
+        repeat(4, 1fr);
 
       padding:
         12px;
@@ -1564,6 +1631,17 @@
         1.6;
     }
 
+    .announcement-note {
+      white-space:
+        pre-line;
+
+      color:
+        #33483d;
+
+      font-size:
+        13px;
+    }
+
 
     /* ==================================================
        FOOTER
@@ -1665,7 +1743,7 @@
 
       .stats {
         grid-template-columns:
-          repeat(5, 1fr);
+          repeat(4, 1fr);
 
         gap:
           5px;
@@ -1689,11 +1767,59 @@
       .hafalan-list {
         grid-template-columns:
           1fr;
+
+        gap:
+          9px;
+      }
+
+      .hafalan-item {
+        flex-direction:
+          row-reverse;
+
+        justify-content:
+          flex-start;
+
+        padding:
+          11px;
+
+        gap:
+          9px;
+      }
+
+      .hafalan-number {
+        flex:
+          0 0 27px;
+
+        width:
+          27px;
+
+        height:
+          27px;
+
+        font-size:
+          11px;
+      }
+
+      .hafalan-title {
+        flex:
+          1;
+
+        text-align:
+          right;
+
+        font-size:
+          17px;
+
+        line-height:
+          1.45;
+
+        overflow-wrap:
+          anywhere;
       }
 
       .monthly-data {
         grid-template-columns:
-          repeat(5, 1fr);
+          repeat(4, 1fr);
       }
 
     }
@@ -2829,6 +2955,19 @@
       class="hidden"
     >
 
+      <div class="result-actions">
+
+        <button
+          id="btnHome"
+          class="home-button"
+          type="button"
+        >
+          <span aria-hidden="true">🏠</span>
+          HOME
+        </button>
+
+      </div>
+
 
       <!-- ==================================================
            PROFIL
@@ -3007,21 +3146,6 @@
 
             </div>
 
-            <div class="stat">
-
-              <div
-                id="totalHariAktif"
-                class="stat-number"
-              >
-                0
-              </div>
-
-              <div class="stat-label">
-                HARI AKTIF
-              </div>
-
-            </div>
-
           </div>
 
           <div
@@ -3062,8 +3186,7 @@
             </div>
 
             <div class="attendance-award-rule">
-              Predikat berdasarkan jumlah Alpa dan
-              persentase Sakit + Izin
+              Predikat berdasarkan jumlah Alpa dan ketidak hadiran
             </div>
 
           </div>
@@ -3305,7 +3428,7 @@
 
 
       <!-- ==================================================
-           KETERANGAN ABSENSI
+           PENGUMUMAN
            ================================================== -->
 
       <section
@@ -3316,18 +3439,20 @@
         <div class="card-title">
 
           <div class="card-title-icon">
-            ℹ️
+            📢
           </div>
 
-          Keterangan
+          <span id="pengumumanJudul">
+            Pengumuman
+          </span>
 
         </div>
 
         <div class="card-body">
 
           <div
-            id="keteranganAbsensi"
-            class="note"
+            id="pengumumanIsi"
+            class="note announcement-note"
           ></div>
 
         </div>
@@ -3381,6 +3506,9 @@
   const btnCek =
     document.getElementById('btnCek');
 
+  const btnHome =
+    document.getElementById('btnHome');
+
   const errorBox =
     document.getElementById('errorBox');
 
@@ -3431,6 +3559,44 @@
     'click',
     cekData
   );
+
+
+  btnHome.addEventListener(
+    'click',
+    kembaliKeHome
+  );
+
+
+  function kembaliKeHome() {
+
+    hasilSection.classList.add(
+      'hidden'
+    );
+
+    loginSection.classList.remove(
+      'hidden'
+    );
+
+    noHp.value =
+      '';
+
+    errorBox.textContent =
+      '';
+
+    errorBox.style.display =
+      'none';
+
+    document.getElementById(
+      'keteranganSection'
+    ).classList.add(
+      'hidden'
+    );
+
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  }
 
 
   /* ==================================================
@@ -4005,19 +4171,38 @@
        KETERANGAN
        ----------------------------------------------- */
 
-    const keterangan =
+    const pengumuman =
+      data.pengumuman ||
+      {};
+
+    const isiPengumuman =
       String(
+        pengumuman.isi ||
         data.keteranganAbsensi ||
         ''
       ).trim();
 
+    const judulPengumuman =
+      String(
+        pengumuman.judul ||
+        'Pengumuman'
+      ).trim();
 
-    if (keterangan !== '') {
 
-      document.getElementById(
-        'keteranganAbsensi'
-      ).textContent =
-        keterangan;
+    if (
+      isiPengumuman !== '' &&
+      pengumuman.tampil !== false
+    ) {
+
+      setText(
+        'pengumumanJudul',
+        judulPengumuman
+      );
+
+      setText(
+        'pengumumanIsi',
+        isiPengumuman
+      );
 
       document.getElementById(
         'keteranganSection'
@@ -4253,12 +4438,6 @@
         data.className =
           'monthly-data';
 
-
-        tambahStatBulanan(
-          data,
-          item.hariAktif,
-          'Hari Aktif'
-        );
 
         tambahStatBulanan(
           data,
@@ -4516,7 +4695,14 @@
           'hafalan-number';
 
         number.textContent =
-          nomor;
+          String(nomor).replace(
+            /[0-9]/g,
+            function (angkaLatin) {
+              return '٠١٢٣٤٥٦٧٨٩'[
+                Number(angkaLatin)
+              ];
+            }
+          );
 
 
         const title =
@@ -4748,6 +4934,18 @@
 
   }
 
+</script>
+
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function () {
+      navigator.serviceWorker
+        .register('./service-worker.js')
+        .catch(function (error) {
+          console.error('Service Worker gagal didaftarkan:', error);
+        });
+    });
+  }
 </script>
 
 </body>
