@@ -3987,7 +3987,7 @@
             📚
           </div>
 
-          Perkembangan Hafalan Berjalan
+          Perkembangan Hafalan Shorof Berjalan
 
         </div>
 
@@ -4074,7 +4074,7 @@
           >
 
             <div class="level-eyebrow">
-              PENCAPAIAN HAFALAN BERJALAN
+              PENCAPAIAN HAFALAN SHOROF BERJALAN
             </div>
 
             <div
@@ -4101,14 +4101,14 @@
               id="levelCount"
               class="level-count"
             >
-              0 dari 0 Hafalan Berjalan telah diselesaikan
+              0 dari 0 Hafalan Shorof Berjalan telah diselesaikan
             </div>
 
             <div
               id="levelNext"
               class="level-next"
             >
-              Mulai setorkan Hafalan Berjalan untuk membuka Level 1
+              Mulai setorkan Hafalan Shorof Berjalan untuk membuka Level 1
             </div>
 
             <div
@@ -4204,7 +4204,7 @@
             📖
           </div>
 
-          Daftar Hafalan Berjalan yang Belum Diselesaikan
+          Daftar Hafalan Shorof Berjalan yang Belum Diselesaikan
 
         </div>
 
@@ -4360,7 +4360,7 @@
       <img
         id="achievementPreviewImage"
         class="achievement-preview-image"
-        alt="Pratinjau kartu pencapaian Hafalan Berjalan"
+        alt="Pratinjau kartu pencapaian Hafalan Shorof Berjalan"
       >
 
     </div>
@@ -5740,8 +5740,8 @@
         '1 / -1';
 
       complete.textContent =
-        '🎉 Tidak ada Hafalan Berjalan yang tertinggal. ' +
-        'Semua Hafalan Berjalan yang tersedia sudah diselesaikan.';
+        '🎉 Tidak ada Hafalan Shorof Berjalan yang tertinggal. ' +
+        'Semua Hafalan Shorof Berjalan yang tersedia sudah diselesaikan.';
 
 
       container.appendChild(
@@ -5972,7 +5972,7 @@
       angka(jumlahSudah) +
       ' dari ' +
       angka(jumlahTotal) +
-      ' Hafalan Berjalan telah diselesaikan'
+      ' Hafalan Shorof Berjalan telah diselesaikan'
     );
 
 
@@ -5997,12 +5997,12 @@
     if (jumlahTotal <= 0) {
 
       pesanBerikutnya =
-        'Data Hafalan Berjalan belum tersedia.';
+        'Data Hafalan Shorof Berjalan belum tersedia.';
 
     } else if (level >= 7) {
 
       pesanBerikutnya =
-        'Seluruh Hafalan Berjalan telah diselesaikan. Pertahankan dan terus murajaah.';
+        'Seluruh Hafalan Shorof Berjalan telah diselesaikan. Pertahankan dan terus murajaah.';
 
     } else {
 
@@ -6030,7 +6030,7 @@
       pesanBerikutnya =
         'Selesaikan ' +
         angka(jumlahKurang) +
-        ' Hafalan Berjalan lagi untuk mencapai Level ' +
+        ' Hafalan Shorof Berjalan lagi untuk mencapai Level ' +
         levelBerikutnya;
     }
 
@@ -6337,7 +6337,7 @@
         );
 
       const namaFile =
-        'pencapaian-hafalan-berjalan-' +
+        'pencapaian-hafalan-shorof-berjalan-' +
         buatNamaFileAman(
           dataPencapaianTerakhir.nama
         ) +
@@ -6511,9 +6511,9 @@
       await navigator.share({
         files: [file],
         title:
-          'Pencapaian Hafalan Berjalan',
+          'Pencapaian Hafalan Shorof Berjalan',
         text:
-          'Alhamdulillah, pencapaian Hafalan Berjalan Level ' +
+          'Alhamdulillah, pencapaian Hafalan Shorof Berjalan Level ' +
           dataPencapaianTerakhir.level +
           '.'
       });
@@ -6733,10 +6733,10 @@
           '#ffffff';
 
         context.font =
-          '800 58px Arial, sans-serif';
+          '800 52px Arial, sans-serif';
 
         context.fillText(
-          'HAFALAN BERJALAN',
+          'HAFALAN SHOROF BERJALAN',
           540,
           315
         );
@@ -6818,7 +6818,7 @@
           angka(data.sudah) +
           ' dari ' +
           angka(data.total) +
-          ' Hafalan Berjalan telah diselesaikan',
+          ' Hafalan Shorof Berjalan telah diselesaikan',
           540,
           posisiSetelahNama + 190
         );
@@ -7403,7 +7403,7 @@
   ) {
 
     if (level >= 7) {
-      return 'Seluruh Hafalan Berjalan telah diselesaikan. Pertahankan pencapaian dan teruslah murajaah.';
+      return 'Seluruh Hafalan Shorof Berjalan telah diselesaikan. Pertahankan pencapaian dan teruslah murajaah.';
     }
 
     if (level >= 6) {
