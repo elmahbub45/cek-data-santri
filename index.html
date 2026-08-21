@@ -413,33 +413,10 @@
         anywhere;
     }
 
-    /* BADGE NOMOR ABSEN */
 
-    .profile-absen {
-      display:
-        flex;
-
-      align-items:
-        center;
-
-      justify-content:
-        space-between;
-
-      gap:
-        10px;
-
-      padding:
-        13px;
-
-      border-radius:
-        12px;
-
-      background:
-        #f8fafc;
-
-      min-width:
-        0;
-    }
+    /* ==================================================
+       BADGE NOMOR ABSEN
+       ================================================== */
 
     .absen-badge {
       display:
@@ -451,24 +428,35 @@
       justify-content:
         center;
 
-      min-width:
-        42px;
+      gap:
+        6px;
 
-      height:
-        30px;
+      margin:
+        0 auto 14px;
 
       padding:
-        0 10px;
+        7px 13px;
 
       border-radius:
-        9px;
+        99px;
 
       background:
-        #ccfbf1;
+        #ecfdf5;
+
+      border:
+        1px solid #ccfbf1;
 
       color:
         #0f766e;
 
+      font-size:
+        12px;
+
+      font-weight:
+        700;
+    }
+
+    .absen-badge-number {
       font-size:
         14px;
 
@@ -733,52 +721,6 @@
 
       line-height:
         1.5;
-    }
-
-
-    /* ==================================================
-       TARGET
-       ================================================== */
-
-    .info-grid {
-      display:
-        grid;
-
-      grid-template-columns:
-        repeat(2, 1fr);
-
-      gap:
-        10px;
-    }
-
-    .info-box {
-      padding:
-        13px;
-
-      border-radius:
-        12px;
-
-      background:
-        #f8fafc;
-    }
-
-    .info-box-label {
-      font-size:
-        11px;
-
-      color:
-        #6b7280;
-
-      margin-bottom:
-        5px;
-    }
-
-    .info-box-value {
-      font-size:
-        14px;
-
-      font-weight:
-        700;
     }
 
 
@@ -1157,8 +1099,7 @@
           1fr;
       }
 
-      .profile-item,
-      .profile-absen {
+      .profile-item {
         display:
           flex;
 
@@ -1348,32 +1289,26 @@
 
         <div class="card-body">
 
+          <!-- BADGE NOMOR ABSEN -->
+
+          <div
+            id="absenBadge"
+            class="absen-badge"
+          >
+            <span>
+              NO. ABSEN
+            </span>
+
+            <span
+              id="nomorAbsen"
+              class="absen-badge-number"
+            >
+              -
+            </span>
+          </div>
+
+
           <div class="profile">
-
-
-            <!-- NOMOR ABSEN -->
-
-            <div class="profile-absen">
-
-              <div>
-
-                <div class="profile-label">
-                  No. Absen
-                </div>
-
-              </div>
-
-              <div
-                id="nomorAbsen"
-                class="absen-badge"
-              >
-                -
-              </div>
-
-            </div>
-
-
-            <!-- NAMA -->
 
             <div class="profile-item">
 
@@ -1390,9 +1325,6 @@
 
             </div>
 
-
-            <!-- NO INDUK -->
-
             <div class="profile-item">
 
               <div class="profile-label">
@@ -1408,9 +1340,6 @@
 
             </div>
 
-
-            <!-- BIN -->
-
             <div class="profile-item">
 
               <div class="profile-label">
@@ -1425,7 +1354,6 @@
               </div>
 
             </div>
-
 
           </div>
 
@@ -1800,6 +1728,13 @@
 
 <script>
 
+  /* ==================================================
+     KONFIGURASI API
+     ================================================== */
+
+  const API_URL =
+    'https://script.google.com/macros/s/AKfycbzwmAoGDbHTlvnO2VsLtpnOqXOvMw1aLxJQiHnLHf6CoNP_UaIz2XH_W_A2Zle8RrmD/exec';
+
 
   /* ==================================================
      ELEMENT
@@ -1865,13 +1800,9 @@
 
   /* ==================================================
      CEK DATA
-     
-     PENTING:
-     Menggunakan google.script.run.
-     Tidak menggunakan fetch/API_URL.
      ================================================== */
 
-  function cekData() {
+  async function cekData() {
 
     const nomor =
       noHp.value.trim();
@@ -1897,20 +1828,57 @@
       'none';
 
 
-    /*
-     * Pastikan halaman memang dijalankan
-     * dari Google Apps Script.
-     */
+    try {
 
-    if (
-      typeof google === 'undefined' ||
-      !google.script ||
-      !google.script.run
-    ) {
+      const url =
+        API_URL +
+        '?api=cekSantri&noHp=' +
+        encodeURIComponent(nomor);
+
+
+      const response =
+        await fetch(url, {
+          method: 'GET',
+          cache: 'no-store'
+        });
+
+
+      if (!response.ok) {
+
+        throw new Error(
+          'Server tidak dapat dihubungi.'
+        );
+
+      }
+
+
+      const data =
+        await response.json();
+
+
+      if (!data.ada) {
+
+        throw new Error(
+          stripHtml(
+            data.pesan ||
+            'Data santri tidak ditemukan.'
+          )
+        );
+
+      }
+
+
+      tampilkanData(data);
+
+
+    } catch (error) {
 
       tampilkanError(
-        'Halaman tidak terhubung ke Google Apps Script. Pastikan Index.html dijalankan melalui Web App Google Apps Script.'
+        error.message ||
+        'Terjadi kesalahan saat mengambil data.'
       );
+
+    } finally {
 
       btnCek.disabled =
         false;
@@ -1918,94 +1886,7 @@
       btnCek.textContent =
         'Cek Data Santri';
 
-      return;
-
     }
-
-
-    google.script.run
-
-      .withSuccessHandler(
-        function (data) {
-
-          btnCek.disabled =
-            false;
-
-          btnCek.textContent =
-            'Cek Data Santri';
-
-
-          if (
-            !data
-          ) {
-
-            tampilkanError(
-              'Tidak ada respons dari Google Apps Script.'
-            );
-
-            return;
-
-          }
-
-
-          if (
-            !data.ada
-          ) {
-
-            tampilkanError(
-              stripHtml(
-                data.pesan ||
-                'Data santri tidak ditemukan.'
-              )
-            );
-
-            return;
-
-          }
-
-
-          tampilkanData(
-            data
-          );
-
-        }
-      )
-
-      .withFailureHandler(
-        function (error) {
-
-          btnCek.disabled =
-            false;
-
-          btnCek.textContent =
-            'Cek Data Santri';
-
-
-          let pesan =
-            'Terjadi kesalahan saat mengambil data.';
-
-
-          if (
-            error &&
-            error.message
-          ) {
-
-            pesan =
-              error.message;
-
-          }
-
-
-          tampilkanError(
-            pesan
-          );
-
-        }
-      )
-
-      .cekSantri(
-        nomor
-      );
 
   }
 
@@ -2016,9 +1897,28 @@
 
   function tampilkanData(data) {
 
-
     /* -----------------------------------------------
        PROFIL
+       ----------------------------------------------- */
+
+    setText(
+      'nama',
+      data.nama || '-'
+    );
+
+    setText(
+      'induk',
+      data.induk || '-'
+    );
+
+    setText(
+      'bin',
+      data.bin || '-'
+    );
+
+
+    /* -----------------------------------------------
+       NOMOR ABSEN
        ----------------------------------------------- */
 
     setText(
@@ -2030,75 +1930,33 @@
     );
 
 
-    setText(
-      'nama',
-      data.nama || '-'
-    );
-
-
-    setText(
-      'induk',
-      data.induk || '-'
-    );
-
-
-    setText(
-      'bin',
-      data.bin || '-'
-    );
-
-
     /* -----------------------------------------------
        STATISTIK ABSENSI
        ----------------------------------------------- */
 
     setText(
       'totalHadir',
-      angka(
-        data.totalHadir !== undefined
-          ? data.totalHadir
-          : data.hadir
-      )
+      angka(data.totalHadir)
     );
-
 
     setText(
       'totalSakit',
-      angka(
-        data.totalSakit !== undefined
-          ? data.totalSakit
-          : data.sakit
-      )
+      angka(data.totalSakit)
     );
-
 
     setText(
       'totalIzin',
-      angka(
-        data.totalIzin !== undefined
-          ? data.totalIzin
-          : data.izin
-      )
+      angka(data.totalIzin)
     );
-
 
     setText(
       'totalAlpa',
-      angka(
-        data.totalAlpa !== undefined
-          ? data.totalAlpa
-          : data.alpa
-      )
+      angka(data.totalAlpa)
     );
-
 
     setText(
       'totalHariAktif',
-      angka(
-        data.totalHariAktif !== undefined
-          ? data.totalHariAktif
-          : data.total
-      )
+      angka(data.totalHariAktif)
     );
 
 
@@ -2151,12 +2009,10 @@
       angka(data.sudah)
     );
 
-
     setText(
       'belum',
       angka(data.belum)
     );
-
 
     setText(
       'totalHafalan',
@@ -2174,13 +2030,11 @@
       '⚪'
     );
 
-
     setText(
       'predicateName',
       data.predikatHafalan ||
       'BELUM MENYETOR'
     );
-
 
     setText(
       'predicateDescription',
@@ -2197,7 +2051,6 @@
       'targetProgres',
       angka(data.targetProgres) + '%'
     );
-
 
     setText(
       'targetLabel',
@@ -2226,15 +2079,12 @@
       ).trim();
 
 
-    if (
-      keterangan !== ''
-    ) {
+    if (keterangan !== '') {
 
       document.getElementById(
         'keteranganAbsensi'
       ).textContent =
         keterangan;
-
 
       document.getElementById(
         'keteranganSection'
@@ -2261,11 +2111,9 @@
       'hidden'
     );
 
-
     hasilSection.classList.remove(
       'hidden'
     );
-
 
     window.scrollTo({
       top: 0,
@@ -2342,7 +2190,6 @@
         name.className =
           'monthly-name';
 
-
         name.textContent =
           item.bulan ||
           '-';
@@ -2409,7 +2256,6 @@
           name
         );
 
-
         head.appendChild(
           status
         );
@@ -2442,11 +2288,9 @@
             info.className =
               'monthly-period';
 
-
             info.textContent =
               item.statusText ||
               'Belum diinput';
-
 
             wrapper.appendChild(
               info
@@ -2458,7 +2302,6 @@
           container.appendChild(
             wrapper
           );
-
 
           return;
 
@@ -2484,13 +2327,11 @@
           'Hari Aktif'
         );
 
-
         tambahStatBulanan(
           data,
           item.hadir,
           'Hadir'
         );
-
 
         tambahStatBulanan(
           data,
@@ -2498,13 +2339,11 @@
           'Sakit'
         );
 
-
         tambahStatBulanan(
           data,
           item.izin,
           'Izin'
         );
-
 
         tambahStatBulanan(
           data,
@@ -2531,7 +2370,6 @@
           periode.className =
             'monthly-period';
 
-
           periode.textContent =
             (
               item.tanggalMulai ||
@@ -2542,7 +2380,6 @@
               item.tanggalSelesai ||
               '-'
             );
-
 
           wrapper.appendChild(
             periode
@@ -2585,7 +2422,6 @@
         'strong'
       );
 
-
     number.textContent =
       angka(value);
 
@@ -2595,7 +2431,6 @@
         'span'
       );
 
-
     text.textContent =
       label;
 
@@ -2603,7 +2438,6 @@
     box.appendChild(
       number
     );
-
 
     box.appendChild(
       text
@@ -2645,14 +2479,11 @@
           'div'
         );
 
-
       complete.className =
         'all-complete';
 
-
       complete.style.gridColumn =
         '1 / -1';
-
 
       complete.textContent =
         '🎉 Tidak ada hafalan yang tertinggal. ' +
@@ -2663,7 +2494,6 @@
         complete
       );
 
-
       return;
 
     }
@@ -2672,10 +2502,8 @@
     daftar.forEach(
       function (item, index) {
 
-
         let nomor =
           index + 1;
-
 
         let judul =
           '';
@@ -2689,7 +2517,6 @@
           nomor =
             item.nomor ||
             nomor;
-
 
           judul =
             item.judul ||
@@ -2711,12 +2538,8 @@
           ).trim();
 
 
-        if (
-          judul === ''
-        ) {
-
+        if (judul === '') {
           return;
-
         }
 
 
@@ -2724,7 +2547,6 @@
           document.createElement(
             'div'
           );
-
 
         element.className =
           'hafalan-item';
@@ -2735,10 +2557,8 @@
             'div'
           );
 
-
         number.className =
           'hafalan-number';
-
 
         number.textContent =
           nomor;
@@ -2749,10 +2569,8 @@
             'div'
           );
 
-
         title.className =
           'hafalan-title';
-
 
         title.textContent =
           judul;
@@ -2761,7 +2579,6 @@
         element.appendChild(
           number
         );
-
 
         element.appendChild(
           title
@@ -2821,7 +2638,6 @@
       const s =
         Number(sudah) || 0;
 
-
       const t =
         Number(total) || 0;
 
@@ -2842,7 +2658,6 @@
         0;
 
     }
-
 
     if (
       angkaPersen > 100
@@ -2936,10 +2751,8 @@
     errorBox.innerHTML =
       '';
 
-
     errorBox.textContent =
       pesan;
-
 
     errorBox.style.display =
       'block';
@@ -2960,12 +2773,8 @@
         'div'
       );
 
-
     div.innerHTML =
-      String(
-        text || ''
-      );
-
+      String(text || '');
 
     return (
       div.textContent ||
