@@ -16,10 +16,10 @@
 
   <title>TARAQQI • III i</title>
 
-  <link rel="manifest" href="./manifest.json?v=1.4">
-  <link rel="icon" type="image/png" sizes="32x32" href="./icons/icon-32.png?v=1.4">
-  <link rel="icon" type="image/png" sizes="192x192" href="./icons/icon-192.png?v=1.4">
-  <link rel="apple-touch-icon" href="./icons/icon-192.png?v=1.4">
+  <link rel="manifest" href="./manifest.json?v=1.5">
+  <link rel="icon" type="image/png" sizes="32x32" href="./icons/icon-32.png?v=1.5">
+  <link rel="icon" type="image/png" sizes="192x192" href="./icons/icon-192.png?v=1.5">
+  <link rel="apple-touch-icon" href="./icons/icon-192.png?v=1.5">
 
   <style>
 
@@ -3660,7 +3660,7 @@
       <div class="card-body">
 
         <p class="login-description">
-          Masukkan 4 digit terakhir nomor HP
+          Masukkan 5 digit terakhir nomor HP
           orang tua untuk melihat data santri.
         </p>
 
@@ -3668,7 +3668,7 @@
           class="input-label"
           for="noHp"
         >
-          4 digit terakhir nomor HP
+          5 digit terakhir nomor HP
         </label>
 
         <input
@@ -3676,9 +3676,9 @@
           class="input"
           type="tel"
           inputmode="numeric"
-          maxlength="4"
+          maxlength="5"
           autocomplete="off"
-          placeholder="••••"
+          placeholder="•••••"
         >
 
         <button
@@ -4487,7 +4487,7 @@
       this.value =
         this.value
           .replace(/\D/g, '')
-          .slice(0, 4);
+          .slice(0, 5);
 
       errorBox.style.display =
         'none';
@@ -4602,7 +4602,7 @@
       if (
         document.visibilityState === 'visible' &&
         hasilSedangTerbuka &&
-        noHp.value.trim().length === 4 &&
+        noHp.value.trim().length === 5 &&
         sudahLewatTigaPuluhDetik
       ) {
         cekData('auto-refresh');
@@ -4678,11 +4678,11 @@
       noHp.value.trim();
 
 
-    if (nomor.length !== 4) {
+    if (nomor.length !== 5) {
 
       if (!modePembaruan) {
         tampilkanError(
-          'Masukkan tepat 4 digit terakhir nomor HP orang tua.'
+          'Masukkan tepat 5 digit terakhir nomor HP orang tua.'
         );
       }
 
