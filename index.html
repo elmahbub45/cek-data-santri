@@ -16,10 +16,6 @@
 
   <title>Cek Data Santri</title>
 
-  <link rel="manifest" href="./manifest.json">
-  <link rel="icon" type="image/png" sizes="192x192" href="./icons/icon-192.png">
-  <link rel="apple-touch-icon" href="./icons/icon-192.png">
-
   <style>
 
     * {
@@ -640,7 +636,7 @@
         grid;
 
       grid-template-columns:
-        repeat(4, 1fr);
+        repeat(5, 1fr);
 
       gap:
         8px;
@@ -1365,7 +1361,7 @@
         grid;
 
       grid-template-columns:
-        repeat(4, 1fr);
+        repeat(5, 1fr);
 
       padding:
         12px;
@@ -1669,7 +1665,7 @@
 
       .stats {
         grid-template-columns:
-          repeat(4, 1fr);
+          repeat(5, 1fr);
 
         gap:
           5px;
@@ -1693,59 +1689,11 @@
       .hafalan-list {
         grid-template-columns:
           1fr;
-
-        gap:
-          9px;
-      }
-
-      .hafalan-item {
-        flex-direction:
-          row-reverse;
-
-        justify-content:
-          flex-start;
-
-        padding:
-          11px;
-
-        gap:
-          9px;
-      }
-
-      .hafalan-number {
-        flex:
-          0 0 27px;
-
-        width:
-          27px;
-
-        height:
-          27px;
-
-        font-size:
-          11px;
-      }
-
-      .hafalan-title {
-        flex:
-          1;
-
-        text-align:
-          right;
-
-        font-size:
-          17px;
-
-        line-height:
-          1.45;
-
-        overflow-wrap:
-          anywhere;
       }
 
       .monthly-data {
         grid-template-columns:
-          repeat(4, 1fr);
+          repeat(5, 1fr);
       }
 
     }
@@ -3059,6 +3007,21 @@
 
             </div>
 
+            <div class="stat">
+
+              <div
+                id="totalHariAktif"
+                class="stat-number"
+              >
+                0
+              </div>
+
+              <div class="stat-label">
+                HARI AKTIF
+              </div>
+
+            </div>
+
           </div>
 
           <div
@@ -3099,7 +3062,8 @@
             </div>
 
             <div class="attendance-award-rule">
-              Predikat berdasarkan jumlah Alpa dan ketidak hadiran
+              Predikat berdasarkan jumlah Alpa dan
+              persentase Sakit + Izin
             </div>
 
           </div>
@@ -4292,6 +4256,12 @@
 
         tambahStatBulanan(
           data,
+          item.hariAktif,
+          'Hari Aktif'
+        );
+
+        tambahStatBulanan(
+          data,
           item.hadir,
           'Hadir'
         );
@@ -4546,14 +4516,7 @@
           'hafalan-number';
 
         number.textContent =
-          String(nomor).replace(
-            /[0-9]/g,
-            function (angkaLatin) {
-              return '٠١٢٣٤٥٦٧٨٩'[
-                Number(angkaLatin)
-              ];
-            }
-          );
+          nomor;
 
 
         const title =
@@ -4785,18 +4748,6 @@
 
   }
 
-</script>
-
-<script>
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', function () {
-      navigator.serviceWorker
-        .register('./service-worker.js')
-        .catch(function (error) {
-          console.error('Service Worker gagal didaftarkan:', error);
-        });
-    });
-  }
 </script>
 
 </body>
