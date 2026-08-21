@@ -5,7 +5,7 @@
 
   <meta
     name="viewport"
-    content="width=device-width, initial-scale=1.0"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
   >
 
   <title>Cek Data Santri</title>
@@ -13,74 +13,1579 @@
   <style>
     * {
       box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
     }
 
-    html,
+    :root {
+      --primary: #166534;
+      --primary-dark: #14532d;
+      --primary-light: #dcfce7;
+
+      --blue: #2563eb;
+      --blue-light: #dbeafe;
+
+      --orange: #ea580c;
+      --orange-light: #ffedd5;
+
+      --red: #dc2626;
+      --red-light: #fee2e2;
+
+      --purple: #7c3aed;
+      --purple-light: #ede9fe;
+
+      --background: #f4f7f5;
+      --card: #ffffff;
+      --text: #17201b;
+      --muted: #6b7280;
+      --border: #e5e7eb;
+
+      --radius: 18px;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       margin: 0;
       padding: 0;
-      width: 100%;
-      min-height: 100%;
-      font-family: Arial, sans-serif;
-      background: #f5f7fa;
-      color: #222;
+      min-height: 100vh;
+      background:
+        radial-gradient(
+          circle at top left,
+          rgba(22, 101, 52, 0.08),
+          transparent 32%
+        ),
+        var(--background);
+      color: var(--text);
+      font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
     }
 
-    body {
+    button,
+    input {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    /* =========================================================
+       APP
+    ========================================================= */
+
+    .app {
+      width: 100%;
+      max-width: 620px;
+      min-height: 100vh;
+      margin: 0 auto;
+      padding-bottom: 30px;
+    }
+
+    /* =========================================================
+       HEADER
+    ========================================================= */
+
+    .header {
+      position: relative;
+      overflow: hidden;
+      padding: 30px 22px 38px;
+      color: white;
+      background:
+        linear-gradient(
+          145deg,
+          #166534 0%,
+          #15803d 55%,
+          #22c55e 100%
+        );
+      border-radius: 0 0 30px 30px;
+      box-shadow: 0 10px 30px rgba(22, 101, 52, 0.18);
+    }
+
+    .header::before {
+      content: "";
+      position: absolute;
+      width: 190px;
+      height: 190px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.08);
+      top: -90px;
+      right: -55px;
+    }
+
+    .header::after {
+      content: "";
+      position: absolute;
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.06);
+      bottom: -70px;
+      left: -35px;
+    }
+
+    .header-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      margin-bottom: 25px;
+    }
+
+    .brand-icon {
+      width: 48px;
+      height: 48px;
+      flex-shrink: 0;
       display: flex;
       align-items: center;
       justify-content: center;
-      min-height: 100vh;
-      padding: 20px;
+      border-radius: 15px;
+      background: rgba(255,255,255,0.16);
+      border: 1px solid rgba(255,255,255,0.2);
+      font-size: 23px;
     }
 
-    .container {
-      width: 100%;
-      max-width: 500px;
-      background: white;
-      border-radius: 16px;
-      padding: 30px 24px;
-      text-align: center;
-      box-shadow: 0 5px 25px rgba(0, 0, 0, 0.08);
-    }
-
-    h1 {
-      margin: 0 0 10px;
-      font-size: 26px;
-    }
-
-    p {
+    .brand-title {
       margin: 0;
-      color: #666;
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: 0.2px;
+    }
+
+    .brand-subtitle {
+      margin: 4px 0 0;
+      font-size: 12px;
+      color: rgba(255,255,255,0.78);
+    }
+
+    .hero-title {
+      margin: 0;
+      font-size: 28px;
+      line-height: 1.2;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+    }
+
+    .hero-description {
+      margin: 9px 0 0;
+      max-width: 450px;
+      color: rgba(255,255,255,0.82);
+      font-size: 14px;
       line-height: 1.6;
     }
 
-    .status {
-      margin-top: 25px;
-      padding: 14px;
-      border-radius: 10px;
-      background: #f0fdf4;
-      color: #166534;
+    /* =========================================================
+       CONTENT
+    ========================================================= */
+
+    .content {
+      padding: 0 16px;
+      margin-top: -20px;
+      position: relative;
+      z-index: 5;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid rgba(229,231,235,0.8);
+      border-radius: var(--radius);
+      box-shadow: 0 7px 25px rgba(0,0,0,0.055);
+    }
+
+    /* =========================================================
+       SEARCH CARD
+    ========================================================= */
+
+    .search-card {
+      padding: 20px;
+    }
+
+    .section-label {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .section-description {
+      margin: 0 0 16px;
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .input-wrapper {
+      position: relative;
+    }
+
+    .input-icon {
+      position: absolute;
+      left: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      font-size: 15px;
+      pointer-events: none;
+    }
+
+    .phone-input {
+      width: 100%;
+      height: 54px;
+      padding: 0 54px 0 45px;
+      border: 1.5px solid var(--border);
+      border-radius: 14px;
+      outline: none;
+      background: #fafafa;
+      color: var(--text);
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      transition: 0.2s ease;
+    }
+
+    .phone-input::placeholder {
+      color: #a1a1aa;
       font-size: 14px;
+      letter-spacing: 0;
+      font-weight: 400;
+    }
+
+    .phone-input:focus {
+      border-color: var(--primary);
+      background: white;
+      box-shadow: 0 0 0 4px rgba(22,101,52,0.08);
+    }
+
+    .clear-button {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 35px;
+      height: 35px;
+      border: 0;
+      border-radius: 10px;
+      background: #f3f4f6;
+      color: #6b7280;
+      display: none;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .clear-button.show {
+      display: flex;
+    }
+
+    .search-button {
+      width: 100%;
+      height: 52px;
+      margin-top: 12px;
+      border: 0;
+      border-radius: 14px;
+      background: var(--primary);
+      color: white;
+      font-size: 15px;
+      font-weight: 700;
+      box-shadow: 0 6px 15px rgba(22,101,52,0.2);
+      transition: 0.2s ease;
+    }
+
+    .search-button:active {
+      transform: scale(0.98);
+    }
+
+    .search-button:hover {
+      background: var(--primary-dark);
+    }
+
+    .search-button:disabled {
+      opacity: 0.7;
+      cursor: wait;
+    }
+
+    .search-note {
+      margin-top: 12px;
+      text-align: center;
+      font-size: 11px;
+      color: #9ca3af;
+    }
+
+    /* =========================================================
+       MESSAGE
+    ========================================================= */
+
+    .message {
+      display: none;
+      margin-top: 14px;
+      padding: 13px 14px;
+      border-radius: 12px;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .message.show {
+      display: block;
+    }
+
+    .message.error {
+      background: var(--red-light);
+      color: #991b1b;
+    }
+
+    .message.success {
+      background: var(--primary-light);
+      color: #166534;
+    }
+
+    .message.loading {
+      background: #f3f4f6;
+      color: #4b5563;
+    }
+
+    /* =========================================================
+       RESULT
+    ========================================================= */
+
+    .result {
+      display: none;
+      margin-top: 18px;
+    }
+
+    .result.show {
+      display: block;
+    }
+
+    /* =========================================================
+       STUDENT PROFILE
+    ========================================================= */
+
+    .profile-card {
+      padding: 20px;
+      overflow: hidden;
+    }
+
+    .profile-top {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .avatar {
+      width: 58px;
+      height: 58px;
+      flex-shrink: 0;
+      border-radius: 17px;
+      background: var(--primary-light);
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      font-weight: 800;
+    }
+
+    .profile-name {
+      margin: 0;
+      font-size: 20px;
+      line-height: 1.3;
+      font-weight: 800;
+    }
+
+    .profile-class {
+      margin: 4px 0 0;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .profile-divider {
+      height: 1px;
+      margin: 18px 0;
+      background: var(--border);
+    }
+
+    .identity-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .identity-item {
+      padding: 12px;
+      border-radius: 12px;
+      background: #f8faf9;
+    }
+
+    .identity-label {
+      margin-bottom: 5px;
+      color: var(--muted);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .identity-value {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text);
+      word-break: break-word;
+    }
+
+    /* =========================================================
+       STATISTICS
+    ========================================================= */
+
+    .section-heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin: 22px 3px 10px;
+    }
+
+    .section-heading h2 {
+      margin: 0;
+      font-size: 16px;
+      font-weight: 800;
+    }
+
+    .section-heading span {
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+
+    .stat-card {
+      padding: 16px;
+      border-radius: 16px;
+      background: white;
+      border: 1px solid var(--border);
+    }
+
+    .stat-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+
+    .stat-icon {
+      width: 35px;
+      height: 35px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 11px;
+      font-size: 15px;
+    }
+
+    .stat-card.izin .stat-icon {
+      background: var(--blue-light);
+      color: var(--blue);
+    }
+
+    .stat-card.sakit .stat-icon {
+      background: var(--orange-light);
+      color: var(--orange);
+    }
+
+    .stat-card.alpa .stat-icon {
+      background: var(--red-light);
+      color: var(--red);
+    }
+
+    .stat-card.total .stat-icon {
+      background: var(--purple-light);
+      color: var(--purple);
+    }
+
+    .stat-label {
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .stat-value {
+      margin: 0;
+      font-size: 25px;
+      font-weight: 800;
+      line-height: 1;
+    }
+
+    /* =========================================================
+       HAFALAN SUMMARY
+    ========================================================= */
+
+    .summary-card {
+      padding: 20px;
+    }
+
+    .summary-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 15px;
+    }
+
+    .summary-title {
+      margin: 0;
+      font-size: 15px;
+      font-weight: 800;
+    }
+
+    .summary-subtitle {
+      margin: 5px 0 0;
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .percentage {
+      font-size: 25px;
+      line-height: 1;
+      font-weight: 800;
+      color: var(--primary);
+    }
+
+    .progress {
+      height: 10px;
+      margin-top: 18px;
+      border-radius: 999px;
+      overflow: hidden;
+      background: #e5e7eb;
+    }
+
+    .progress-bar {
+      width: 0%;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(
+        90deg,
+        #166534,
+        #22c55e
+      );
+      transition: width 0.6s ease;
+    }
+
+    .summary-counts {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 10px;
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .summary-counts strong {
+      color: var(--text);
+    }
+
+    /* =========================================================
+       HAFALAN LIST
+    ========================================================= */
+
+    .hafalan-card {
+      padding: 20px;
+    }
+
+    .hafalan-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      direction: rtl;
+    }
+
+    .hafalan-item {
+      min-height: 48px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 10px;
+      border-radius: 12px;
+      background: #f8faf9;
+      border: 1px solid #edf1ee;
+    }
+
+    .hafalan-number {
+      width: 25px;
+      height: 25px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      background: var(--primary-light);
+      color: var(--primary);
+      font-size: 10px;
+      font-weight: 800;
+    }
+
+    .hafalan-name {
+      direction: rtl;
+      flex: 1;
+      font-size: 12px;
+      line-height: 1.5;
+      font-weight: 600;
+      text-align: right;
+    }
+
+    .empty-hafalan {
+      grid-column: 1 / -1;
+      padding: 25px 15px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 12px;
+      background: #f8faf9;
+      border-radius: 12px;
+    }
+
+    /* =========================================================
+       FOOTER
+    ========================================================= */
+
+    .footer {
+      padding: 25px 20px 10px;
+      text-align: center;
+      color: #9ca3af;
+      font-size: 10px;
+      line-height: 1.6;
+    }
+
+    /* =========================================================
+       HIDDEN
+    ========================================================= */
+
+    .hidden {
+      display: none !important;
+    }
+
+    /* =========================================================
+       LOADING
+    ========================================================= */
+
+    .spinner {
+      width: 17px;
+      height: 17px;
+      display: inline-block;
+      margin-right: 7px;
+      vertical-align: -3px;
+      border: 2px solid rgba(255,255,255,0.4);
+      border-top-color: white;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* =========================================================
+       DESKTOP
+    ========================================================= */
+
+    @media (min-width: 700px) {
+
+      body {
+        padding: 25px 0;
+      }
+
+      .app {
+        min-height: auto;
+      }
+
+      .header {
+        border-radius: 25px;
+      }
+
+      .content {
+        padding: 0 20px;
+      }
+    }
+
+    /* =========================================================
+       SMALL HP
+    ========================================================= */
+
+    @media (max-width: 360px) {
+
+      .header {
+        padding: 25px 18px 35px;
+      }
+
+      .hero-title {
+        font-size: 24px;
+      }
+
+      .content {
+        padding: 0 12px;
+      }
+
+      .search-card,
+      .profile-card,
+      .summary-card,
+      .hafalan-card {
+        padding: 16px;
+      }
+
+      .stats-grid {
+        gap: 8px;
+      }
+
+      .stat-card {
+        padding: 13px;
+      }
+
+      .stat-value {
+        font-size: 22px;
+      }
+
+      .hafalan-list {
+        gap: 6px;
+      }
+
+      .hafalan-item {
+        padding: 8px;
+      }
     }
   </style>
 </head>
 
 <body>
 
-  <main class="container">
+  <div class="app">
 
-    <h1>Cek Data Santri</h1>
+    <!-- =====================================================
+         HEADER
+    ====================================================== -->
 
-    <p>
-      Sistem pengecekan data santri
-    </p>
+    <header class="header">
 
-    <div class="status">
-      Frontend PWA berhasil dimuat.
-    </div>
+      <div class="header-content">
 
-  </main>
+        <div class="brand">
+
+          <div class="brand-icon">
+            ✓
+          </div>
+
+          <div>
+            <h1 class="brand-title">
+              CEK DATA SANTRI
+            </h1>
+
+            <p class="brand-subtitle">
+              III i Awwaliyah Putra
+            </p>
+          </div>
+
+        </div>
+
+        <h2 class="hero-title">
+          Cek Data Santri
+        </h2>
+
+        <p class="hero-description">
+          Lihat data absensi dan perkembangan hafalan
+          santri dengan mudah.
+        </p>
+
+      </div>
+
+    </header>
+
+
+    <!-- =====================================================
+         CONTENT
+    ====================================================== -->
+
+    <main class="content">
+
+
+      <!-- ===================================================
+           SEARCH
+      ==================================================== -->
+
+      <section class="card search-card">
+
+        <label
+          class="section-label"
+          for="noHp"
+        >
+          Verifikasi Data Santri
+        </label>
+
+        <p class="section-description">
+          Masukkan 4 digit terakhir nomor HP wali santri
+          untuk melihat data.
+        </p>
+
+        <div class="input-wrapper">
+
+          <div class="input-icon">
+            ☎
+          </div>
+
+          <input
+            type="tel"
+            id="noHp"
+            class="phone-input"
+            maxlength="4"
+            inputmode="numeric"
+            autocomplete="off"
+            placeholder="Masukkan 4 digit terakhir"
+          >
+
+          <button
+            type="button"
+            id="clearButton"
+            class="clear-button"
+            aria-label="Hapus"
+          >
+            ×
+          </button>
+
+        </div>
+
+        <button
+          type="button"
+          id="searchButton"
+          class="search-button"
+        >
+          Cek Data Santri
+        </button>
+
+        <div
+          id="message"
+          class="message"
+        ></div>
+
+        <div class="search-note">
+          Data hanya dapat dilihat setelah verifikasi.
+        </div>
+
+      </section>
+
+
+      <!-- ===================================================
+           RESULT
+      ==================================================== -->
+
+      <section
+        id="result"
+        class="result"
+      >
+
+
+        <!-- ================================================
+             IDENTITAS SANTRI
+        ================================================= -->
+
+        <div class="card profile-card">
+
+          <div class="profile-top">
+
+            <div
+              class="avatar"
+              id="avatar"
+            >
+              S
+            </div>
+
+            <div>
+
+              <h2
+                class="profile-name"
+                id="namaSantri"
+              >
+                Nama Santri
+              </h2>
+
+              <p
+                class="profile-class"
+                id="kelasSantri"
+              >
+                III i Awwaliyah Putra
+              </p>
+
+            </div>
+
+          </div>
+
+          <div class="profile-divider"></div>
+
+          <div class="identity-grid">
+
+            <div class="identity-item">
+
+              <div class="identity-label">
+                No. Absen
+              </div>
+
+              <div
+                class="identity-value"
+                id="nomorAbsen"
+              >
+                -
+              </div>
+
+            </div>
+
+
+            <div class="identity-item">
+
+              <div class="identity-label">
+                No. Induk
+              </div>
+
+              <div
+                class="identity-value"
+                id="nomorInduk"
+              >
+                -
+              </div>
+
+            </div>
+
+
+            <div class="identity-item">
+
+              <div class="identity-label">
+                Nama Santri
+              </div>
+
+              <div
+                class="identity-value"
+                id="namaLengkap"
+              >
+                -
+              </div>
+
+            </div>
+
+
+            <div class="identity-item">
+
+              <div class="identity-label">
+                Bin / Binti
+              </div>
+
+              <div
+                class="identity-value"
+                id="binSantri"
+              >
+                -
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- ================================================
+             STATISTIK ABSENSI
+        ================================================= -->
+
+        <div class="section-heading">
+
+          <h2>
+            Statistik Absensi
+          </h2>
+
+          <span>
+            Rekap kehadiran
+          </span>
+
+        </div>
+
+
+        <div class="stats-grid">
+
+
+          <div class="stat-card izin">
+
+            <div class="stat-head">
+
+              <div class="stat-icon">
+                ✓
+              </div>
+
+              <span class="stat-label">
+                Izin
+              </span>
+
+            </div>
+
+            <p
+              class="stat-value"
+              id="izin"
+            >
+              0
+            </p>
+
+          </div>
+
+
+          <div class="stat-card sakit">
+
+            <div class="stat-head">
+
+              <div class="stat-icon">
+                +
+              </div>
+
+              <span class="stat-label">
+                Sakit
+              </span>
+
+            </div>
+
+            <p
+              class="stat-value"
+              id="sakit"
+            >
+              0
+            </p>
+
+          </div>
+
+
+          <div class="stat-card alpa">
+
+            <div class="stat-head">
+
+              <div class="stat-icon">
+                !
+              </div>
+
+              <span class="stat-label">
+                Alpa
+              </span>
+
+            </div>
+
+            <p
+              class="stat-value"
+              id="alpa"
+            >
+              0
+            </p>
+
+          </div>
+
+
+          <div class="stat-card total">
+
+            <div class="stat-head">
+
+              <div class="stat-icon">
+                #
+              </div>
+
+              <span class="stat-label">
+                Total
+              </span>
+
+            </div>
+
+            <p
+              class="stat-value"
+              id="total"
+            >
+              0
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <!-- ================================================
+             RINGKASAN HAFALAN
+        ================================================= -->
+
+        <div class="section-heading">
+
+          <h2>
+            Perkembangan Hafalan
+          </h2>
+
+          <span>
+            Capaian santri
+          </span>
+
+        </div>
+
+
+        <div class="card summary-card">
+
+          <div class="summary-top">
+
+            <div>
+
+              <h3 class="summary-title">
+                Progress Hafalan
+              </h3>
+
+              <p class="summary-subtitle">
+                Berdasarkan data hafalan yang tersedia
+              </p>
+
+            </div>
+
+            <div
+              class="percentage"
+              id="persentase"
+            >
+              0%
+            </div>
+
+          </div>
+
+
+          <div class="progress">
+
+            <div
+              class="progress-bar"
+              id="progressBar"
+            ></div>
+
+          </div>
+
+
+          <div class="summary-counts">
+
+            <span>
+              Sudah:
+              <strong id="sudah">
+                0
+              </strong>
+            </span>
+
+            <span>
+              Belum:
+              <strong id="belum">
+                0
+              </strong>
+            </span>
+
+            <span>
+              Total:
+              <strong id="totalHafalan">
+                0
+              </strong>
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <!-- ================================================
+             DAFTAR HAFALAN
+        ================================================= -->
+
+        <div class="section-heading">
+
+          <h2>
+            Daftar Hafalan
+          </h2>
+
+          <span>
+            Materi
+          </span>
+
+        </div>
+
+
+        <div class="card hafalan-card">
+
+          <div
+            class="hafalan-list"
+            id="hafalanList"
+          >
+
+            <div class="empty-hafalan">
+              Data hafalan akan ditampilkan di sini.
+            </div>
+
+          </div>
+
+        </div>
+
+
+      </section>
+
+
+      <!-- ===================================================
+           FOOTER
+      ==================================================== -->
+
+      <footer class="footer">
+
+        Cek Data Santri<br>
+
+        <span>
+          Tahun Ajaran 2026–2027
+        </span>
+
+      </footer>
+
+    </main>
+
+  </div>
+
+
+  <script>
+
+    /* =======================================================
+       ELEMEN
+    ======================================================== */
+
+    const noHp = document.getElementById("noHp");
+    const clearButton = document.getElementById("clearButton");
+    const searchButton = document.getElementById("searchButton");
+    const message = document.getElementById("message");
+    const result = document.getElementById("result");
+
+
+    /* =======================================================
+       INPUT HANYA ANGKA
+    ======================================================== */
+
+    noHp.addEventListener("input", function () {
+
+      this.value = this.value
+        .replace(/\D/g, "")
+        .slice(0, 4);
+
+      if (this.value.length > 0) {
+        clearButton.classList.add("show");
+      } else {
+        clearButton.classList.remove("show");
+      }
+
+    });
+
+
+    /* =======================================================
+       CLEAR INPUT
+    ======================================================== */
+
+    clearButton.addEventListener("click", function () {
+
+      noHp.value = "";
+
+      clearButton.classList.remove("show");
+
+      noHp.focus();
+
+    });
+
+
+    /* =======================================================
+       ENTER UNTUK CEK
+    ======================================================== */
+
+    noHp.addEventListener("keydown", function (event) {
+
+      if (event.key === "Enter") {
+        cekTampilan();
+      }
+
+    });
+
+
+    /* =======================================================
+       TOMBOL CEK
+       
+       CATATAN:
+       Pada Tahap 7 ini belum ada koneksi API.
+       Fungsi ini hanya untuk menguji tampilan.
+    ======================================================== */
+
+    searchButton.addEventListener("click", cekTampilan);
+
+
+    function cekTampilan() {
+
+      const nomor = noHp.value.trim();
+
+      if (nomor.length !== 4) {
+
+        tampilkanPesan(
+          "Masukkan 4 digit terakhir nomor HP wali santri.",
+          "error"
+        );
+
+        noHp.focus();
+
+        return;
+      }
+
+
+      searchButton.disabled = true;
+
+      searchButton.innerHTML =
+        '<span class="spinner"></span>Memeriksa...';
+
+
+      tampilkanPesan(
+        "Tampilan siap. Koneksi ke data santri akan dilakukan pada Tahap 8.",
+        "loading"
+      );
+
+
+      /*
+       * Belum mengambil data dari API.
+       *
+       * Koneksi ke:
+       * ?api=cekSantri&noHp=XXXX
+       *
+       * akan dibuat pada Tahap 8.
+       */
+
+
+      setTimeout(function () {
+
+        searchButton.disabled = false;
+
+        searchButton.textContent =
+          "Cek Data Santri";
+
+      }, 700);
+
+    }
+
+
+    /* =======================================================
+       PESAN
+    ======================================================== */
+
+    function tampilkanPesan(teks, tipe) {
+
+      message.textContent = teks;
+
+      message.className =
+        "message show " + tipe;
+
+    }
+
+
+    /* =======================================================
+       FUNGSI UNTUK MENGISI DATA
+       
+       Fungsi ini sengaja sudah disiapkan untuk Tahap 8.
+       Nanti hasil dari API tinggal dimasukkan ke sini.
+    ======================================================== */
+
+    function tampilkanData(data) {
+
+      if (!data) {
+        return;
+      }
+
+
+      document.getElementById("namaSantri").textContent =
+        data.nama || "-";
+
+
+      document.getElementById("namaLengkap").textContent =
+        data.nama || "-";
+
+
+      document.getElementById("nomorInduk").textContent =
+        data.induk || "-";
+
+
+      document.getElementById("binSantri").textContent =
+        data.bin || "-";
+
+
+      document.getElementById("nomorAbsen").textContent =
+        data.noAbsen || "-";
+
+
+      document.getElementById("izin").textContent =
+        data.izin ?? 0;
+
+
+      document.getElementById("sakit").textContent =
+        data.sakit ?? 0;
+
+
+      document.getElementById("alpa").textContent =
+        data.alpa ?? 0;
+
+
+      document.getElementById("total").textContent =
+        data.total ?? 0;
+
+
+      document.getElementById("sudah").textContent =
+        data.sudah ?? 0;
+
+
+      document.getElementById("belum").textContent =
+        data.belum ?? 0;
+
+
+      document.getElementById("totalHafalan").textContent =
+        data.totalHafalan ?? data.total ?? 0;
+
+
+      const persen =
+        Number(data.persentase) || 0;
+
+
+      document.getElementById("persentase").textContent =
+        persen + "%";
+
+
+      document.getElementById("progressBar").style.width =
+        Math.min(100, Math.max(0, persen)) + "%";
+
+
+      /* Inisial avatar */
+
+      const nama =
+        String(data.nama || "S").trim();
+
+      document.getElementById("avatar").textContent =
+        nama.charAt(0).toUpperCase();
+
+
+      /* Daftar hafalan */
+
+      const list =
+        document.getElementById("hafalanList");
+
+      list.innerHTML = "";
+
+
+      const daftar =
+        Array.isArray(data.daftar)
+          ? data.daftar
+          : [];
+
+
+      if (daftar.length === 0) {
+
+        list.innerHTML =
+          '<div class="empty-hafalan">' +
+          'Belum ada data hafalan.' +
+          '</div>';
+
+      } else {
+
+        daftar.forEach(function (item, index) {
+
+          const div =
+            document.createElement("div");
+
+          div.className =
+            "hafalan-item";
+
+
+          div.innerHTML =
+            '<div class="hafalan-number">' +
+            (index + 1) +
+            '</div>' +
+
+            '<div class="hafalan-name">' +
+            escapeHtml(item) +
+            '</div>';
+
+
+          list.appendChild(div);
+
+        });
+
+      }
+
+
+      result.classList.add("show");
+
+      message.className =
+        "message";
+
+
+      setTimeout(function () {
+
+        result.scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+
+      }, 100);
+
+    }
+
+
+    /* =======================================================
+       AMANKAN TEXT HTML
+    ======================================================== */
+
+    function escapeHtml(text) {
+
+      const div =
+        document.createElement("div");
+
+      div.textContent =
+        text == null ? "" : String(text);
+
+      return div.innerHTML;
+
+    }
+
+
+    /* =======================================================
+       DATA CONTOH UNTUK PENGUJIAN TAMPILAN
+       
+       TIDAK AKAN DIGUNAKAN UNTUK API.
+       Sengaja tidak otomatis dijalankan.
+    ======================================================== */
+
+    /*
+    tampilkanData({
+      nama: "Nama Santri",
+      noAbsen: "01",
+      induk: "12345",
+      bin: "Bin Nama Ayah",
+      izin: 2,
+      sakit: 1,
+      alpa: 3,
+      total: 6,
+      sudah: 45,
+      belum: 53,
+      totalHafalan: 98,
+      persentase: 46,
+      daftar: [
+        "المادة الأولى",
+        "المادة الثانية",
+        "المادة الثالثة",
+        "المادة الرابعة"
+      ]
+    });
+    */
+
+  </script>
 
 </body>
 </html>
