@@ -16,10 +16,10 @@
 
   <title>TARAQQI SANTRI • III i</title>
 
-  <link rel="manifest" href="./manifest.json?v=1.7">
-  <link rel="icon" type="image/png" sizes="32x32" href="./icons/icon-32.png?v=1.7">
-  <link rel="icon" type="image/png" sizes="192x192" href="./icons/icon-192.png?v=1.7">
-  <link rel="apple-touch-icon" href="./icons/icon-192.png?v=1.7">
+  <link rel="manifest" href="./manifest.json?v=1.8">
+  <link rel="icon" type="image/png" sizes="32x32" href="./icons/icon-32.png?v=1.8">
+  <link rel="icon" type="image/png" sizes="192x192" href="./icons/icon-192.png?v=1.8">
+  <link rel="apple-touch-icon" href="./icons/icon-192.png?v=1.8">
 
   <style>
 
@@ -767,7 +767,7 @@
         50%;
 
       background:
-        #e5ffee;
+        #22a447;
 
       vertical-align:
         1px;
@@ -3140,7 +3140,7 @@
 
     .profile-status-badge::before {
       background:
-        #e5ffee;
+        #7ee2a0;
 
       box-shadow:
         0 0 0 3px rgba(126,226,160,0.12);
@@ -3877,6 +3877,67 @@
     }
 
 
+    /* ==================================================
+       PENGUMUMAN AWAL & PILIHAN SEMESTER
+       ================================================== */
+
+    .initial-announcement {
+      border-color: rgba(212,167,44,0.36);
+      background: linear-gradient(145deg, #fffef9, #fbf7e9);
+    }
+
+    .semester-switcher {
+      margin-bottom: 18px;
+      padding: 5px;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 5px;
+      border: 1px solid #dbe7de;
+      border-radius: 14px;
+      background: #eef5f0;
+    }
+
+    .semester-button {
+      min-height: 42px;
+      padding: 8px 10px;
+      border: 0;
+      border-radius: 10px;
+      background: transparent;
+      color: #52635a;
+      font-size: 12px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+
+    .semester-button.active {
+      background: #ffffff;
+      color: var(--premium-green-dark);
+      box-shadow: 0 3px 10px rgba(11,61,46,0.10);
+    }
+
+    .semester-button[disabled] {
+      opacity: 0.42;
+      cursor: not-allowed;
+    }
+
+    .semester-current {
+      margin: -8px 0 16px;
+      color: #6b7b72;
+      font-size: 11px;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    .attendance-award-semester {
+      margin-bottom: 5px;
+      color: rgba(255,255,255,0.82);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+    }
+
   </style>
 
   <!-- Google Analytics -->
@@ -3950,19 +4011,22 @@
         TARAQQI SANTRI
       </h1>
 
-      <div class="header-class">
+      <div
+        id="headerClass"
+        class="header-class"
+      >
         III i Awwaliyah Putera
       </div>
 
       <div class="academic-pill">
 
-        <span>
+        <span id="academicYearMasehi">
           2026–2027 M
         </span>
 
         <i></i>
 
-        <span>
+        <span id="academicYearHijriah">
           1447–1448 H
         </span>
 
@@ -3980,6 +4044,39 @@
        ================================================== -->
 
   <main class="content">
+
+
+    <!-- ==================================================
+         PENGUMUMAN SEBELUM LOGIN
+         ================================================== -->
+
+    <section
+      id="initialAnnouncementSection"
+      class="card initial-announcement hidden"
+    >
+
+      <div class="card-title">
+
+        <div class="card-title-icon">
+          📢
+        </div>
+
+        <span id="initialAnnouncementTitle">
+          Pengumuman
+        </span>
+
+      </div>
+
+      <div class="card-body">
+
+        <div
+          id="initialAnnouncementText"
+          class="note announcement-note"
+        ></div>
+
+      </div>
+
+    </section>
 
 
     <!-- ==================================================
@@ -4168,6 +4265,39 @@
 
         <div class="card-body">
 
+          <div
+            class="semester-switcher"
+            role="group"
+            aria-label="Pilih semester absensi"
+          >
+
+            <button
+              id="semesterButton1"
+              class="semester-button"
+              type="button"
+              data-semester="1"
+            >
+              Semester 1
+            </button>
+
+            <button
+              id="semesterButton2"
+              class="semester-button active"
+              type="button"
+              data-semester="2"
+            >
+              Semester 2
+            </button>
+
+          </div>
+
+          <div
+            id="semesterCurrentLabel"
+            class="semester-current"
+          >
+            Menampilkan rekap Semester 2
+          </div>
+
           <div class="stats">
 
             <div class="stat hadir">
@@ -4246,6 +4376,13 @@
 
             <div class="attendance-award-label">
               APRESIASI KEDISIPLINAN
+            </div>
+
+            <div
+              id="attendanceAwardSemester"
+              class="attendance-award-semester"
+            >
+              Semester 2
             </div>
 
             <div
@@ -4688,7 +4825,10 @@
             Guru Muhammad bin H.M. Anies
           </h2>
 
-          <p class="teacher-profile-role">
+          <p
+            id="teacherProfileRole"
+            class="teacher-profile-role"
+          >
             III i Awwaliyah Putera
           </p>
 
@@ -4888,6 +5028,15 @@
   const hasilSection =
     document.getElementById('hasilSection');
 
+  const initialAnnouncementSection =
+    document.getElementById('initialAnnouncementSection');
+
+  const semesterButton1 =
+    document.getElementById('semesterButton1');
+
+  const semesterButton2 =
+    document.getElementById('semesterButton2');
+
 
   let sedangMemuatData =
     false;
@@ -4900,6 +5049,20 @@
 
   let gambarPencapaianTerakhir =
     null;
+
+  let semesterAktif =
+    2;
+
+  let semesterTerpilih =
+    2;
+
+  let semesterTerakhirBerhasil =
+    2;
+
+  let semesterTersedia = {
+    semester1: true,
+    semester2: true
+  };
 
 
   /* ==================================================
@@ -4954,6 +5117,22 @@
     'click',
     function () {
       cekData('refresh');
+    }
+  );
+
+
+  semesterButton1.addEventListener(
+    'click',
+    function () {
+      pilihSemester(1);
+    }
+  );
+
+
+  semesterButton2.addEventListener(
+    'click',
+    function () {
+      pilihSemester(2);
     }
   );
 
@@ -5037,6 +5216,233 @@
   );
 
 
+  /* ==================================================
+     INFORMASI AWAL APLIKASI
+     ================================================== */
+
+  async function muatInfoAplikasi() {
+
+    try {
+
+      const response =
+        await fetch(
+          API_URL + '?api=infoAplikasi',
+          {
+            method: 'GET',
+            cache: 'no-store'
+          }
+        );
+
+      if (!response.ok) {
+        return;
+      }
+
+      const data =
+        await response.json();
+
+      terapkanPengaturanAplikasi(
+        data.pengaturan || {}
+      );
+
+      perbaruiSemesterTersedia(
+        data.semesterTersedia || {}
+      );
+
+      tampilkanPengumumanAwal(
+        data.pengumuman || {}
+      );
+
+    } catch (error) {
+
+      // Halaman login tetap dapat digunakan jika informasi
+      // awal belum berhasil dimuat.
+
+    }
+  }
+
+
+  function terapkanPengaturanAplikasi(
+    pengaturan
+  ) {
+
+    if (!pengaturan) {
+      return;
+    }
+
+    setText(
+      'academicYearMasehi',
+      pengaturan.tahunAjaran ||
+      '2026–2027 M'
+    );
+
+    setText(
+      'academicYearHijriah',
+      pengaturan.tahunHijriah ||
+      '1447–1448 H'
+    );
+
+    setText(
+      'headerClass',
+      pengaturan.kelas ||
+      'III i Awwaliyah Putera'
+    );
+
+    setText(
+      'teacherProfileName',
+      pengaturan.waliKelas ||
+      'Guru Muhammad bin H.M. Anies'
+    );
+
+    setText(
+      'teacherProfileRole',
+      pengaturan.kelas ||
+      'III i Awwaliyah Putera'
+    );
+
+    semesterAktif =
+      Number(pengaturan.semesterAktif) === 1
+        ? 1
+        : 2;
+
+    semesterTerpilih =
+      semesterAktif;
+
+    perbaruiTampilanSemester();
+  }
+
+
+  function perbaruiSemesterTersedia(
+    tersedia
+  ) {
+
+    semesterTersedia = {
+      semester1:
+        tersedia.semester1 !== false,
+      semester2:
+        tersedia.semester2 !== false
+    };
+
+    semesterButton1.disabled =
+      !semesterTersedia.semester1;
+
+    semesterButton2.disabled =
+      !semesterTersedia.semester2;
+
+    if (
+      semesterTerpilih === 2 &&
+      !semesterTersedia.semester2 &&
+      semesterTersedia.semester1
+    ) {
+      semesterTerpilih = 1;
+    }
+
+    perbaruiTampilanSemester();
+  }
+
+
+  function tampilkanPengumumanAwal(
+    pengumuman
+  ) {
+
+    const isi =
+      String(
+        pengumuman.isi || ''
+      ).trim();
+
+    if (
+      pengumuman.tampil === false ||
+      isi === ''
+    ) {
+      initialAnnouncementSection.classList.add(
+        'hidden'
+      );
+      return;
+    }
+
+    setText(
+      'initialAnnouncementTitle',
+      pengumuman.judul ||
+      'Pengumuman'
+    );
+
+    setText(
+      'initialAnnouncementText',
+      isi
+    );
+
+    if (
+      !loginSection.classList.contains('hidden')
+    ) {
+      initialAnnouncementSection.classList.remove(
+        'hidden'
+      );
+    }
+  }
+
+
+  function perbaruiTampilanSemester() {
+
+    semesterButton1.classList.toggle(
+      'active',
+      semesterTerpilih === 1
+    );
+
+    semesterButton2.classList.toggle(
+      'active',
+      semesterTerpilih === 2
+    );
+
+    setText(
+      'semesterCurrentLabel',
+      'Menampilkan rekap Semester ' +
+      semesterTerpilih +
+      (
+        semesterTerpilih === semesterAktif
+          ? ' • Semester berjalan'
+          : ''
+      )
+    );
+
+    setText(
+      'attendanceAwardSemester',
+      'Semester ' + semesterTerpilih
+    );
+  }
+
+
+  function pilihSemester(
+    semester
+  ) {
+
+    const nomorSemester =
+      Number(semester) === 1
+        ? 1
+        : 2;
+
+    if (
+      sedangMemuatData ||
+      nomorSemester === semesterTerpilih ||
+      (
+        nomorSemester === 1 &&
+        !semesterTersedia.semester1
+      ) ||
+      (
+        nomorSemester === 2 &&
+        !semesterTersedia.semester2
+      )
+    ) {
+      return;
+    }
+
+    semesterTerpilih =
+      nomorSemester;
+
+    perbaruiTampilanSemester();
+
+    cekData('semester-change');
+  }
+
+
   function kembaliKeHome() {
 
     hasilSection.classList.add(
@@ -5046,6 +5452,17 @@
     loginSection.classList.remove(
       'hidden'
     );
+
+    const pengumumanAwalIsi =
+      document.getElementById(
+        'initialAnnouncementText'
+      ).textContent.trim();
+
+    if (pengumumanAwalIsi !== '') {
+      initialAnnouncementSection.classList.remove(
+        'hidden'
+      );
+    }
 
     noHp.value =
       '';
@@ -5098,7 +5515,8 @@
 
     const modePembaruan =
       sumber === 'refresh' ||
-      sumber === 'auto-refresh';
+      sumber === 'auto-refresh' ||
+      sumber === 'semester-change';
 
     const nomor =
       noHp.value.trim();
@@ -5146,7 +5564,11 @@
       const url =
         API_URL +
         '?api=cekSantri&noHp=' +
-        encodeURIComponent(nomor);
+        encodeURIComponent(nomor) +
+        '&semester=' +
+        encodeURIComponent(
+          String(semesterTerpilih)
+        );
 
 
       const response =
@@ -5185,6 +5607,12 @@
 
 
     } catch (error) {
+
+      if (sumber === 'semester-change') {
+        semesterTerpilih =
+          semesterTerakhirBerhasil;
+        perbaruiTampilanSemester();
+      }
 
       if (modePembaruan) {
 
@@ -5512,6 +5940,28 @@
 
   function tampilkanData(data) {
 
+    if (data.pengaturan) {
+      terapkanPengaturanAplikasi(
+        data.pengaturan
+      );
+    }
+
+    if (data.semesterTersedia) {
+      perbaruiSemesterTersedia(
+        data.semesterTersedia
+      );
+    }
+
+    semesterTerpilih =
+      Number(data.semester) === 1
+        ? 1
+        : 2;
+
+    semesterTerakhirBerhasil =
+      semesterTerpilih;
+
+    perbaruiTampilanSemester();
+
     /* -----------------------------------------------
        PROFIL
        ----------------------------------------------- */
@@ -5767,6 +6217,10 @@
        ----------------------------------------------- */
 
     loginSection.classList.add(
+      'hidden'
+    );
+
+    initialAnnouncementSection.classList.add(
       'hidden'
     );
 
@@ -8072,6 +8526,11 @@
     ).trim();
 
   }
+
+
+  // Muat pengumuman dan periode aktif segera setelah
+  // elemen halaman tersedia.
+  muatInfoAplikasi();
 
 </script>
 
