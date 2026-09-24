@@ -16,10 +16,10 @@
 
   <title>TARAQQI SANTRI • III i</title>
 
-  <link rel="manifest" href="./manifest.json?v=1.8">
-  <link rel="icon" type="image/png" sizes="32x32" href="./icons/icon-32.png?v=1.8">
-  <link rel="icon" type="image/png" sizes="192x192" href="./icons/icon-192.png?v=1.8">
-  <link rel="apple-touch-icon" href="./icons/icon-192.png?v=1.8">
+  <link rel="manifest" href="./manifest.json?v=1.8.1">
+  <link rel="icon" type="image/png" sizes="32x32" href="./icons/icon-32.png?v=1.8.1">
+  <link rel="icon" type="image/png" sizes="192x192" href="./icons/icon-192.png?v=1.8.1">
+  <link rel="apple-touch-icon" href="./icons/icon-192.png?v=1.8.1">
 
   <style>
 
@@ -3881,9 +3881,95 @@
        PENGUMUMAN AWAL & PILIHAN SEMESTER
        ================================================== */
 
-    .initial-announcement {
-      border-color: rgba(212,167,44,0.36);
-      background: linear-gradient(145deg, #fffef9, #fbf7e9);
+    .announcement-card {
+      position: relative;
+      padding: 19px 20px 18px 27px;
+      border-color: rgba(212,167,44,0.42);
+      background: #fffefa;
+      box-shadow: 0 8px 22px rgba(22,64,40,0.06);
+    }
+
+    .announcement-card::before {
+      content: "";
+      position: absolute;
+      top: 20px;
+      bottom: 20px;
+      left: 14px;
+      width: 3px;
+      border-radius: 99px;
+      background: var(--premium-gold);
+    }
+
+    .announcement-meta {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-bottom: 7px;
+      color: #b28211;
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: 1.05px;
+      text-transform: uppercase;
+    }
+
+    .announcement-date:empty {
+      display: none;
+    }
+
+    .announcement-heading {
+      margin: 0;
+      color: var(--premium-green-dark);
+      font-size: 18px;
+      line-height: 1.3;
+    }
+
+    .announcement-content {
+      margin-top: 7px;
+      color: #66736c;
+      font-size: 13px;
+      line-height: 1.55;
+      white-space: pre-line;
+    }
+
+    .announcement-action {
+      width: fit-content;
+      margin-top: 12px;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      color: var(--premium-green-dark);
+      font-size: 12px;
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    .announcement-action::after {
+      content: "\2192";
+      font-size: 16px;
+      line-height: 1;
+      transition: transform 0.18s ease;
+    }
+
+    .announcement-action:hover::after,
+    .announcement-action:focus-visible::after {
+      transform: translateX(3px);
+    }
+
+    @media (max-width: 600px) {
+      .announcement-card {
+        padding: 17px 17px 16px 25px;
+      }
+
+      .announcement-card::before {
+        top: 18px;
+        bottom: 18px;
+        left: 12px;
+      }
+
+      .announcement-heading {
+        font-size: 16px;
+      }
     }
 
     .semester-switcher {
@@ -4052,29 +4138,34 @@
 
     <section
       id="initialAnnouncementSection"
-      class="card initial-announcement hidden"
+      class="card announcement-card initial-announcement hidden"
     >
 
-      <div class="card-title">
-
-        <div class="card-title-icon">
-          📢
-        </div>
-
-        <span id="initialAnnouncementTitle">
-          Pengumuman
-        </span>
-
+      <div class="announcement-meta">
+        <span>PENGUMUMAN</span>
+        <span class="announcement-separator">•</span>
+        <span
+          id="initialAnnouncementDate"
+          class="announcement-date"
+        ></span>
       </div>
 
-      <div class="card-body">
+      <h2
+        id="initialAnnouncementTitle"
+        class="announcement-heading"
+      >Pengumuman</h2>
 
-        <div
-          id="initialAnnouncementText"
-          class="note announcement-note"
-        ></div>
+      <div
+        id="initialAnnouncementText"
+        class="announcement-content"
+      ></div>
 
-      </div>
+      <a
+        id="initialAnnouncementLink"
+        class="announcement-action hidden"
+        target="_blank"
+        rel="noopener noreferrer"
+      >BUKA TAUTAN</a>
 
     </section>
 
@@ -4715,29 +4806,34 @@
 
       <section
         id="keteranganSection"
-        class="card hidden"
+        class="card announcement-card hidden"
       >
 
-        <div class="card-title">
-
-          <div class="card-title-icon">
-            📢
-          </div>
-
-          <span id="pengumumanJudul">
-            Pengumuman
-          </span>
-
+        <div class="announcement-meta">
+          <span>PENGUMUMAN</span>
+          <span class="announcement-separator">•</span>
+          <span
+            id="pengumumanTanggal"
+            class="announcement-date"
+          ></span>
         </div>
 
-        <div class="card-body">
+        <h2
+          id="pengumumanJudul"
+          class="announcement-heading"
+        >Pengumuman</h2>
 
-          <div
-            id="pengumumanIsi"
-            class="note announcement-note"
-          ></div>
+        <div
+          id="pengumumanIsi"
+          class="announcement-content"
+        ></div>
 
-        </div>
+        <a
+          id="pengumumanLink"
+          class="announcement-action hidden"
+          target="_blank"
+          rel="noopener noreferrer"
+        >BUKA TAUTAN</a>
 
       </section>
 
@@ -5359,15 +5455,14 @@
       return;
     }
 
-    setText(
-      'initialAnnouncementTitle',
-      pengumuman.judul ||
-      'Pengumuman'
-    );
-
-    setText(
-      'initialAnnouncementText',
-      isi
+    isiPengumumanKeKartu(
+      {
+        judul: 'initialAnnouncementTitle',
+        isi: 'initialAnnouncementText',
+        tanggal: 'initialAnnouncementDate',
+        link: 'initialAnnouncementLink'
+      },
+      pengumuman
     );
 
     if (
@@ -5376,6 +5471,65 @@
       initialAnnouncementSection.classList.remove(
         'hidden'
       );
+    }
+  }
+
+
+  function isiPengumumanKeKartu(
+    id,
+    pengumuman
+  ) {
+
+    setText(
+      id.judul,
+      pengumuman.judul || 'Pengumuman'
+    );
+
+    setText(
+      id.isi,
+      pengumuman.isi || ''
+    );
+
+    setText(
+      id.tanggal,
+      pengumuman.tanggal || ''
+    );
+
+    const tanggal =
+      document.getElementById(id.tanggal);
+
+    const pemisah =
+      tanggal && tanggal.parentElement
+        ? tanggal.parentElement.querySelector(
+            '.announcement-separator'
+          )
+        : null;
+
+    if (pemisah) {
+      pemisah.style.display =
+        String(pengumuman.tanggal || '').trim()
+          ? ''
+          : 'none';
+    }
+
+    const tautan =
+      document.getElementById(id.link);
+
+    const link =
+      String(pengumuman.link || '').trim();
+
+    if (
+      tautan &&
+      /^https:\/\//i.test(link)
+    ) {
+      tautan.href = link;
+      tautan.textContent =
+        pengumuman.teksTombol ||
+        'BUKA TAUTAN';
+      tautan.classList.remove('hidden');
+    } else if (tautan) {
+      tautan.removeAttribute('href');
+      tautan.classList.add('hidden');
     }
   }
 
@@ -6185,14 +6339,20 @@
       pengumuman.tampil !== false
     ) {
 
-      setText(
-        'pengumumanJudul',
-        judulPengumuman
-      );
-
-      setText(
-        'pengumumanIsi',
-        isiPengumuman
+      isiPengumumanKeKartu(
+        {
+          judul: 'pengumumanJudul',
+          isi: 'pengumumanIsi',
+          tanggal: 'pengumumanTanggal',
+          link: 'pengumumanLink'
+        },
+        {
+          judul: judulPengumuman,
+          isi: isiPengumuman,
+          tanggal: pengumuman.tanggal || '',
+          link: pengumuman.link || '',
+          teksTombol: pengumuman.teksTombol || ''
+        }
       );
 
       document.getElementById(
