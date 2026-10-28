@@ -2255,16 +2255,11 @@
        HAFALAN LIST
        ================================================== */
 
-    .hafalan-list {
-      display:
-        grid;
-
-      grid-template-columns:
-        repeat(2, 1fr);
-
-      gap:
-        9px;
-    }
+.hafalan-list {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 9px;
+}
 
     .hafalan-item {
       display:
@@ -2340,6 +2335,45 @@
       overflow-wrap:
         anywhere;
     }
+
+    .hafalan-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.hafalan-meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 6px;
+  font-size: 12px;
+}
+
+.hafalan-status {
+  display: inline-block;
+  padding: 3px 9px;
+  border-radius: 999px;
+  font-weight: 600;
+}
+
+.hafalan-status.is-sudah {
+  color: #166534;
+  background: #dcfce7;
+}
+
+.hafalan-status.is-belum {
+  color: #6b7280;
+  background: #f3f4f6;
+}
+
+.hafalan-tanggal {
+  color: #6b7280;
+}
+
+.hafalan-item.is-belum .hafalan-title {
+  color: #9ca3af;
+}
 
     .all-complete {
       padding:
@@ -6765,173 +6799,92 @@
      DAFTAR HAFALAN
      ================================================== */
 
-  function tampilkanDaftarHafalan(
-    daftar
-  ) {
+function tampilkanDaftarHafalan(daftar) {
+  const container = document.getElementById('hafalanList');
+  container.innerHTML = '';
 
-    const container =
-      document.getElementById(
-        'hafalanList'
-      );
+  if (!Array.isArray(daftar) || daftar.length === 0) {
+    const complete = document.createElement('div');
+    complete.className = 'all-complete';
+    complete.style.gridColumn = '1 / -1';
+    complete.textContent =
+      '🎉 Tidak ada Hafalan Shorof Berjalan yang tertinggal. ' +
+      'Semua Hafalan Shorof Berjalan yang tersedia sudah diselesaikan.';
+    container.appendChild(complete);
+    return;
+  }
 
+  daftar.forEach(function (item, index) {
+    let nomor = index + 1;
+    let judul = '';
+    let status = 'belum';
+    let tanggalSetoran = '';
 
-    container.innerHTML =
-      '';
-
-
-    if (
-      !Array.isArray(daftar) ||
-      daftar.length === 0
-    ) {
-
-      const complete =
-        document.createElement(
-          'div'
-        );
-
-      complete.className =
-        'all-complete';
-
-      complete.style.gridColumn =
-        '1 / -1';
-
-      complete.textContent =
-        '🎉 Tidak ada Hafalan Shorof Berjalan yang tertinggal. ' +
-        'Semua Hafalan Shorof Berjalan yang tersedia sudah diselesaikan.';
-
-
-      container.appendChild(
-        complete
-      );
-
-      return;
-
+    if (item && typeof item === 'object') {
+      nomor = item.nomor || nomor;
+      judul = item.judul || '';
+      status = String(item.status || 'belum').toLowerCase();
+      tanggalSetoran = item.tanggalSetoran || '';
+    } else {
+      judul = String(item || '');
     }
 
+    judul = String(judul).trim();
+    if (!judul) return;
 
-    daftar.forEach(
-      function (item, index) {
+    const sudah = status === 'sudah';
 
-        /*
-         * PENTING:
-         * Backend mengirim object:
-         *
-         * {
-         *   nomor: 1,
-         *   judul: "..."
-         * }
-         *
-         * Jangan menggunakan:
-         *
-         * element.textContent = item
-         *
-         * karena hasilnya [object Object].
-         */
+    const element = document.createElement('div');
+    element.className = 'hafalan-item ' +
+      (sudah ? 'is-sudah' : 'is-belum');
 
+    const number = document.createElement('div');
+    number.className = 'hafalan-number';
+    number.textContent = String(nomor).replace(/[0-9]/g, function (n) {
+      return '٠١٢٣٤٥٦٧٨٩'[Number(n)];
+    });
 
-        let nomor =
-          index + 1;
+    const content = document.createElement('div');
+    content.className = 'hafalan-content';
 
-        let judul =
-          '';
+    const title = document.createElement('div');
+    title.className = 'hafalan-title';
+    title.textContent = judul;
 
+    const meta = document.createElement('div');
+    meta.className = 'hafalan-meta';
 
-        if (
-          item &&
-          typeof item === 'object'
-        ) {
+    const badge = document.createElement('span');
+    badge.className = 'hafalan-status ' +
+      (sudah ? 'is-sudah' : 'is-belum');
+    badge.textContent = sudah ? 'Sudah' : 'Belum';
 
-          nomor =
-            item.nomor ||
-            nomor;
+    meta.appendChild(badge);
 
-          judul =
-            item.judul ||
-            '';
+    if (sudah && tanggalSetoran) {
+      const tanggal = document.createElement('span');
+      tanggal.className = 'hafalan-tanggal';
 
-        } else {
+      const nilaiTanggal = String(tanggalSetoran).trim();
+      const cocok = nilaiTanggal.match(/^(\d{4})-(\d{2})-(\d{2})$/);
 
-          /*
-           * Pengaman jika suatu saat backend
-           * mengirim string biasa.
-           */
+      tanggal.textContent = 'Setoran: ' +
+        (cocok
+          ? cocok[3] + '-' + cocok[2] + '-' + cocok[1]
+          : nilaiTanggal);
 
-          judul =
-            String(
-              item || ''
-            );
+      meta.appendChild(tanggal);
+    }
 
-        }
+    content.appendChild(title);
+    content.appendChild(meta);
 
+    element.appendChild(number);
+    element.appendChild(content);
 
-        judul =
-          String(
-            judul
-          ).trim();
-
-
-        if (judul === '') {
-          return;
-        }
-
-
-        const element =
-          document.createElement(
-            'div'
-          );
-
-        element.className =
-          'hafalan-item';
-
-
-        const number =
-          document.createElement(
-            'div'
-          );
-
-        number.className =
-          'hafalan-number';
-
-        number.textContent =
-          String(nomor).replace(
-            /[0-9]/g,
-            function (angkaLatin) {
-              return '٠١٢٣٤٥٦٧٨٩'[
-                Number(angkaLatin)
-              ];
-            }
-          );
-
-
-        const title =
-          document.createElement(
-            'div'
-          );
-
-        title.className =
-          'hafalan-title';
-
-        title.textContent =
-          judul;
-
-
-        element.appendChild(
-          number
-        );
-
-        element.appendChild(
-          title
-        );
-
-
-        container.appendChild(
-          element
-        );
-
-      }
-    );
-
-  }
+    container.appendChild(element);
+  });
+}
 
 
   /* ==================================================
