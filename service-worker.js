@@ -1,4 +1,4 @@
-const CACHE_NAME = 'cek-data-santri-v1';
+const CACHE_NAME = 'cek-data-santri-v2';
 
 const FILES_TO_CACHE = [
   './',
