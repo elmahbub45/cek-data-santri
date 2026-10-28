@@ -4608,19 +4608,12 @@
         <div class="card-body">
 
 <div class="progress-summary">
-
-            <div>
-              <div class="stat-label" style="font-size: 11px; color: #6b7280; font-weight: 700;">
-                HAFALAN BERJALAN
-              </div>
-              <div
-                id="persentaseBerjalan"
-                class="progress-percent"
-                style="font-size: 26px;"
-              >
-                0%
-              </div>
+            <div id="persentase" class="progress-percent">0%</div>
+            <div class="progress-caption">
+              <div>Target Berjalan</div>
+              <strong id="labelTargetBerjalan">Materi Ke-0</strong>
             </div>
+          </div>
 
             <div class="progress-caption" style="text-align: right;">
               <div class="stat-label" style="font-size: 11px; color: #6b7280; font-weight: 700;">
@@ -4819,14 +4812,15 @@
 
       <section class="card">
 
-        <div class="card-title">
-
-          <div class="card-title-icon">
-            📖
+<div class="card-title" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+          <div style="display: flex; align-items: center; gap: 9px;">
+            <div class="card-title-icon">📖</div>
+            Daftar Seluruh Hafalan Shorof
           </div>
-
-          Daftar Hafalan Shorof Berjalan yang Belum Diselesaikan
-
+          <div style="text-align: right; font-size: 12px; margin-top: 4px;">
+            <span style="color: #6b7280;">Progres Total:</span>
+            <strong id="persentaseKurikulum" style="color: #166534; font-size: 16px; margin-left: 4px;">0%</strong>
+          </div>
         </div>
 
         <div class="card-body">
@@ -6215,30 +6209,35 @@ function tampilkanData(data) {
       data.total
     );
 
-    // Tampilkan nilai ke masing-masing elemen UI
-    setText('persentaseBerjalan', persenBerjalan.toFixed(2) + '%');
-    setText('persentaseKurikulum', persenKurikulum.toFixed(2) + '%');
+// Tampilkan persentase Hafalan Berjalan di Kartu Atas
+    setText('persentase', persenBerjalan.toFixed(2) + '%');
+    setText('labelTargetBerjalan', 'Materi Ke-' + angka(data.targetBerjalan));
 
-    // Progress fill grafik batang menggunakan Hafalan Berjalan
+    // Progress fill grafik batang
     const progressFillElem = document.getElementById('progressFill');
     if (progressFillElem) {
-      progressFillElem.style.width = persenBerjalan + '%';
+      progressFillElem.style.width = Math.max(0, Math.min(100, persenBerjalan)) + '%';
     }
 
-    setText('sudah', angka(data.sudah));
-    setText('belum', angka(data.belum));
-    setText('totalHafalan', angka(data.total));
+    // Angka 3 kotak di bawah baris grafik disesuaikan dengan Hafalan Berjalan
+    setText('sudah', angka(data.nomorHafalanTertinggi));
+    setText('belum', angka(Math.max(0, data.targetBerjalan - data.nomorHafalanTertinggi)));
+    setText('totalHafalan', angka(data.targetBerjalan));
 
     /* -----------------------------------------------
-       LEVEL PENCAPAIAN HAFALAN
+       LEVEL PENCAPAIAN HAFALAN (FOKUS BERJALAN)
        ----------------------------------------------- */
-
     tampilkanLevelHafalan(
-      persenKurikulum,
-      data.sudah,
-      data.total,
+      persenBerjalan,
+      data.nomorHafalanTertinggi,
+      data.targetBerjalan,
       data.nama
     );
+
+    /* -----------------------------------------------
+       PERSENTASE SELURUH KURIKULUM (KARTU BAWAH)
+       ----------------------------------------------- */
+    setText('persentaseKurikulum', persenKurikulum.toFixed(2) + '%');
 
     /* -----------------------------------------------
        TARGET & DAFTAR HAFALAN
