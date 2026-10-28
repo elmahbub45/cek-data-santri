@@ -6868,10 +6868,27 @@ function tampilkanDaftarHafalan(daftar) {
       const nilaiTanggal = String(tanggalSetoran).trim();
       const cocok = nilaiTanggal.match(/^(\d{4})-(\d{2})-(\d{2})$/);
 
-      tanggal.textContent = 'Setoran: ' +
-        (cocok
-          ? cocok[3] + '-' + cocok[2] + '-' + cocok[1]
-          : nilaiTanggal);
+const tanggalObj = cocok
+  ? new Date(
+      Number(cocok[1]),
+      Number(cocok[2]) - 1,
+      Number(cocok[3])
+    )
+  : new Date(nilaiTanggal);
+
+if (!isNaN(tanggalObj.getTime())) {
+  const formatTanggal = new Intl.DateTimeFormat('id-ID', {
+    weekday: 'long',
+    day: 'numeric',
+    month: 'short',
+    year: 'numeric'
+  }).format(tanggalObj);
+
+  tanggal.textContent = 'Setoran: ' +
+    formatTanggal.replace(/\./g, '');
+} else {
+  tanggal.textContent = 'Setoran: ' + nilaiTanggal;
+}
 
       meta.appendChild(tanggal);
     }
