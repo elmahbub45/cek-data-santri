@@ -4607,27 +4607,12 @@
 
         <div class="card-body">
 
-<div class="progress-summary">
+          <div class="progress-summary">
             <div id="persentase" class="progress-percent">0%</div>
             <div class="progress-caption">
               <div>Target Berjalan</div>
               <strong id="labelTargetBerjalan">Materi Ke-0</strong>
             </div>
-          </div>
-
-            <div class="progress-caption" style="text-align: right;">
-              <div class="stat-label" style="font-size: 11px; color: #6b7280; font-weight: 700;">
-                SELURUH KURIKULUM
-              </div>
-              <div
-                id="persentaseKurikulum"
-                class="progress-percent"
-                style="font-size: 22px; color: #2f855a;"
-              >
-                0%
-              </div>
-            </div>
-
           </div>
 
           <div class="progress-bar">
@@ -4812,10 +4797,16 @@
 
       <section class="card">
 
-<div class="card-title">
-  <div>📖 Daftar Seluruh Hafalan Shorof</div>
-  <div style="font-size: 13px;">Progres: <strong id="persentaseKurikulum">0%</strong></div>
-</div>
+        <div class="card-title" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+          <div style="display: flex; align-items: center; gap: 9px;">
+            <div class="card-title-icon">📖</div>
+            Daftar Seluruh Hafalan Shorof
+          </div>
+          <div style="text-align: right; font-size: 12px;">
+            <span style="color: #6b7280;">Progres Kurikulum:</span>
+            <strong id="persentaseKurikulum" style="color: #166534; font-size: 15px; margin-left: 4px;">0%</strong>
+          </div>
+        </div>
 
         <div class="card-body">
 
@@ -5378,10 +5369,7 @@
       );
 
     } catch (error) {
-
-      // Halaman login tetap dapat digunakan jika informasi
-      // awal belum berhasil dimuat.
-
+      // Halaman login tetap aman
     }
   }
 
@@ -5695,7 +5683,6 @@
       return;
     }
 
-
     const modePembaruan =
       sumber === 'refresh' ||
       sumber === 'auto-refresh' ||
@@ -5703,7 +5690,6 @@
 
     const nomor =
       noHp.value.trim();
-
 
     if (nomor.length !== 5) {
 
@@ -5716,10 +5702,8 @@
       return;
     }
 
-
     sedangMemuatData =
       true;
-
 
     if (modePembaruan) {
 
@@ -5741,7 +5725,6 @@
     errorBox.style.display =
       'none';
 
-
     try {
 
       const url =
@@ -5753,41 +5736,31 @@
           String(semesterTerpilih)
         );
 
-
       const response =
         await fetch(url, {
           method: 'GET',
           cache: 'no-store'
         });
 
-
       if (!response.ok) {
-
         throw new Error(
           'Server tidak dapat dihubungi.'
         );
-
       }
-
 
       const data =
         await response.json();
 
-
       if (!data.ada) {
-
         throw new Error(
           stripHtml(
             data.pesan ||
             'Data santri tidak ditemukan.'
           )
         );
-
       }
 
-
       tampilkanData(data);
-
 
     } catch (error) {
 
@@ -5816,7 +5789,6 @@
 
       sedangMemuatData =
         false;
-
 
       if (modePembaruan) {
 
@@ -5861,11 +5833,9 @@
         Number(angka(totalHariAktif))
       );
 
-
     if (hariAktif <= 0) {
       return 0;
     }
-
 
     return Math.max(
       0,
@@ -5903,7 +5873,6 @@
         totalHadir,
         totalHariAktif
       );
-
 
     const daftar = [
 
@@ -5951,9 +5920,7 @@
 
     ];
 
-
     if (hariAktif <= 0) {
-
       return {
         icon: 'ℹ️',
         judul: 'DATA BELUM TERSEDIA',
@@ -5962,18 +5929,9 @@
         persen: 0,
         keterangan: ''
       };
-
     }
 
-
-    /*
-     * Alpa 30 atau lebih telah mencapai batas toleransi
-     * pondok. Aplikasi hanya memberi tanda perlunya tindak
-     * lanjut dan tidak menentukan keputusan kenaikan kelas.
-     */
-
     if (alpa >= 30) {
-
       return {
         icon: '⚠️',
         judul: 'PERLU TINDAK LANJUT',
@@ -5982,14 +5940,9 @@
         persen: persentaseKehadiran,
         keterangan: 'Batas toleransi pondok: 30 Alpa.'
       };
-
     }
 
-
-    /* Predikat dasar berdasarkan persentase kehadiran. */
-
     let levelKehadiran = 5;
-
 
     if (persentaseKehadiran >= 100) {
       levelKehadiran = 0;
@@ -6003,11 +5956,7 @@
       levelKehadiran = 4;
     }
 
-
-    /* Alpa menentukan batas predikat tertinggi. */
-
     let levelAlpa = 0;
-
 
     if (alpa >= 21) {
       levelAlpa = 5;
@@ -6021,16 +5970,13 @@
       levelAlpa = 1;
     }
 
-
     const levelFinal =
       Math.max(
         levelKehadiran,
         levelAlpa
       );
 
-
     let keterangan = '';
-
 
     if (alpa > 0) {
       keterangan =
@@ -6039,7 +5985,6 @@
         '. Batas predikat berdasarkan Alpa: ' +
         daftar[levelAlpa].judul;
     }
-
 
     return {
       ...daftar[levelFinal],
@@ -6077,7 +6022,6 @@
         'attendanceAwardAdjustment'
       );
 
-
     kartu.className =
       'attendance-award ' +
       hasil.kelas;
@@ -6102,7 +6046,6 @@
       hasil.pesan
     );
 
-
     if (hasil.keterangan) {
       setText(
         'attendanceAwardAdjustment',
@@ -6118,10 +6061,10 @@
 
 
   /* ==================================================
-     TAMPILKAN DATA
+     TAMPILKAN DATA (DIJAMIN BERSIH & RAPI)
      ================================================== */
 
-function tampilkanData(data) {
+  function tampilkanData(data) {
 
     if (data.pengaturan) {
       terapkanPengaturanAplikasi(
@@ -6182,11 +6125,11 @@ function tampilkanData(data) {
 
     tampilkanRekapBulanan(data.rincianAbsensi);
 
-/* -----------------------------------------------
-       HAFALAN (DUA PERSENTASE)
+    /* -----------------------------------------------
+       HAFALAN (DUA PERSENTASE TERPISAH)
        ----------------------------------------------- */
 
-    // 1. Persentase Hafalan Berjalan (Santri vs Target Berjalan Kelas)
+    // 1. Persentase Hafalan Berjalan (Kartu Atas)
     let persenBerjalan = parseFloat(String(data.persentaseBerjalan || data.persentaseTargetBerjalan || '').replace('%', ''));
     if (!isFinite(persenBerjalan)) {
       const tertinggi = Number(data.nomorHafalanTertinggi) || 0;
@@ -6195,7 +6138,7 @@ function tampilkanData(data) {
     }
     persenBerjalan = Math.max(0, Math.min(100, persenBerjalan));
 
-    // 2. Persentase Seluruh Kurikulum (Sudah Disetor vs Total 97 Hafalan)
+    // 2. Persentase Seluruh Kurikulum (Kartu Bawah)
     const persenKurikulum = normalisasiPersentase(
       data.persentase,
       data.progresHafalan,
@@ -6203,25 +6146,8 @@ function tampilkanData(data) {
       data.total
     );
 
-// Tampilkan persentase Hafalan Berjalan di Kartu Atas
-let persenBerjalan = parseFloat(String(data.persentaseBerjalan || data.persentaseTargetBerjalan || '').replace('%', ''));
-    if (!isFinite(persenBerjalan)) {
-      const tertinggi = Number(data.nomorHafalanTertinggi) || 0;
-      const target = Number(data.targetBerjalan) || 0;
-      persenBerjalan = target > 0 ? (tertinggi / target) * 100 : 0;
-    }
-    persenBerjalan = Math.max(0, Math.min(100, persenBerjalan));
-
-    const persenKurikulum = normalisasiPersentase(
-      data.persentase,
-      data.progresHafalan,
-      data.sudah,
-      data.total
-    );
-
-    // Update tampilan
+    // Update tampilan UI Kartu Atas
     setText('persentase', persenBerjalan.toFixed(2) + '%');
-    setText('persentaseKurikulum', persenKurikulum.toFixed(2) + '%');
     setText('labelTargetBerjalan', 'Materi Ke-' + angka(data.targetBerjalan));
 
     // Progress fill grafik batang
@@ -6235,6 +6161,9 @@ let persenBerjalan = parseFloat(String(data.persentaseBerjalan || data.persentas
     setText('belum', angka(Math.max(0, data.targetBerjalan - data.nomorHafalanTertinggi)));
     setText('totalHafalan', angka(data.targetBerjalan));
 
+    // Update tampilan UI Kartu Bawah (Progres Kurikulum)
+    setText('persentaseKurikulum', persenKurikulum.toFixed(2) + '%');
+
     /* -----------------------------------------------
        LEVEL PENCAPAIAN HAFALAN (FOKUS BERJALAN)
        ----------------------------------------------- */
@@ -6244,11 +6173,6 @@ let persenBerjalan = parseFloat(String(data.persentaseBerjalan || data.persentas
       data.targetBerjalan,
       data.nama
     );
-
-    /* -----------------------------------------------
-       PERSENTASE SELURUH KURIKULUM (KARTU BAWAH)
-       ----------------------------------------------- */
-    setText('persentaseKurikulum', persenKurikulum.toFixed(2) + '%');
 
     /* -----------------------------------------------
        TARGET & DAFTAR HAFALAN
@@ -6354,10 +6278,8 @@ let persenBerjalan = parseFloat(String(data.persentaseBerjalan || data.persentas
         'monthlyList'
       );
 
-
     container.innerHTML =
       '';
-
 
     if (
       !Array.isArray(daftar) ||
@@ -6373,14 +6295,12 @@ let persenBerjalan = parseFloat(String(data.persentaseBerjalan || data.persentas
 
     }
 
-
     daftar.forEach(
       function (item) {
 
         if (!item) {
           return;
         }
-
 
         const wrapper =
           document.createElement(
@@ -6390,7 +6310,6 @@ let persenBerjalan = parseFloat(String(data.persentaseBerjalan || data.persentas
         wrapper.className =
           'monthly-item';
 
-
         const head =
           document.createElement(
             'div'
@@ -6398,7 +6317,6 @@ let persenBerjalan = parseFloat(String(data.persentaseBerjalan || data.persentas
 
         head.className =
           'monthly-head';
-
 
         const name =
           document.createElement(
@@ -6412,7 +6330,6 @@ let persenBerjalan = parseFloat(String(data.persentaseBerjalan || data.persentas
           item.bulan ||
           '-';
 
-
         const status =
           document.createElement(
             'div'
@@ -6421,13 +6338,11 @@ let persenBerjalan = parseFloat(String(data.persentaseBerjalan || data.persentas
         status.className =
           'monthly-status';
 
-
         const statusValue =
           String(
             item.status ||
             ''
           );
-
 
         if (
           statusValue ===
@@ -6441,9 +6356,7 @@ let persenBerjalan = parseFloat(String(data.persentaseBerjalan || data.persentas
           status.textContent =
             'SUDAH DIINPUT';
 
-        }
-
-        else if (
+        } else if (
           statusValue ===
           'belum-input'
         ) {
@@ -6455,9 +6368,7 @@ let persenBerjalan = parseFloat(String(data.persentaseBerjalan || data.persentas
           status.textContent =
             'BELUM DIINPUT';
 
-        }
-
-        else {
+        } else {
 
           status.classList.add(
             'status-error'
@@ -6469,7 +6380,6 @@ let persenBerjalan = parseFloat(String(data.persentaseBerjalan || data.persentas
 
         }
 
-
         head.appendChild(
           name
         );
@@ -6478,15 +6388,9 @@ let persenBerjalan = parseFloat(String(data.persentaseBerjalan || data.persentas
           status
         );
 
-
         wrapper.appendChild(
           head
         );
-
-
-        /* --------------------------------------------
-           Jika belum diinput / kalender error
-           -------------------------------------------- */
 
         if (
           item.status !==
@@ -6516,7 +6420,6 @@ let persenBerjalan = parseFloat(String(data.persentaseBerjalan || data.persentas
 
           }
 
-
           container.appendChild(
             wrapper
           );
@@ -6525,11 +6428,6 @@ let persenBerjalan = parseFloat(String(data.persentaseBerjalan || data.persentas
 
         }
 
-
-        /* --------------------------------------------
-           DATA BULAN
-           -------------------------------------------- */
-
         const data =
           document.createElement(
             'div'
@@ -6537,7 +6435,6 @@ let persenBerjalan = parseFloat(String(data.persentaseBerjalan || data.persentas
 
         data.className =
           'monthly-data';
-
 
         tambahStatBulanan(
           data,
@@ -6563,11 +6460,9 @@ let persenBerjalan = parseFloat(String(data.persentaseBerjalan || data.persentas
           'Alpa'
         );
 
-
         wrapper.appendChild(
           data
         );
-
 
         if (
           item.tanggalMulai ||
@@ -6599,7 +6494,6 @@ let persenBerjalan = parseFloat(String(data.persentaseBerjalan || data.persentas
 
         }
 
-
         container.appendChild(
           wrapper
         );
@@ -6628,7 +6522,6 @@ let persenBerjalan = parseFloat(String(data.persentaseBerjalan || data.persentas
     box.className =
       'monthly-stat';
 
-
     const number =
       document.createElement(
         'strong'
@@ -6636,7 +6529,6 @@ let persenBerjalan = parseFloat(String(data.persentaseBerjalan || data.persentas
 
     number.textContent =
       angka(value);
-
 
     const text =
       document.createElement(
@@ -6646,7 +6538,6 @@ let persenBerjalan = parseFloat(String(data.persentaseBerjalan || data.persentas
     text.textContent =
       label;
 
-
     box.appendChild(
       number
     );
@@ -6654,7 +6545,6 @@ let persenBerjalan = parseFloat(String(data.persentaseBerjalan || data.persentas
     box.appendChild(
       text
     );
-
 
     parent.appendChild(
       box
@@ -6667,125 +6557,122 @@ let persenBerjalan = parseFloat(String(data.persentaseBerjalan || data.persentas
      DAFTAR HAFALAN
      ================================================== */
 
-function tampilkanDaftarHafalan(daftar) {
-  const container = document.getElementById('hafalanList');
-  container.innerHTML = '';
+  function tampilkanDaftarHafalan(daftar) {
+    const container = document.getElementById('hafalanList');
+    container.innerHTML = '';
 
-  if (!Array.isArray(daftar) || daftar.length === 0) {
-    const complete = document.createElement('div');
-    complete.className = 'all-complete';
-    complete.style.gridColumn = '1 / -1';
-    complete.textContent =
-      '🎉 Tidak ada Hafalan Shorof Berjalan yang tertinggal. ' +
-      'Semua Hafalan Shorof Berjalan yang tersedia sudah diselesaikan.';
-    container.appendChild(complete);
-    return;
-  }
-
-  daftar.forEach(function (item, index) {
-    let nomor = index + 1;
-    let judul = '';
-    let status = 'belum';
-    let tanggalSetoran = '';
-
-    if (item && typeof item === 'object') {
-      nomor = item.nomor || nomor;
-      judul = item.judul || '';
-      status = String(item.status || 'belum').toLowerCase();
-      tanggalSetoran = item.tanggalSetoran || '';
-    } else {
-      judul = String(item || '');
+    if (!Array.isArray(daftar) || daftar.length === 0) {
+      const complete = document.createElement('div');
+      complete.className = 'all-complete';
+      complete.style.gridColumn = '1 / -1';
+      complete.textContent =
+        '🎉 Tidak ada Hafalan Shorof Berjalan yang tertinggal. ' +
+        'Semua Hafalan Shorof Berjalan yang tersedia sudah diselesaikan.';
+      container.appendChild(complete);
+      return;
     }
 
-    judul = String(judul).trim();
-    if (!judul) return;
+    daftar.forEach(function (item, index) {
+      let nomor = index + 1;
+      let judul = '';
+      let status = 'belum';
+      let tanggalSetoran = '';
 
-    const sudah = status === 'sudah';
-
-    const element = document.createElement('div');
-    element.className = 'hafalan-item ' +
-      (sudah ? 'is-sudah' : 'is-belum');
-
-    const number = document.createElement('div');
-    number.className = 'hafalan-number';
-    number.textContent = String(nomor).replace(/[0-9]/g, function (n) {
-      return '٠١٢٣٤٥٦٧٨٩'[Number(n)];
-    });
-
-    const content = document.createElement('div');
-    content.className = 'hafalan-content';
-
-    const title = document.createElement('div');
-    title.className = 'hafalan-title';
-    title.textContent = judul;
-
-    const meta = document.createElement('div');
-    meta.className = 'hafalan-meta';
-
-    const badge = document.createElement('span');
-    badge.className = 'hafalan-status ' +
-      (sudah ? 'is-sudah' : 'is-belum');
-    badge.textContent = sudah ? 'Sudah' : 'Belum';
-
-    meta.appendChild(badge);
-
-if (sudah && tanggalSetoran) {
-      const tanggal = document.createElement('span');
-      tanggal.className = 'hafalan-tanggal';
-
-      const nilaiTanggal = String(tanggalSetoran).trim();
-      let tanggalObj = null;
-
-      // Cek format dd/mm/yyyy (misal: 19/04/2026)
-      const cocokLengkap = nilaiTanggal.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
-      
-      // Cek format ringkas dd-mm atau dd/mm (misal: 19-04)
-      const cocokRingkas = nilaiTanggal.match(/^(\d{1,2})[-/](\d{1,2})$/);
-
-      if (cocokLengkap) {
-        tanggalObj = new Date(
-          Number(cocokLengkap[3]),
-          Number(cocokLengkap[2]) - 1,
-          Number(cocokLengkap[1])
-        );
-      } else if (cocokRingkas) {
-        tanggalObj = new Date(
-          2026,
-          Number(cocokRingkas[2]) - 1,
-          Number(cocokRingkas[1])
-        );
+      if (item && typeof item === 'object') {
+        nomor = item.nomor || nomor;
+        judul = item.judul || '';
+        status = String(item.status || 'belum').toLowerCase();
+        tanggalSetoran = item.tanggalSetoran || '';
       } else {
-        const parsed = new Date(nilaiTanggal);
-        if (!isNaN(parsed.getTime())) {
-          tanggalObj = parsed;
+        judul = String(item || '');
+      }
+
+      judul = String(judul).trim();
+      if (!judul) return;
+
+      const sudah = status === 'sudah';
+
+      const element = document.createElement('div');
+      element.className = 'hafalan-item ' +
+        (sudah ? 'is-sudah' : 'is-belum');
+
+      const number = document.createElement('div');
+      number.className = 'hafalan-number';
+      number.textContent = String(nomor).replace(/[0-9]/g, function (n) {
+        return '٠١٢٣٤٥٦٧٨٩'[Number(n)];
+      });
+
+      const content = document.createElement('div');
+      content.className = 'hafalan-content';
+
+      const title = document.createElement('div');
+      title.className = 'hafalan-title';
+      title.textContent = judul;
+
+      const meta = document.createElement('div');
+      meta.className = 'hafalan-meta';
+
+      const badge = document.createElement('span');
+      badge.className = 'hafalan-status ' +
+        (sudah ? 'is-sudah' : 'is-belum');
+      badge.textContent = sudah ? 'Sudah' : 'Belum';
+
+      meta.appendChild(badge);
+
+      if (sudah && tanggalSetoran) {
+        const tanggal = document.createElement('span');
+        tanggal.className = 'hafalan-tanggal';
+
+        const nilaiTanggal = String(tanggalSetoran).trim();
+        let tanggalObj = null;
+
+        const cocokLengkap = nilaiTanggal.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
+        const cocokRingkas = nilaiTanggal.match(/^(\d{1,2})[-/](\d{1,2})$/);
+
+        if (cocokLengkap) {
+          tanggalObj = new Date(
+            Number(cocokLengkap[3]),
+            Number(cocokLengkap[2]) - 1,
+            Number(cocokLengkap[1])
+          );
+        } else if (cocokRingkas) {
+          tanggalObj = new Date(
+            2026,
+            Number(cocokRingkas[2]) - 1,
+            Number(cocokRingkas[1])
+          );
+        } else {
+          const parsed = new Date(nilaiTanggal);
+          if (!isNaN(parsed.getTime())) {
+            tanggalObj = parsed;
+          }
         }
+
+        if (tanggalObj && !isNaN(tanggalObj.getTime())) {
+          const formatTanggal = new Intl.DateTimeFormat('id-ID', {
+            weekday: 'long',
+            day: 'numeric',
+            month: 'short',
+            year: 'numeric'
+          }).format(tanggalObj);
+
+          tanggal.textContent = 'Setoran: ' + formatTanggal.replace(/\./g, '');
+        } else {
+          tanggal.textContent = 'Setoran: ' + nilaiTanggal;
+        }
+
+        meta.appendChild(tanggal);
       }
 
-      if (tanggalObj && !isNaN(tanggalObj.getTime())) {
-        const formatTanggal = new Intl.DateTimeFormat('id-ID', {
-          weekday: 'long',
-          day: 'numeric',
-          month: 'short',
-          year: 'numeric'
-        }).format(tanggalObj);
+      content.appendChild(title);
+      content.appendChild(meta);
 
-        tanggal.textContent = 'Setoran: ' + formatTanggal.replace(/\./g, '');
-      } else {
-        tanggal.textContent = 'Setoran: ' + nilaiTanggal;
-      }
+      element.appendChild(number);
+      element.appendChild(content);
 
-      meta.appendChild(tanggal);
-    }
-
-    content.appendChild(title);
-    content.appendChild(meta);
-
-    element.appendChild(number);
-    element.appendChild(content);
-
-    container.appendChild(element);
-  });
-}
+      container.appendChild(element);
+    });
+  }
 
 
   /* ==================================================
@@ -6798,7 +6685,6 @@ if (sudah && tanggalSetoran) {
 
     const nilai =
       Number(persentase) || 0;
-
 
     if (nilai >= 100) {
       return 7;
@@ -6827,7 +6713,6 @@ if (sudah && tanggalSetoran) {
     if (nilai > 0) {
       return 1;
     }
-
 
     return 0;
   }
@@ -6866,7 +6751,6 @@ if (sudah && tanggalSetoran) {
         )
       );
 
-
     setText(
       'levelTitle',
       'LEVEL ' + level
@@ -6885,7 +6769,6 @@ if (sudah && tanggalSetoran) {
       ' Hafalan Shorof Berjalan telah diselesaikan'
     );
 
-
     const lambangUtama =
       document.getElementById(
         'levelCurrentEmblem'
@@ -6896,26 +6779,19 @@ if (sudah && tanggalSetoran) {
         level
       );
 
-
     const ambangLevel =
       [0, 1, 20, 40, 60, 75, 90, 100];
 
     let pesanBerikutnya =
       '';
 
-
     if (jumlahTotal <= 0) {
-
       pesanBerikutnya =
         'Data Hafalan Shorof Berjalan belum tersedia.';
-
     } else if (level >= 7) {
-
       pesanBerikutnya =
         'Seluruh Hafalan Shorof Berjalan telah diselesaikan. Pertahankan dan terus murajaah.';
-
     } else {
-
       const levelBerikutnya =
         level + 1;
 
@@ -6936,7 +6812,6 @@ if (sudah && tanggalSetoran) {
           jumlahSudah
         );
 
-
       pesanBerikutnya =
         'Selesaikan ' +
         angka(jumlahKurang) +
@@ -6944,12 +6819,10 @@ if (sudah && tanggalSetoran) {
         levelBerikutnya;
     }
 
-
     setText(
       'levelNext',
       pesanBerikutnya
     );
-
 
     const roadmap =
       document.getElementById(
@@ -6958,7 +6831,6 @@ if (sudah && tanggalSetoran) {
 
     roadmap.innerHTML =
       '';
-
 
     for (
       let nomorLevel = 1;
@@ -6974,7 +6846,6 @@ if (sudah && tanggalSetoran) {
       node.className =
         'level-node';
 
-
       if (nomorLevel < level) {
         node.classList.add(
           'is-complete'
@@ -6985,7 +6856,6 @@ if (sudah && tanggalSetoran) {
         );
       }
 
-
       node.setAttribute(
         'aria-label',
         nomorLevel < level
@@ -6994,7 +6864,6 @@ if (sudah && tanggalSetoran) {
             ? 'Level ' + nomorLevel + ' saat ini'
             : 'Level ' + nomorLevel + ' belum dicapai'
       );
-
 
       const emblem =
         document.createElement(
@@ -7014,7 +6883,6 @@ if (sudah && tanggalSetoran) {
           nomorLevel
         );
 
-
       const label =
         document.createElement(
           'span'
@@ -7025,7 +6893,6 @@ if (sudah && tanggalSetoran) {
 
       label.textContent =
         String(nomorLevel);
-
 
       node.appendChild(
         emblem
@@ -7039,7 +6906,6 @@ if (sudah && tanggalSetoran) {
         node
       );
     }
-
 
     const bagianBagikan =
       document.getElementById(
@@ -7064,7 +6930,6 @@ if (sudah && tanggalSetoran) {
     );
 
     tutupPratinjauPencapaian();
-
 
     dataPencapaianTerakhir = {
       nama:
@@ -7115,14 +6980,12 @@ if (sudah && tanggalSetoran) {
     let hiasan =
       '';
 
-
     if (level >= 4) {
       hiasan +=
         '<circle cx="60" cy="60" r="45" fill="none" ' +
         'stroke="currentColor" stroke-width="1.5" opacity="0.48" ' +
         'stroke-dasharray="3 5"/>';
     }
-
 
     if (level >= 6) {
       hiasan +=
@@ -7132,13 +6995,11 @@ if (sudah && tanggalSetoran) {
         'stroke-linecap="round" opacity="0.72"/>';
     }
 
-
     if (level >= 7) {
       hiasan +=
         '<path d="M43 20 L51 29 L60 17 L69 29 L77 20 ' +
         'L74 36 L46 36 Z" fill="currentColor" opacity="0.9"/>';
     }
-
 
     return (
       '<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">' +
@@ -7172,7 +7033,6 @@ if (sudah && tanggalSetoran) {
     const titik =
       [];
 
-
     for (
       let indeks = 0;
       indeks < jumlahSudut * 2;
@@ -7199,7 +7059,6 @@ if (sudah && tanggalSetoran) {
         Math.sin(sudut) *
         radius;
 
-
       titik.push(
         (indeks === 0 ? 'M' : 'L') +
         x.toFixed(2) +
@@ -7207,7 +7066,6 @@ if (sudah && tanggalSetoran) {
         y.toFixed(2)
       );
     }
-
 
     return titik.join(' ') + ' Z';
   }
@@ -7226,7 +7084,6 @@ if (sudah && tanggalSetoran) {
       return;
     }
 
-
     btnShareAchievement.disabled =
       true;
 
@@ -7237,7 +7094,6 @@ if (sudah && tanggalSetoran) {
       'shareFeedback',
       ''
     );
-
 
     try {
 
@@ -7257,7 +7113,6 @@ if (sudah && tanggalSetoran) {
         await blobKeDataUrl(
           blob
         );
-
 
       gambarPencapaianTerakhir = {
         blob:
@@ -7311,7 +7166,6 @@ if (sudah && tanggalSetoran) {
       'modal-open'
     );
 
-
     setTimeout(
       function () {
         btnSharePrepared.focus();
@@ -7347,10 +7201,8 @@ if (sudah && tanggalSetoran) {
       return;
     }
 
-
     const jembatanAndroid =
       window.CekDataSantriAndroid;
-
 
     if (
       jembatanAndroid &&
@@ -7363,7 +7215,6 @@ if (sudah && tanggalSetoran) {
           gambarPencapaianTerakhir.namaFile
         );
 
-
       setText(
         'achievementPreviewFeedback',
         hasilNative === 'OK'
@@ -7374,10 +7225,8 @@ if (sudah && tanggalSetoran) {
       return;
     }
 
-
     let file =
       null;
-
 
     if (
       typeof File === 'function'
@@ -7395,7 +7244,6 @@ if (sudah && tanggalSetoran) {
         );
     }
 
-
     const dapatBerbagiFile =
       file &&
       typeof navigator.share === 'function' &&
@@ -7403,7 +7251,6 @@ if (sudah && tanggalSetoran) {
       navigator.canShare({
         files: [file]
       });
-
 
     if (!dapatBerbagiFile) {
 
@@ -7414,7 +7261,6 @@ if (sudah && tanggalSetoran) {
 
       return;
     }
-
 
     try {
 
@@ -7462,10 +7308,8 @@ if (sudah && tanggalSetoran) {
       return;
     }
 
-
     const jembatanAndroid =
       window.CekDataSantriAndroid;
-
 
     if (
       jembatanAndroid &&
@@ -7478,10 +7322,8 @@ if (sudah && tanggalSetoran) {
           gambarPencapaianTerakhir.namaFile
         );
 
-
       let pesanNative =
         'Gambar belum berhasil disimpan. Silakan coba lagi.';
-
 
       if (hasilNative === 'OK') {
         pesanNative =
@@ -7491,7 +7333,6 @@ if (sudah && tanggalSetoran) {
           'Berikan izin penyimpanan untuk menyimpan gambar.';
       }
 
-
       setText(
         'achievementPreviewFeedback',
         pesanNative
@@ -7499,7 +7340,6 @@ if (sudah && tanggalSetoran) {
 
       return;
     }
-
 
     const tautan =
       document.createElement(
@@ -7520,7 +7360,6 @@ if (sudah && tanggalSetoran) {
 
     tautan.remove();
 
-
     setText(
       'achievementPreviewFeedback',
       'Perintah simpan telah dikirim. Jika belum tersimpan, tekan lama gambar lalu pilih simpan.'
@@ -7538,7 +7377,6 @@ if (sudah && tanggalSetoran) {
         const pembaca =
           new FileReader();
 
-
         pembaca.onload =
           function () {
             resolve(
@@ -7554,7 +7392,6 @@ if (sudah && tanggalSetoran) {
               )
             );
           };
-
 
         pembaca.readAsDataURL(
           blob
@@ -7582,10 +7419,8 @@ if (sudah && tanggalSetoran) {
         canvas.height =
           1920;
 
-
         const context =
           canvas.getContext('2d');
-
 
         if (!context) {
           reject(
@@ -7596,13 +7431,11 @@ if (sudah && tanggalSetoran) {
           return;
         }
 
-
         gambarLatarKartu(
           context,
           canvas.width,
           canvas.height
         );
-
 
         context.textAlign =
           'center';
@@ -7622,7 +7455,6 @@ if (sudah && tanggalSetoran) {
           180
         );
 
-
         context.letterSpacing =
           '0px';
 
@@ -7638,7 +7470,6 @@ if (sudah && tanggalSetoran) {
           250
         );
 
-
         context.fillStyle =
           '#ffffff';
 
@@ -7650,7 +7481,6 @@ if (sudah && tanggalSetoran) {
           540,
           315
         );
-
 
         context.fillStyle =
           'rgba(255,255,255,0.72)';
@@ -7664,7 +7494,6 @@ if (sudah && tanggalSetoran) {
           365
         );
 
-
         gambarLambangCanvas(
           context,
           540,
@@ -7672,7 +7501,6 @@ if (sudah && tanggalSetoran) {
           230,
           data.level
         );
-
 
         context.fillStyle =
           '#f4d47a';
@@ -7685,7 +7513,6 @@ if (sudah && tanggalSetoran) {
           540,
           925
         );
-
 
         context.fillStyle =
           '#ffffff';
@@ -7704,7 +7531,6 @@ if (sudah && tanggalSetoran) {
             2
           );
 
-
         context.fillStyle =
           '#f4d47a';
 
@@ -7716,7 +7542,6 @@ if (sudah && tanggalSetoran) {
           540,
           posisiSetelahNama + 125
         );
-
 
         context.fillStyle =
           'rgba(255,255,255,0.80)';
@@ -7733,13 +7558,11 @@ if (sudah && tanggalSetoran) {
           posisiSetelahNama + 190
         );
 
-
         gambarGarisOrnamen(
           context,
           540,
           posisiSetelahNama + 260
         );
-
 
         context.fillStyle =
           '#f7f3df';
@@ -7759,7 +7582,6 @@ if (sudah && tanggalSetoran) {
           4
         );
 
-
         context.fillStyle =
           'rgba(255,255,255,0.65)';
 
@@ -7772,7 +7594,6 @@ if (sudah && tanggalSetoran) {
           1768
         );
 
-
         context.fillStyle =
           'rgba(244,212,122,0.82)';
 
@@ -7784,7 +7605,6 @@ if (sudah && tanggalSetoran) {
           540,
           1812
         );
-
 
         canvas.toBlob(
           function (blob) {
@@ -7846,7 +7666,6 @@ if (sudah && tanggalSetoran) {
       tinggi
     );
 
-
     const cahaya =
       context.createRadialGradient(
         540,
@@ -7877,7 +7696,6 @@ if (sudah && tanggalSetoran) {
       tinggi
     );
 
-
     context.strokeStyle =
       'rgba(229,195,94,0.76)';
 
@@ -7904,7 +7722,6 @@ if (sudah && tanggalSetoran) {
       tinggi - 132
     );
 
-
     context.save();
 
     context.translate(
@@ -7922,7 +7739,6 @@ if (sudah && tanggalSetoran) {
     context.lineWidth =
       2;
 
-
     for (
       let ukuran = 180;
       ukuran <= 780;
@@ -7935,7 +7751,6 @@ if (sudah && tanggalSetoran) {
         ukuran
       );
     }
-
 
     context.restore();
   }
@@ -7956,7 +7771,6 @@ if (sudah && tanggalSetoran) {
       tengahY
     );
 
-
     context.shadowColor =
       'rgba(0,0,0,0.28)';
 
@@ -7965,7 +7779,6 @@ if (sudah && tanggalSetoran) {
 
     context.shadowOffsetY =
       18;
-
 
     const gradasiEmas =
       context.createLinearGradient(
@@ -7990,7 +7803,6 @@ if (sudah && tanggalSetoran) {
       '#8e6511'
     );
 
-
     context.beginPath();
 
     context.arc(
@@ -8013,7 +7825,6 @@ if (sudah && tanggalSetoran) {
       16;
 
     context.stroke();
-
 
     context.shadowColor =
       'transparent';
@@ -8041,7 +7852,6 @@ if (sudah && tanggalSetoran) {
 
     context.stroke();
 
-
     const jumlahSudut =
       [4, 4, 5, 7, 8, 9, 10, 12][level];
 
@@ -8054,7 +7864,6 @@ if (sudah && tanggalSetoran) {
       jumlahSudut,
       gradasiEmas
     );
-
 
     context.beginPath();
 
@@ -8070,7 +7879,6 @@ if (sudah && tanggalSetoran) {
       gradasiEmas;
 
     context.fill();
-
 
     context.fillStyle =
       '#0a3825';
@@ -8090,7 +7898,6 @@ if (sudah && tanggalSetoran) {
       5
     );
 
-
     context.restore();
   }
 
@@ -8106,7 +7913,6 @@ if (sudah && tanggalSetoran) {
   ) {
 
     context.beginPath();
-
 
     for (
       let indeks = 0;
@@ -8134,14 +7940,12 @@ if (sudah && tanggalSetoran) {
         Math.sin(sudut) *
         radius;
 
-
       if (indeks === 0) {
         context.moveTo(x, y);
       } else {
         context.lineTo(x, y);
       }
     }
-
 
     context.closePath();
 
@@ -8196,7 +8000,6 @@ if (sudah && tanggalSetoran) {
 
     context.stroke();
 
-
     context.save();
 
     context.translate(
@@ -8241,7 +8044,6 @@ if (sudah && tanggalSetoran) {
     let barisSekarang =
       '';
 
-
     kata.forEach(
       function (item) {
 
@@ -8249,7 +8051,6 @@ if (sudah && tanggalSetoran) {
           barisSekarang
             ? barisSekarang + ' ' + item
             : item;
-
 
         if (
           context.measureText(
@@ -8273,20 +8074,17 @@ if (sudah && tanggalSetoran) {
       }
     );
 
-
     if (barisSekarang) {
       baris.push(
         barisSekarang
       );
     }
 
-
     const barisTerpakai =
       baris.slice(
         0,
         jumlahBarisMaksimal
       );
-
 
     barisTerpakai.forEach(
       function (isiBaris, indeks) {
@@ -8298,7 +8096,6 @@ if (sudah && tanggalSetoran) {
         );
       }
     );
-
 
     return mulaiY +
       Math.max(
@@ -8320,7 +8117,6 @@ if (sudah && tanggalSetoran) {
       return 'Hampir tuntas. Teruskan langkah dengan semangat, ketekunan, dan istiqamah.';
     }
 
-
     return 'Pencapaian yang baik tumbuh dari ketekunan yang terus dijaga.';
   }
 
@@ -8338,7 +8134,6 @@ if (sudah && tanggalSetoran) {
         .replace(/^-+|-+$/g, '')
         .slice(0, 45);
 
-
     return hasil || 'santri';
   }
 
@@ -8354,15 +8149,6 @@ if (sudah && tanggalSetoran) {
     total
   ) {
 
-    /*
-     * Prioritas:
-     *
-     * 1. persentase dari backend
-     * 2. progresHafalan dari backend
-     * 3. hitung dari sudah / total
-     */
-
-
     let angkaPersen =
       parseFloat(
         String(
@@ -8371,7 +8157,6 @@ if (sudah && tanggalSetoran) {
         .replace('%', '')
         .replace(',', '.')
       );
-
 
     if (
       !isFinite(angkaPersen)
@@ -8387,7 +8172,6 @@ if (sudah && tanggalSetoran) {
 
     }
 
-
     if (
       !isFinite(angkaPersen)
     ) {
@@ -8398,7 +8182,6 @@ if (sudah && tanggalSetoran) {
       const t =
         Number(total) || 0;
 
-
       angkaPersen =
         t > 0
           ? (s / t) * 100
@@ -8406,25 +8189,17 @@ if (sudah && tanggalSetoran) {
 
     }
 
-
     if (
       angkaPersen < 0
     ) {
-
-      angkaPersen =
-        0;
-
+      angkaPersen = 0;
     }
 
     if (
       angkaPersen > 100
     ) {
-
-      angkaPersen =
-        100;
-
+      angkaPersen = 100;
     }
-
 
     return angkaPersen;
 
@@ -8444,24 +8219,17 @@ if (sudah && tanggalSetoran) {
       value === undefined ||
       value === ''
     ) {
-
       return '0';
-
     }
-
 
     const n =
       Number(value);
 
-
     if (
       !isFinite(n)
     ) {
-
       return '0';
-
     }
-
 
     return String(
       n
@@ -8484,14 +8252,11 @@ if (sudah && tanggalSetoran) {
         id
       );
 
-
     if (
       element
     ) {
-
       element.textContent =
         value;
-
     }
 
   }
@@ -8542,8 +8307,6 @@ if (sudah && tanggalSetoran) {
   }
 
 
-  // Muat pengumuman dan periode aktif segera setelah
-  // elemen halaman tersedia.
   muatInfoAplikasi();
 
 </script>
