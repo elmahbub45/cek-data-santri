@@ -4812,16 +4812,10 @@
 
       <section class="card">
 
-<div class="card-title" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
-          <div style="display: flex; align-items: center; gap: 9px;">
-            <div class="card-title-icon">📖</div>
-            Daftar Seluruh Hafalan Shorof
-          </div>
-          <div style="text-align: right; font-size: 12px; margin-top: 4px;">
-            <span style="color: #6b7280;">Progres Total:</span>
-            <strong id="persentaseKurikulum" style="color: #166534; font-size: 16px; margin-left: 4px;">0%</strong>
-          </div>
-        </div>
+<div class="card-title">
+  <div>📖 Daftar Seluruh Hafalan Shorof</div>
+  <div style="font-size: 13px;">Progres: <strong id="persentaseKurikulum">0%</strong></div>
+</div>
 
         <div class="card-body">
 
@@ -6210,7 +6204,24 @@ function tampilkanData(data) {
     );
 
 // Tampilkan persentase Hafalan Berjalan di Kartu Atas
+let persenBerjalan = parseFloat(String(data.persentaseBerjalan || data.persentaseTargetBerjalan || '').replace('%', ''));
+    if (!isFinite(persenBerjalan)) {
+      const tertinggi = Number(data.nomorHafalanTertinggi) || 0;
+      const target = Number(data.targetBerjalan) || 0;
+      persenBerjalan = target > 0 ? (tertinggi / target) * 100 : 0;
+    }
+    persenBerjalan = Math.max(0, Math.min(100, persenBerjalan));
+
+    const persenKurikulum = normalisasiPersentase(
+      data.persentase,
+      data.progresHafalan,
+      data.sudah,
+      data.total
+    );
+
+    // Update tampilan
     setText('persentase', persenBerjalan.toFixed(2) + '%');
+    setText('persentaseKurikulum', persenKurikulum.toFixed(2) + '%');
     setText('labelTargetBerjalan', 'Materi Ke-' + angka(data.targetBerjalan));
 
     // Progress fill grafik batang
