@@ -4607,25 +4607,32 @@
 
         <div class="card-body">
 
-          <div class="progress-summary">
+<div class="progress-summary">
 
-            <div
-              id="persentase"
-              class="progress-percent"
-            >
-              0%
+            <div>
+              <div class="stat-label" style="font-size: 11px; color: #6b7280; font-weight: 700;">
+                HAFALAN BERJALAN
+              </div>
+              <div
+                id="persentaseBerjalan"
+                class="progress-percent"
+                style="font-size: 26px;"
+              >
+                0%
+              </div>
             </div>
 
-            <div class="progress-caption">
-
-              <div>
-                Target Akhir
+            <div class="progress-caption" style="text-align: right;">
+              <div class="stat-label" style="font-size: 11px; color: #6b7280; font-weight: 700;">
+                SELURUH KURIKULUM
               </div>
-
-              <strong>
-                100%
-              </strong>
-
+              <div
+                id="persentaseKurikulum"
+                class="progress-percent"
+                style="font-size: 22px; color: #2f855a;"
+              >
+                0%
+              </div>
             </div>
 
           </div>
@@ -6262,36 +6269,39 @@
        HAFALAN
        ----------------------------------------------- */
 
-    const persentase =
-      normalisasiPersentase(
-        data.persentase,
-        data.progresHafalan,
-        data.sudah,
-        data.total
-      );
+/* -----------------------------------------------
+       PERSENTASE HAFALAN BERJALAN & KURIKULUM
+       ----------------------------------------------- */
 
-
-    setText(
-      'persentase',
-      persentase.toFixed(2) + '%'
+    const persenBerjalan = normalisasiPersentase(
+      data.persentaseTargetBerjalan,
+      data.persentaseTargetBerjalan,
+      data.nomorHafalanTertinggi,
+      data.targetBerjalan
     );
 
+    const persenKurikulum = normalisasiPersentase(
+      data.persentase,
+      data.progresHafalan,
+      data.sudah,
+      data.total
+    );
 
-    const progress =
-      Math.max(
-        0,
-        Math.min(
-          100,
-          persentase
-        )
-      );
+    setText(
+      'persentaseBerjalan',
+      persenBerjalan.toFixed(2) + '%'
+    );
 
+    setText(
+      'persentaseKurikulum',
+      persenKurikulum.toFixed(2) + '%'
+    );
 
-    document.getElementById(
-      'progressFill'
-    ).style.width =
+    // Progress bar mengikuti progres Hafalan Berjalan
+    const progress = Math.max(0, Math.min(100, persenBerjalan));
+
+    document.getElementById('progressFill').style.width =
       progress + '%';
-
 
     setText(
       'sudah',
