@@ -6133,7 +6133,7 @@
      TAMPILKAN DATA
      ================================================== */
 
-  function tampilkanData(data) {
+function tampilkanData(data) {
 
     if (data.pengaturan) {
       terapkanPengaturanAplikasi(
@@ -6161,91 +6161,28 @@
        PROFIL
        ----------------------------------------------- */
 
-    setText(
-      'nama',
-      data.nama || '-'
-    );
+    setText('nama', data.nama || '-');
+    setText('induk', data.induk || '-');
+    setText('bin', data.bin || '-');
+    setText('absen', data.absen || '-');
+    setText('statusSantri', data.statusSantri || 'Santri Aktif');
+    setText('tanggalMasuk', data.tanggalMasuk || '-');
 
-    setText(
-      'induk',
-      data.induk || '-'
-    );
-
-    setText(
-      'bin',
-      data.bin || '-'
-    );
-
-    setText(
-      'absen',
-      data.absen || '-'
-    );
-
-    setText(
-      'statusSantri',
-      data.statusSantri ||
-      'Santri Aktif'
-    );
-
-
-    /* -----------------------------------------------
-       INFORMASI SANTRI
-       ----------------------------------------------- */
-
-    setText(
-      'tanggalMasuk',
-      data.tanggalMasuk || '-'
-    );
-
-
-    let lama =
-      '-';
-
-    if (
-      data.lamaSantri &&
-      data.lamaSantri.tersedia
-    ) {
-
-      lama =
-        data.lamaSantri.teks ||
-        '-';
-
+    let lama = '-';
+    if (data.lamaSantri && data.lamaSantri.tersedia) {
+      lama = data.lamaSantri.teks || '-';
     }
-
-    setText(
-      'lamaSantri',
-      lama
-    );
-
+    setText('lamaSantri', lama);
 
     /* -----------------------------------------------
        STATISTIK ABSENSI
        ----------------------------------------------- */
 
-    setText(
-      'totalHadir',
-      angka(data.totalHadir)
-    );
-
-    setText(
-      'totalSakit',
-      angka(data.totalSakit)
-    );
-
-    setText(
-      'totalIzin',
-      angka(data.totalIzin)
-    );
-
-    setText(
-      'totalAlpa',
-      angka(data.totalAlpa)
-    );
-
-    setText(
-      'totalHariAktif',
-      angka(data.totalHariAktif)
-    );
+    setText('totalHadir', angka(data.totalHadir));
+    setText('totalSakit', angka(data.totalSakit));
+    setText('totalIzin', angka(data.totalIzin));
+    setText('totalAlpa', angka(data.totalAlpa));
+    setText('totalHariAktif', angka(data.totalHariAktif));
 
     tampilkanApresiasiAbsensi(
       data.totalAlpa,
@@ -6255,22 +6192,10 @@
       data.totalIzin
     );
 
+    tampilkanRekapBulanan(data.rincianAbsensi);
 
     /* -----------------------------------------------
-       REKAP BULANAN
-       ----------------------------------------------- */
-
-    tampilkanRekapBulanan(
-      data.rincianAbsensi
-    );
-
-
-    /* -----------------------------------------------
-       HAFALAN
-       ----------------------------------------------- */
-
-/* -----------------------------------------------
-       PERSENTASE HAFALAN BERJALAN & KURIKULUM
+       HAFALAN (DUA PERSENTASE)
        ----------------------------------------------- */
 
     const persenBerjalan = normalisasiPersentase(
@@ -6287,102 +6212,49 @@
       data.total
     );
 
-    setText(
-      'persentaseBerjalan',
-      persenBerjalan.toFixed(2) + '%'
-    );
+    // Update elemen persentase jika ada di UI
+    setText('persentaseBerjalan', persenBerjalan.toFixed(2) + '%');
+    setText('persentaseKurikulum', persenKurikulum.toFixed(2) + '%');
+    setText('persentase', persenKurikulum.toFixed(2) + '%');
 
-    setText(
-      'persentaseKurikulum',
-      persenKurikulum.toFixed(2) + '%'
-    );
+    const progressFillElem = document.getElementById('progressFill');
+    if (progressFillElem) {
+      progressFillElem.style.width = Math.max(0, Math.min(100, persenBerjalan)) + '%';
+    }
 
-    // Progress bar mengikuti progres Hafalan Berjalan
-    const progress = Math.max(0, Math.min(100, persenBerjalan));
-
-    document.getElementById('progressFill').style.width =
-      progress + '%';
-
-    setText(
-      'sudah',
-      angka(data.sudah)
-    );
-
-    setText(
-      'belum',
-      angka(data.belum)
-    );
-
-    setText(
-      'totalHafalan',
-      angka(data.total)
-    );
-
+    setText('sudah', angka(data.sudah));
+    setText('belum', angka(data.belum));
+    setText('totalHafalan', angka(data.total));
 
     /* -----------------------------------------------
        LEVEL PENCAPAIAN HAFALAN
        ----------------------------------------------- */
 
     tampilkanLevelHafalan(
-      persentase,
+      persenKurikulum,
       data.sudah,
       data.total,
       data.nama
     );
 
-
     /* -----------------------------------------------
-       TARGET
+       TARGET & DAFTAR HAFALAN
        ----------------------------------------------- */
 
-    setText(
-      'targetProgres',
-      angka(data.targetProgres) + '%'
-    );
+    setText('targetProgres', angka(data.targetProgres) + '%');
+    setText('targetLabel', data.targetProgresLabel || '-');
 
-    setText(
-      'targetLabel',
-      data.targetProgresLabel ||
-      '-'
-    );
-
+    tampilkanDaftarHafalan(data.daftar);
 
     /* -----------------------------------------------
-       DAFTAR HAFALAN
+       KETERANGAN & PENGUMUMAN
        ----------------------------------------------- */
 
-    tampilkanDaftarHafalan(
-      data.daftar
-    );
+    const pengumuman = data.pengumuman || {};
+    const isiPengumuman = String(pengumuman.isi || data.keteranganAbsensi || '').trim();
+    const judulPengumuman = String(pengumuman.judul || 'Pengumuman').trim();
 
-
-    /* -----------------------------------------------
-       KETERANGAN
-       ----------------------------------------------- */
-
-    const pengumuman =
-      data.pengumuman ||
-      {};
-
-    const isiPengumuman =
-      String(
-        pengumuman.isi ||
-        data.keteranganAbsensi ||
-        ''
-      ).trim();
-
-    const judulPengumuman =
-      String(
-        pengumuman.judul ||
-        'Pengumuman'
-      ).trim();
-
-
-    if (
-      isiPengumuman !== '' &&
-      pengumuman.tampil !== false
-    ) {
-
+    if (isiPengumuman !== '' && pengumuman.tampil !== false) {
       isiPengumumanKeKartu(
         {
           judul: 'pengumumanJudul',
@@ -6399,51 +6271,25 @@
         }
       );
 
-      document.getElementById(
-        'keteranganSection'
-      ).classList.remove(
-        'hidden'
-      );
-
+      document.getElementById('keteranganSection').classList.remove('hidden');
     } else {
-
-      document.getElementById(
-        'keteranganSection'
-      ).classList.add(
-        'hidden'
-      );
-
+      document.getElementById('keteranganSection').classList.add('hidden');
     }
-
 
     /* -----------------------------------------------
        TAMPILKAN HASIL
        ----------------------------------------------- */
 
-    loginSection.classList.add(
-      'hidden'
-    );
+    loginSection.classList.add('hidden');
+    initialAnnouncementSection.classList.add('hidden');
+    hasilSection.classList.remove('hidden');
 
-    initialAnnouncementSection.classList.add(
-      'hidden'
-    );
-
-    hasilSection.classList.remove(
-      'hidden'
-    );
-
-
-    waktuPembaruanTerakhir =
-      Date.now();
+    waktuPembaruanTerakhir = Date.now();
 
     setText(
       'lastUpdated',
       'Data terakhir diperbarui: ' +
-      formatWaktuPembaruan(
-        new Date(
-          waktuPembaruanTerakhir
-        )
-      )
+      formatWaktuPembaruan(new Date(waktuPembaruanTerakhir))
     );
 
     window.scrollTo({
@@ -6452,7 +6298,6 @@
     });
 
   }
-
 
   function formatWaktuPembaruan(tanggal) {
 
