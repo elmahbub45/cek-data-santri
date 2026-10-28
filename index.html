@@ -6194,17 +6194,20 @@ function tampilkanData(data) {
 
     tampilkanRekapBulanan(data.rincianAbsensi);
 
-    /* -----------------------------------------------
+/* -----------------------------------------------
        HAFALAN (DUA PERSENTASE)
        ----------------------------------------------- */
 
-    const persenBerjalan = normalisasiPersentase(
-      data.persentaseTargetBerjalan,
-      data.persentaseTargetBerjalan,
-      data.nomorHafalanTertinggi,
-      data.targetBerjalan
-    );
+    // 1. Persentase Hafalan Berjalan (Santri vs Target Berjalan Kelas)
+    let persenBerjalan = parseFloat(String(data.persentaseBerjalan || data.persentaseTargetBerjalan || '').replace('%', ''));
+    if (!isFinite(persenBerjalan)) {
+      const tertinggi = Number(data.nomorHafalanTertinggi) || 0;
+      const target = Number(data.targetBerjalan) || 0;
+      persenBerjalan = target > 0 ? (tertinggi / target) * 100 : 0;
+    }
+    persenBerjalan = Math.max(0, Math.min(100, persenBerjalan));
 
+    // 2. Persentase Seluruh Kurikulum (Sudah Disetor vs Total 97 Hafalan)
     const persenKurikulum = normalisasiPersentase(
       data.persentase,
       data.progresHafalan,
@@ -6212,14 +6215,14 @@ function tampilkanData(data) {
       data.total
     );
 
-    // Update elemen persentase jika ada di UI
+    // Tampilkan nilai ke masing-masing elemen UI
     setText('persentaseBerjalan', persenBerjalan.toFixed(2) + '%');
     setText('persentaseKurikulum', persenKurikulum.toFixed(2) + '%');
-    setText('persentase', persenKurikulum.toFixed(2) + '%');
 
+    // Progress fill grafik batang menggunakan Hafalan Berjalan
     const progressFillElem = document.getElementById('progressFill');
     if (progressFillElem) {
-      progressFillElem.style.width = Math.max(0, Math.min(100, persenBerjalan)) + '%';
+      progressFillElem.style.width = persenBerjalan + '%';
     }
 
     setText('sudah', angka(data.sudah));
