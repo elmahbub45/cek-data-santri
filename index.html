@@ -4062,6 +4062,22 @@
       text-transform: uppercase;
     }
 
+    /* ==================================================
+       ANIMASI LOADING KARTU
+       ================================================== */
+    .sedang-memuat {
+      opacity: 0.5;
+      filter: grayscale(0.8) blur(1px);
+      pointer-events: none;
+      transition: all 0.3s ease;
+      animation: pulse-loading 1s infinite alternate;
+    }
+
+    @keyframes pulse-loading {
+      0% { opacity: 0.4; }
+      100% { opacity: 0.8; }
+    }
+
   </style>
 
   <!-- Google Analytics -->
@@ -5683,24 +5699,24 @@
     sedangMemuatData =
       true;
 
-    if (modePembaruan) {
+if (modePembaruan) {
 
-      btnRefresh.disabled =
-        true;
+      btnRefresh.disabled = true;
+      refreshButtonText.textContent = 'MEMPERBARUI...';
 
-      refreshButtonText.textContent =
-        'MEMPERBARUI...';
-
-      // --- TAMBAHAN LOADING SEMESTER ---
       if (semesterTerpilih === 1) {
         semesterButton1.textContent = 'Memuat...';
       } else {
         semesterButton2.textContent = 'Memuat...';
       }
-      // Kunci tombol agar tidak bisa diklik dobel
       semesterButton1.disabled = true;
       semesterButton2.disabled = true;
-      // ---------------------------------
+
+      // --- NYALAKAN EFEK LOADING ---
+      document.getElementById('attendanceAward').classList.add('sedang-memuat');
+      document.querySelector('.stats').classList.add('sedang-memuat');
+      document.getElementById('monthlyList').classList.add('sedang-memuat');
+      // -----------------------------
 
     } else {
 
@@ -5779,21 +5795,21 @@
       sedangMemuatData =
         false;
 
-      if (modePembaruan) {
+if (modePembaruan) {
 
-        btnRefresh.disabled =
-          false;
+        btnRefresh.disabled = false;
+        refreshButtonText.textContent = 'PERBARUI DATA';
 
-        refreshButtonText.textContent =
-          'PERBARUI DATA';
-
-        // --- KEMBALIKAN TOMBOL SEMESTER ---
         semesterButton1.textContent = 'Semester 1';
         semesterButton2.textContent = 'Semester 2';
-        // Buka kembali kunci tombol (kecuali semester yang memang dimatikan)
         semesterButton1.disabled = !semesterTersedia.semester1;
         semesterButton2.disabled = !semesterTersedia.semester2;
-        // ----------------------------------
+
+        // --- MATIKAN EFEK LOADING ---
+        document.getElementById('attendanceAward').classList.remove('sedang-memuat');
+        document.querySelector('.stats').classList.remove('sedang-memuat');
+        document.getElementById('monthlyList').classList.remove('sedang-memuat');
+        // ----------------------------
 
       } else {
 
