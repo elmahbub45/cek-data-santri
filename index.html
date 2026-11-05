@@ -5691,6 +5691,17 @@
       refreshButtonText.textContent =
         'MEMPERBARUI...';
 
+      // --- TAMBAHAN LOADING SEMESTER ---
+      if (semesterTerpilih === 1) {
+        semesterButton1.textContent = 'Memuat...';
+      } else {
+        semesterButton2.textContent = 'Memuat...';
+      }
+      // Kunci tombol agar tidak bisa diklik dobel
+      semesterButton1.disabled = true;
+      semesterButton2.disabled = true;
+      // ---------------------------------
+
     } else {
 
       btnCek.disabled =
@@ -5776,8 +5787,17 @@
         refreshButtonText.textContent =
           'PERBARUI DATA';
 
+        // --- KEMBALIKAN TOMBOL SEMESTER ---
+        semesterButton1.textContent = 'Semester 1';
+        semesterButton2.textContent = 'Semester 2';
+        // Buka kembali kunci tombol (kecuali semester yang memang dimatikan)
+        semesterButton1.disabled = !semesterTersedia.semester1;
+        semesterButton2.disabled = !semesterTersedia.semester2;
+        // ----------------------------------
+
       } else {
 
+        
         btnCek.disabled =
           false;
 
