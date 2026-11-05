@@ -5309,32 +5309,6 @@
   );
 
 
-  document.addEventListener(
-    'visibilitychange',
-    function () {
-
-      const hasilSedangTerbuka =
-        !hasilSection.classList.contains(
-          'hidden'
-        );
-
-      const sudahLewatTigaPuluhDetik =
-        Date.now() -
-        waktuPembaruanTerakhir >=
-        30000;
-
-
-      if (
-        document.visibilityState === 'visible' &&
-        hasilSedangTerbuka &&
-        noHp.value.trim().length === 5 &&
-        sudahLewatTigaPuluhDetik
-      ) {
-        cekData('auto-refresh');
-      }
-    }
-  );
-
 
   /* ==================================================
      INFORMASI AWAL APLIKASI
