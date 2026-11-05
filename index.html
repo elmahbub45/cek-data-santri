@@ -2366,6 +2366,10 @@
   color: #6b7280;
   background: #f3f4f6;
 }
+.hafalan-status.is-tertinggal {
+  color: #b91c1c;
+  background: #fef2f2;
+}
 
 .hafalan-tanggal {
   color: #6b7280;
@@ -6591,10 +6595,11 @@
       if (!judul) return;
 
       const sudah = status === 'sudah';
+      const tertinggal = status === 'tertinggal';
 
       const element = document.createElement('div');
       element.className = 'hafalan-item ' +
-        (sudah ? 'is-sudah' : 'is-belum');
+        (sudah ? 'is-sudah' : (tertinggal ? 'is-tertinggal' : 'is-belum'));
 
       const number = document.createElement('div');
       number.className = 'hafalan-number';
@@ -6613,9 +6618,12 @@
       meta.className = 'hafalan-meta';
 
       const badge = document.createElement('span');
+      // Atur class (warna) badge sesuai status
       badge.className = 'hafalan-status ' +
-        (sudah ? 'is-sudah' : 'is-belum');
-      badge.textContent = sudah ? 'Sudah' : 'Belum';
+        (sudah ? 'is-sudah' : (tertinggal ? 'is-tertinggal' : 'is-belum'));
+      
+      // Atur teks di dalam badge sesuai status
+      badge.textContent = sudah ? 'Sudah' : (tertinggal ? 'Tertinggal' : 'Belum');
 
       meta.appendChild(badge);
 
