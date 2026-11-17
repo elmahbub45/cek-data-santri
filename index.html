@@ -4010,6 +4010,34 @@
       }
     }
 
+    .announcement-content {
+      margin-top: 8px;
+      color: #4a5568;
+      font-size: 13px;
+      line-height: 1.6; /* Jarak antar baris lebih longgar dan rapi */
+      white-space: pre-line;
+      
+      /* Batasi tinggi maksimal agar pengumuman panjang tidak membuat halaman terlalu ke bawah */
+      max-height: 280px; 
+      overflow-y: auto;
+      padding-right: 4px;
+    }
+
+    /* Kustomisasi scrollbar agar tampak modern dan estetik */
+    .announcement-content::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    .announcement-content::-webkit-scrollbar-track {
+      background: #f1f5f2;
+      border-radius: 9px;
+    }
+
+    .announcement-content::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 9px;
+    }
+
     .semester-switcher {
       margin-bottom: 18px;
       padding: 5px;
@@ -5486,7 +5514,7 @@
   }
 
 
-  function isiPengumumanKeKartu(
+   function isiPengumumanKeKartu(
     id,
     pengumuman
   ) {
@@ -5496,10 +5524,11 @@
       pengumuman.judul || 'Pengumuman'
     );
 
-    setText(
-      id.isi,
-      pengumuman.isi || ''
-    );
+    // Ubah ke innerHTML agar teks tebal (<b>) dan format baris terbaca
+    const elemenIsi = document.getElementById(id.isi);
+    if (elemenIsi) {
+      elemenIsi.innerHTML = pengumuman.isi || '';
+    }
 
     setText(
       id.tanggal,
