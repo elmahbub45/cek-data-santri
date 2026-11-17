@@ -4195,26 +4195,30 @@
          PENGUMUMAN SEBELUM LOGIN
          ================================================== -->
 
+<!-- ==================================================
+        PENGUMUMAN SEBELUM LOGIN
+        ================================================== -->
+
     <section
       id="initialAnnouncementSection"
-      class="card announcement-card initial-announcement hidden"
+      class="card announcement-card initial-announcement"
     >
 
       <div class="announcement-meta">
         <span
           id="initialAnnouncementDate"
           class="announcement-date"
-        ></span>
+        >Memeriksa...</span>
         <h2
-        id="initialAnnouncementTitle"
-        class="announcement-heading"
-        ></h2>
+          id="initialAnnouncementTitle"
+          class="announcement-heading"
+        >Memuat Pengumuman...</h2>
       </div>
 
       <div
         id="initialAnnouncementText"
         class="announcement-content"
-      ></div>
+      >Sedang menyinkronkan data pengumuman terbaru dari server.</div>
 
       <a
         id="initialAnnouncementLink"
@@ -4224,7 +4228,6 @@
       >BUKA TAUTAN</a>
 
     </section>
-
 
     <!-- ==================================================
          LOGIN
@@ -5449,25 +5452,16 @@
   }
 
 
-  function tampilkanPengumumanAwal(
-    pengumuman
-  ) {
+function tampilkanPengumumanAwal(pengumuman) {
+    const isi = String(pengumuman.isi || '').trim();
 
-    const isi =
-      String(
-        pengumuman.isi || ''
-      ).trim();
-
-    if (
-      pengumuman.tampil === false ||
-      isi === ''
-    ) {
-      initialAnnouncementSection.classList.add(
-        'hidden'
-      );
+    // Jika pengumuman dimatikan atau kosong di spreadsheet, baru sembunyikan kartunya
+    if (pengumuman.tampil === false || (isi === '' && !pengumuman.judul)) {
+      initialAnnouncementSection.classList.add('hidden');
       return;
     }
 
+    // Jika ada isinya, masukkan data asli dari server
     isiPengumumanKeKartu(
       {
         judul: 'initialAnnouncementTitle',
@@ -5478,13 +5472,8 @@
       pengumuman
     );
 
-    if (
-      !loginSection.classList.contains('hidden')
-    ) {
-      initialAnnouncementSection.classList.remove(
-        'hidden'
-      );
-    }
+    // Pastikan kartu tetap tampil (tidak hidden)
+    initialAnnouncementSection.classList.remove('hidden');
   }
 
 
