@@ -3922,34 +3922,22 @@
     .announcement-card {
       position: relative;
       padding: 19px 20px 18px 27px;
-      border-color: rgba(212,167,44,0.42);
+      border: 2px solid rgba(212,167,44,0.42);
       background: #fffefa;
       box-shadow: 0 8px 22px rgba(22,64,40,0.06);
     }
 
-    .announcement-card::before {
-      content: "";
-      position: absolute;
-      top: 20px;
-      bottom: 20px;
-      left: 14px;
-      width: 3px;
-      border-radius: 99px;
-      background: var(--premium-gold);
-    }
-
-    .announcement-meta {
-      display: flex;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 7px;
-      margin-bottom: 7px;
-      color: #b28211;
-      font-size: 9px;
-      font-weight: 800;
-      letter-spacing: 1.05px;
-      text-transform: uppercase;
-    }
+.announcement-meta {
+    align-items: center;
+    margin-bottom: 21px;
+    padding-bottom: 7px;
+    color: #b28211;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 1.05px;
+    text-transform: uppercase;
+    border-bottom: 2px dashed #f5eadb;
+}
 
     .announcement-date:empty {
       display: none;
@@ -3997,12 +3985,6 @@
     @media (max-width: 600px) {
       .announcement-card {
         padding: 17px 17px 16px 25px;
-      }
-
-      .announcement-card::before {
-        top: 18px;
-        bottom: 18px;
-        left: 12px;
       }
 
       .announcement-heading {
