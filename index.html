@@ -6083,6 +6083,10 @@ if (modePembaruan) {
 
   function tampilkanData(data) {
 
+    // --- CEK APAKAH INI PERTAMA KALI LOGIN ---
+    const baruLogin = !loginSection.classList.contains('hidden');
+    // ----------------------------------------
+
     if (data.pengaturan) {
       terapkanPengaturanAplikasi(
         data.pengaturan
@@ -6246,6 +6250,16 @@ if (modePembaruan) {
       formatWaktuPembaruan(new Date(waktuPembaruanTerakhir))
     );
 
+    // --- HANYA TARIK KE ATAS JIKA BARU LOGIN ---
+    if (baruLogin) {
+      noHp.blur(); // Menutup keyboard HP
+      window.scrollTo({
+        top: 0,
+        behavior: 'instant'
+      });
+    }
+    // ------------------------------------------
+    
   }
 
   function formatWaktuPembaruan(tanggal) {
